@@ -2,16 +2,22 @@ package no.hiof.geofishing
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import no.hiof.geofishing.databinding.FragmentUserPageBinding
+import androidx.navigation.fragment.navArgs
 
 class UserPageFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = UserPageFragment()
-    }
+    //private val args : UserPageFragmentArgs by navArgs()
+    private var _binding : FragmentUserPageBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: UserPageViewModel
 
@@ -19,13 +25,18 @@ class UserPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_user_page, container, false)
+        _binding = FragmentUserPageBinding.inflate(inflater, container, false)
+
+        binding.settingsButton.setOnClickListener {
+            Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.action_userPageFragment_to_settingsFragment)
+        }
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UserPageViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
 }
