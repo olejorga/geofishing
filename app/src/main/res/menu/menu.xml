@@ -8,7 +8,7 @@
     <item
         android:id="@+id/feedFragment"
         android:icon="@drawable/ic_baseline_feed_24"
-        android:title="Feed" />
+        android:title="@string/feed" />
     <item
         android:id="@+id/catchFragment"
         android:icon="@drawable/ic_baseline_add_box_24"
@@ -16,9 +16,9 @@
     <item
         android:id="@+id/rankFragment"
         android:icon="@drawable/ic_baseline_workspace_premium_24"
-        android:title="Rank" />
+        android:title="@string/rank" />
     <item
         android:id="@+id/userPageFragment"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="My page" />
+        android:title="@string/my_page" />
 </menu>
