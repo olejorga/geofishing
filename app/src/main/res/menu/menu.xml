@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mapsFragment"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/map" />
+    <item
+        android:id="@+id/feedFragment"
+        android:icon="@drawable/ic_baseline_feed_24"
+        android:title="Feed" />
+    <item
+        android:id="@+id/catchFragment"
+        android:icon="@drawable/ic_baseline_add_box_24"
+        android:title="@string/new_catch" />
+    <item
+        android:id="@+id/rankFragment"
+        android:icon="@drawable/ic_baseline_workspace_premium_24"
+        android:title="Rank" />
+    <item
+        android:id="@+id/userPageFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="My page" />
+</menu>

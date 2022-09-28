@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Geofishing</string>
+    <string name="Catch">Catch</string>
+    <string name="feed">Feed</string>
+    <string name="rank">Rank</string>
+    <string name="userpage">UserPage</string>
+    <string name="New_Catch">New_Catch</string>
+    <string name="map">Map</string>
+    <string name="new_catch">New Catch</string>
 </resources>
