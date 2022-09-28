@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_baseline_workspace_premium_24"
         android:title="@string/rank" />
     <item
-        android:id="@+id/userPageFragment"
+        android:id="@+id/nestedgraph"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/my_page" />
 </menu>
