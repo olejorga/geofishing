@@ -11,11 +11,6 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/feedFragment"
-        android:name="no.hiof.geofishing.FeedFragment"
-        android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
-    <fragment
         android:id="@+id/catchFragment"
         android:name="no.hiof.geofishing.CatchFragment"
         android:label="fragment_catch"
@@ -41,5 +36,27 @@
             android:name="no.hiof.geofishing.SettingsFragment"
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings" />
+    </navigation>
+    <navigation android:id="@+id/navigation2"
+        app:startDestination="@id/feedFragment">
+        <fragment
+            android:id="@+id/feedFragment"
+            android:name="no.hiof.geofishing.FeedFragment"
+            android:label="fragment_feed"
+            tools:layout="@layout/fragment_feed">
+            <action
+                android:id="@+id/action_feedFragment_to_feedPostDetailFragment"
+                app:destination="@id/feedPostDetailFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/feedPostDetailFragment"
+            android:name="no.hiof.geofishing.FeedPostDetailFragment"
+            android:label="fragment_feed_post_detail"
+            tools:layout="@layout/fragment_feed_post_detail">
+            <argument
+                android:name="uid"
+                android:defaultValue="1"
+                app:argType="integer" />
+        </fragment>
     </navigation>
 </navigation>

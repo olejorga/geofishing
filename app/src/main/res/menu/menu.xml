@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_baseline_map_24"
         android:title="@string/map" />
     <item
-        android:id="@+id/feedFragment"
+        android:id="@+id/navigation2"
         android:icon="@drawable/ic_baseline_feed_24"
         android:title="@string/feed" />
     <item
