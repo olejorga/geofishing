@@ -31,6 +31,7 @@ class FeedPostDetailFragment : Fragment() {
         binding.postTitleTextView.text = feedPost.title
         binding.postImageView.setImageResource(feedPost.posterUrl)
         binding.postDescriptiontextView.text = feedPost.description
+
     }
 
 }
