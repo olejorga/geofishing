@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Fishing lure (optional)"
+        android:text="@string/New_Catch_Lure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Fishing rod (optional)"
+        android:text="@string/New_Catch__Rod"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,13 +45,13 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Description"
+        android:text="@string/New_Catch_Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewNewCatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,8 +70,9 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Title"
+        android:text="@string/New_Catch_Title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -83,7 +84,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewCatch" />
 
     <Spinner
         android:id="@+id/inputSpeciesSpinner"
@@ -107,7 +108,7 @@
         android:width="180dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Weight (g)"
+        android:text="@string/New_Catch_Weight"
         app:layout_constraintEnd_toStartOf="@+id/inputLength"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +124,7 @@
         android:width="180dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Length (cm)"
+        android:text="@string/New_Catch_Length"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
@@ -133,8 +134,8 @@
         android:id="@+id/buttonTakePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Take a picture"
+        android:layout_marginTop="16dp"
+        android:text="@string/New_Catch_Take_Picture"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="@string/New_Catch_Add_Picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonTakePicture"
@@ -157,7 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:text="Button"
+        android:text="@string/New_Catch_Add_New_Catch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputFishingLure" />
 

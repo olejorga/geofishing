@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import no.hiof.geofishing.databinding.FragmentCatchBinding
+import no.hiof.geofishing.models.FeedPost
 
 class CatchFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = CatchFragment()
-    }
+    private var _binding : FragmentCatchBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: CatchViewModel
 
@@ -19,7 +21,17 @@ class CatchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_catch, container, false)
+        _binding = FragmentCatchBinding.inflate(inflater, container, false)
+        val spinner : Spinner = binding.inputSpeciesSpinner
+        context?.let {
+            ArrayAdapter.createFromResource(it, R.array.fish_array, android.R.layout.simple_spinner_item)
+                .also {
+                    it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinner.adapter = it
+                }
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -2,7 +2,6 @@
     <string name="app_name">Geofishing</string>
     <string name="Catch">Catch</string>
     <string name="userpage">UserPage</string>
-    <string name="New_Catch">New_Catch</string>
     <string name="map">Map</string>
     <string name="new_catch">New Catch</string>
     <string name="feed">Feed</string>
@@ -14,4 +13,28 @@
     <string name="feedposttitle1">feedposttitle1</string>
     <string name="feedposttitle2">feedposttitle2</string>
     <string name="description">description</string>
+
+    <!-- New Catch -->
+    <string name="New_Catch">Add a new Catch</string>
+    <string name="New_Catch_Title">Title</string>
+    <string name="New_Catch_Description">Description</string>
+    <string name="New_Catch_Weight">Weight (g)</string>
+    <string name="New_Catch_Length">Length (cm)</string>
+    <string name="New_Catch_Take_Picture">Take a picture</string>
+    <string name="New_Catch_Add_Picture">Add a picture</string>
+    <string name="New_Catch__Rod">Fishing rod (optional)</string>
+    <string name="New_Catch_Lure">Fishing rod (optional)</string>
+    <string name="New_Catch_Add_New_Catch">Add new Catch</string>
+    <string name="New_Catch_Species_Choose">Choose species</string>
+
+    <string-array name="fish_array">
+        <item>Cod</item>
+        <item>Salmod</item>
+        <item>Blobfish</item>
+        <item>Blowfish</item>
+        <item>Brill</item>
+        <item>Jewfish</item>
+        <item>Dogfish</item>
+        <item>Pirate perch</item>
+    </string-array>
 </resources>
