@@ -2,6 +2,7 @@ package no.hiof.geofishing
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -45,7 +46,16 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         // setting up the binding and navController for bottomNavigation
-        val navView: BottomNavigationView = binding.bottomNavigation
-        navView.setupWithNavController(navController)
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, view, _ ->
+            if (view.id == R.id.loginFragment || view.id == R.id.signupFragment) {
+                binding.bottomNavigation.visibility = View.GONE
+                binding.toolbar.visibility = View.GONE
+            } else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.VISIBLE
+            }
+        }
     }
 }

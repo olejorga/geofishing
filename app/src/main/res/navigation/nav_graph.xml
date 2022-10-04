@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mapsFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/mapsFragment"
@@ -20,7 +20,8 @@
         android:name="no.hiof.geofishing.views.RankFragment"
         android:label="fragment_rank"
         tools:layout="@layout/fragment_rank" />
-    <navigation android:id="@+id/nestedGraph"
+    <navigation
+        android:id="@+id/nestedGraph"
         app:startDestination="@id/userPageFragment">
         <fragment
             android:id="@+id/userPageFragment"
@@ -37,7 +38,8 @@
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings" />
     </navigation>
-    <navigation android:id="@+id/navigation2"
+    <navigation
+        android:id="@+id/navigation2"
         app:startDestination="@id/feedFragment">
         <fragment
             android:id="@+id/feedFragment"
@@ -59,4 +61,25 @@
                 app:argType="integer" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="no.hiof.geofishing.views.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="no.hiof.geofishing.views.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
