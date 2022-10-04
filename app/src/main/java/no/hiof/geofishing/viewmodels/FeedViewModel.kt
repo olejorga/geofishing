@@ -1,7 +1,7 @@
-package no.hiof.geofishing
+package no.hiof.geofishing.viewmodels
 
 import androidx.lifecycle.ViewModel
 
-class RankViewModel : ViewModel() {
+class FeedViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

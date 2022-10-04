@@ -1,4 +1,4 @@
-package no.hiof.geofishing
+package no.hiof.geofishing.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.models.FeedPost
 
 class FeedPostDetailFragment : Fragment() {
-    private val args : FeedPostDetailFragmentArgs by navArgs()
+    private val args : no.hiof.geofishing.views.FeedPostDetailFragmentArgs by navArgs()
     private var fragmentBinding : FragmentFeedPostDetailBinding? = null
 
     override fun onCreateView(

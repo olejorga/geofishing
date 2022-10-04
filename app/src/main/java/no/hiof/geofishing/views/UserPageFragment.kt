@@ -1,14 +1,13 @@
-package no.hiof.geofishing
+package no.hiof.geofishing.views
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import no.hiof.geofishing.viewmodels.UserPageViewModel
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
 
 class UserPageFragment : Fragment() {
@@ -24,7 +23,8 @@ class UserPageFragment : Fragment() {
     ): View? {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
-        val action = UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
+        val action =
+            no.hiof.geofishing.views.UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
             Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
 

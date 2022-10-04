@@ -1,4 +1,4 @@
-package no.hiof.geofishing
+package no.hiof.geofishing.views
 
 import androidx.fragment.app.Fragment
 
@@ -12,6 +12,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import no.hiof.geofishing.R
 
 class MapsFragment : Fragment() {
 

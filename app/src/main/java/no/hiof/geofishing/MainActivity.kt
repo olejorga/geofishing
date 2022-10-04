@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

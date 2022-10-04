@@ -1,4 +1,4 @@
-package no.hiof.geofishing.adapter
+package no.hiof.geofishing.adapters
 
 import android.view.LayoutInflater
 import android.view.View

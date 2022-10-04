@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="no.hiof.geofishing.MapsFragment"
+        android:name="no.hiof.geofishing.views.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/catchFragment"
-        android:name="no.hiof.geofishing.CatchFragment"
+        android:name="no.hiof.geofishing.views.CatchFragment"
         android:label="fragment_catch"
         tools:layout="@layout/fragment_catch" />
     <fragment
         android:id="@+id/rankFragment"
-        android:name="no.hiof.geofishing.RankFragment"
+        android:name="no.hiof.geofishing.views.RankFragment"
         android:label="fragment_rank"
         tools:layout="@layout/fragment_rank" />
     <navigation android:id="@+id/nestedGraph"
         app:startDestination="@id/userPageFragment">
         <fragment
             android:id="@+id/userPageFragment"
-            android:name="no.hiof.geofishing.UserPageFragment"
+            android:name="no.hiof.geofishing.views.UserPageFragment"
             android:label="fragment_user_page"
             tools:layout="@layout/fragment_user_page">
             <action
@@ -33,7 +33,7 @@
         </fragment>
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="no.hiof.geofishing.SettingsFragment"
+            android:name="no.hiof.geofishing.views.SettingsFragment"
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings" />
     </navigation>
@@ -41,7 +41,7 @@
         app:startDestination="@id/feedFragment">
         <fragment
             android:id="@+id/feedFragment"
-            android:name="no.hiof.geofishing.FeedFragment"
+            android:name="no.hiof.geofishing.views.FeedFragment"
             android:label="fragment_feed"
             tools:layout="@layout/fragment_feed">
             <action
@@ -50,7 +50,7 @@
         </fragment>
         <fragment
             android:id="@+id/feedPostDetailFragment"
-            android:name="no.hiof.geofishing.FeedPostDetailFragment"
+            android:name="no.hiof.geofishing.views.FeedPostDetailFragment"
             android:label="fragment_feed_post_detail"
             tools:layout="@layout/fragment_feed_post_detail">
             <argument

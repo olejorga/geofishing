@@ -1,4 +1,4 @@
-package no.hiof.geofishing
+package no.hiof.geofishing.views
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import no.hiof.geofishing.viewmodels.CatchViewModel
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
-import no.hiof.geofishing.models.FeedPost
 
 class CatchFragment : Fragment() {
     private var _binding : FragmentCatchBinding? = null
