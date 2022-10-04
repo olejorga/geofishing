@@ -25,7 +25,7 @@ class SignupFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,7 +33,11 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonLoginViewSignup.setOnClickListener {
+        binding.buttonSignup.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_signupFragment_to_loginFragment)
+        }
+
+        binding.buttonLogin.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }

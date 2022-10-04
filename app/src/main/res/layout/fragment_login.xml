@@ -8,64 +8,67 @@
     tools:context=".views.LoginFragment">
 
     <EditText
-        android:id="@+id/editTextPasswordViewLogin"
+        android:id="@+id/field_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Passord"
+        android:hint="@string/auth_password_hint"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoginViewLogin"
+        app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailViewLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/field_email"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/editTextEmailViewLogin"
+        android:id="@+id/field_email"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="E-post"
+        android:hint="@string/auth_email_hint"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordViewLogin"
+        app:layout_constraintBottom_toTopOf="@+id/field_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitleViewLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/buttonLoginViewLogin"
+        android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Logg inn"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSingupViewLogin"
+        android:text="@string/auth_login_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/button_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordViewLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/field_password" />
 
     <Button
-        android:id="@+id/buttonSingupViewLogin"
+        android:id="@+id/button_signup"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Registrer deg"
+        android:text="@string/auth_signup_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoginViewLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
     <TextView
-        android:id="@+id/textViewTitleViewLogin"
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Geofishing"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailViewLogin"
+        app:layout_constraintBottom_toTopOf="@+id/field_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
