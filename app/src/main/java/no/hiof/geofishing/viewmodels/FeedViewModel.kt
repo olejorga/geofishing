@@ -4,17 +4,14 @@ import androidx.lifecycle.ViewModel
 import no.hiof.geofishing.models.FeedPost
 
 class FeedViewModel : ViewModel() {
-    private lateinit var feedList : MutableList<FeedPost>
+    private lateinit var _feedList : MutableList<FeedPost>
+    public val feedList get() = _feedList
 
     init {
         retrieveFeed()
     }
 
     private fun retrieveFeed() {
-        feedList = ArrayList(FeedPost.getFeedPosts())
-    }
-
-    fun getFeed() : MutableList<FeedPost> {
-        return feedList
+        _feedList = ArrayList(FeedPost.getFeedPosts())
     }
 }

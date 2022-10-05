@@ -34,7 +34,7 @@ class FeedFragment : Fragment() {
 
         val feedRecyclerView = binding.feedRecyclerView
 
-        val feedList = viewModel.getFeed()
+        val feedList = viewModel.feedList
 
         feedRecyclerView.adapter = FeedAdapter(feedList) {
 
