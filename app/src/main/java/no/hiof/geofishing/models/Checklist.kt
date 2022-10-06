@@ -1,13 +1,19 @@
 package no.hiof.geofishing.models
 
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
+
 /**
  * Represents a checklist (one per user).
- * @property id owners id (user).
+ * @property id Unique identifier (should be the id of the user that owns the list).
  * @property items A list of checklist items.
  */
 data class Checklist(
-    val id: String,
-    val items: List<ChecklistItem>
+    @Exclude
+    @DocumentId
+    val id: String? = null,
+    val items: List<ChecklistItem> = ArrayList()
 )
 
 /**
@@ -18,6 +24,6 @@ data class Checklist(
  */
 data class ChecklistItem(
     val completed: Boolean = false,
-    val description: String,
-    val reminder: String? = null
+    val description: String? = null,
+    val reminder: Timestamp? = null
 )
