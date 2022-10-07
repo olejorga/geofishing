@@ -1,16 +1,16 @@
 package no.hiof.geofishing.views
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import no.hiof.geofishing.viewmodels.CatchViewModel
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
+import no.hiof.geofishing.viewmodels.CatchViewModel
 
 class CatchFragment : Fragment() {
     private var _binding : FragmentCatchBinding? = null

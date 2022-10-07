@@ -1,4 +1,4 @@
-package no.hiof.geofishing.models
+package no.hiof.geofishing.data.entities
 
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
@@ -8,8 +8,7 @@ import com.google.firebase.firestore.Exclude
  * @property id Unique identifier (should the id of the auth account).
  * @property bio A short biography of the user.
  * @property name: The name of the user.
- * @property portrait Url to a photo of the user.
- * @property subscriptions A list of ids of users that this user follows.
+ * @property portrait A reference to a photo of the user (usually url).
  */
 data class Profile(
     @Exclude
@@ -17,6 +16,5 @@ data class Profile(
     val id: String? = null,
     val bio: String? = null,
     val name: String? = null,
-    val portrait: String? = null,
-    val subscriptions: List<String> = ArrayList()
+    val portrait: String? = null
 )

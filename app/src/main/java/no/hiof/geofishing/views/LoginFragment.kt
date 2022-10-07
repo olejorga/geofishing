@@ -1,11 +1,11 @@
 package no.hiof.geofishing.views
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentLoginBinding
