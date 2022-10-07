@@ -9,6 +9,7 @@
 
     <!-- Rank-->
     <string name="Rank_Title">Rank</string>
+    <string name="Rank_Number">1</string>
     <string name="Rank_Name">Name</string>
     <string name="Rank_Dots">........</string>
     <string name="Rank_Points">69</string>
