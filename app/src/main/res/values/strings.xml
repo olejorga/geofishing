@@ -6,13 +6,23 @@
     <string name="new_catch">New Catch</string>
     <string name="feed">Feed</string>
     <string name="my_page">My page</string>
-    <string name="rank">Rank</string>
+
+    <!-- Rank-->
+    <string name="Rank_Title">Rank</string>
+    <string name="Rank_Name">Name</string>
+    <string name="Rank_Dots">........</string>
+    <string name="Rank_Points">69</string>
+    <!-- End of Rank-->
+
     <string name="settings">Settings</string>
+
+    <!-- Feed -->
     <string name="feedposterimageview">feedPosterImageView</string>
     <string name="post_image">post_image</string>
     <string name="feedposttitle1">feedposttitle1</string>
     <string name="feedposttitle2">feedposttitle2</string>
     <string name="description">description</string>
+    <!-- End of Feed -->
 
     <!-- New Catch -->
     <string name="New_Catch">Add a new Catch</string>

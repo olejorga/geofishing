@@ -3,14 +3,22 @@ package no.hiof.geofishing.viewmodels
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MapViewModel : ViewModel() {
     private lateinit var _callback : OnMapReadyCallback
+    private lateinit var _mapFragment : SupportMapFragment
+    private var initialStart = true
+
+    val callback get() = _callback
+
     init {
-        initalMapPosition()
+        // TODO: Finn på noe bedre. Callback bli lagret så, HIOF posisjon blir uansett sendt til fragment.
+        if(initialStart)
+            initalMapPosition()
     }
 
     private fun initalMapPosition() {
@@ -35,11 +43,11 @@ class MapViewModel : ViewModel() {
              */
 
             val hio = LatLng(59.12927227233991, 11.352814708532474)
-            googleMap.addMarker(MarkerOptions().position(hio).title("Marker for Høgskolen i Østfold"))
+            googleMap.addMarker(
+                MarkerOptions().position(hio).title("Marker for Høgskolen i Østfold")
+            )
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hio, 17.0f))
         }
+        initialStart = false;
     }
-
-
-    public val callback get() = _callback
 }
