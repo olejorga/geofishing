@@ -1,21 +1,34 @@
 <resources>
     <string name="app_name">Geofishing</string>
+
+    <!-- Navigation bar -->
     <string name="Catch">Catch</string>
-    <string name="userpage">UserPage</string>
     <string name="map">Map</string>
     <string name="new_catch">New Catch</string>
     <string name="feed">Feed</string>
     <string name="my_page">My page</string>
+    <!-- End of Navigation bar -->
+
+    <!-- User page -->
+    <string name="UserPage_Title">Profile</string>
+    <string name="UserPage_Name">Ole-Jørgen Andersen</string>
+    <string name="UserPage_About_Title">About</string>
+    <string name="UserPage_About_Text">I really love tuna fish</string>
+    <string name="UserPage_RecyclerView_Title">Last catches</string>
+    <string name="UserPage_ImageView_Alternative_Text">Profile Image</string>
+    <!-- End of User page -->
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <!-- End of Settings -->
 
     <!-- Rank-->
-    <string name="Rank_Title">Rank</string>
+    <string name="Rank_Title">Rank1</string>
     <string name="Rank_Number">1</string>
     <string name="Rank_Name">Name</string>
     <string name="Rank_Dots">........</string>
     <string name="Rank_Points">69</string>
     <!-- End of Rank-->
-
-    <string name="settings">Settings</string>
 
     <!-- Feed -->
     <string name="feedposterimageview">feedPosterImageView</string>
