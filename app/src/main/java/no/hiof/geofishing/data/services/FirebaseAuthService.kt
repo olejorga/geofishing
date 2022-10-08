@@ -28,7 +28,7 @@ object FirebaseAuthService: AuthService {
         }
     }
 
-    fun logout(): Response<Unit> {
+    override suspend fun logout(): Response<Unit> {
         return try {
             auth.signOut()
             Response()
@@ -38,7 +38,7 @@ object FirebaseAuthService: AuthService {
         }
     }
 
-    override suspend fun signup(name: String, email: String, password: String): Response<Unit> {
+    override suspend fun signup(email: String, password: String, name: String): Response<Unit> {
         return try {
             auth.createUserWithEmailAndPassword(email, password).await()
             profiles.create(Profile(user!!.uid, null, name))
