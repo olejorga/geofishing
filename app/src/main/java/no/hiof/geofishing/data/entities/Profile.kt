@@ -5,6 +5,7 @@ import com.google.firebase.firestore.Exclude
 
 /**
  * Represents a additional information about a user (one per auth account).
+ *
  * @property id Unique identifier (should the id of the auth account).
  * @property bio A short biography of the user.
  * @property name: The name of the user.

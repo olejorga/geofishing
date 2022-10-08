@@ -14,6 +14,7 @@ import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Subscription
 
 object SubscriptionRepository: Repository<Subscription> {
+    // Creating a getter for retrieving the firebase instance (singleton).
     private val database get() = Firebase.firestore.collection("todos")
 
     override suspend fun create(entity: Subscription, id: String?): Response<String> {
@@ -57,8 +58,8 @@ object SubscriptionRepository: Repository<Subscription> {
         }
     }
 
-    override fun find(key: String, value: Any) = database
-        .whereEqualTo(key, value)
+    override fun find(property: String, value: Any) = database
+        .whereEqualTo(property, value)
         .snapshots()
         .mapNotNull { Response(it.toObjects<Subscription>()) }
         .catch { e ->
