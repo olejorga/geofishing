@@ -12,6 +12,7 @@ import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Profile
 
 object FirebaseAuthService: AuthService {
+    // Creating a getter for retrieving the firebase instance (singleton).
     private val auth get() = Firebase.auth
     private val user get() = auth.currentUser
     override var profileRepository: Repository<Profile>? = null

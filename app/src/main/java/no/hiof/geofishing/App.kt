@@ -13,10 +13,16 @@ import no.hiof.geofishing.data.repositories.SubscriptionRepository
 import no.hiof.geofishing.data.repositories.TodoRepository
 import no.hiof.geofishing.data.services.FirebaseAuthService
 
+/**
+ * The main entry point of the app, this is where all dependencies are injected.
+ */
 class App: Application() {
-    // Dependencies
-    private var _authService = FirebaseAuthService
+    // The auth service will be initialized at app boot,
+    // which is OK since the service is required right after boot to check auth status.
+    private val _authService = FirebaseAuthService
     val authService: AuthService get() = _authService
+
+    // Using getters to delay lazy loading of repositories.
     val catchRepository: Repository<Catch> get() = CatchRepository
     val profileRepository: Repository<Profile> get() = ProfileRepository
     val subscriptionRepository: Repository<Subscription> get() = SubscriptionRepository

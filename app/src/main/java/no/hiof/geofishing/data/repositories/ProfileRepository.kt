@@ -13,6 +13,9 @@ import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Profile
 
+/**
+ * A firebase implementation of a profile repository.
+ */
 object ProfileRepository: Repository<Profile> {
     // Creating a getter for retrieving the firebase instance (singleton).
     private val database get() = Firebase.firestore.collection("profiles")

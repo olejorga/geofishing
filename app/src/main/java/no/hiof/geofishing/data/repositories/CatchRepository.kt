@@ -13,6 +13,9 @@ import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Catch
 
+/**
+ * A firebase implementation of a catch repository.
+ */
 object CatchRepository: Repository<Catch> {
     // Creating a getter for retrieving the firebase instance (singleton).
     private val database get() = Firebase.firestore.collection("catches")

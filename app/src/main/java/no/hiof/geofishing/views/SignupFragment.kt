@@ -39,7 +39,14 @@ class SignupFragment : Fragment() {
             viewModel.viewModelScope.launch {
                 val email = binding.fieldEmail.text.toString()
                 val password = binding.fieldPassword.text.toString()
+                val confirmPassword = binding.fieldConfirmPassword.text.toString()
                 val name = binding.fieldName.text.toString()
+
+                if (confirmPassword != password) {
+                    Toast.makeText(context, "Passwords do not match.", Toast.LENGTH_SHORT).show()
+                    binding.fieldConfirmPassword.error = "Passwords do not match."
+                    return@launch
+                }
 
                 val (_, error) = viewModel.signup(email, password, name)
 
