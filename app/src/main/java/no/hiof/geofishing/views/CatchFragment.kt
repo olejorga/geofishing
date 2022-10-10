@@ -6,17 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+<<<<<<< HEAD
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
 import no.hiof.geofishing.viewmodels.CatchViewModel
+=======
+import androidx.core.view.get
+import androidx.fragment.app.viewModels
+import no.hiof.geofishing.viewmodels.CatchViewModel
+import no.hiof.geofishing.R
+import no.hiof.geofishing.databinding.FragmentCatchBinding
+import no.hiof.geofishing.models.Catch
+import kotlin.math.log
+>>>>>>> viewModel
 
 class CatchFragment : Fragment() {
     private var _binding : FragmentCatchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: CatchViewModel
+    private val viewModel : CatchViewModel by viewModels()
+
+    private lateinit var catch: Catch
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,21 +36,22 @@ class CatchFragment : Fragment() {
     ): View? {
         _binding = FragmentCatchBinding.inflate(inflater, container, false)
         val spinner : Spinner = binding.inputSpeciesSpinner
-        context?.let {
-            ArrayAdapter.createFromResource(it, R.array.fish_array, android.R.layout.simple_spinner_item)
-                .also {
-                    it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = it
+        context?.let { context ->
+            ArrayAdapter.createFromResource(context, R.array.fish_array, android.R.layout.simple_spinner_item)
+                .also { arrayAdapter ->
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinner.adapter = arrayAdapter
                 }
         }
-
-        return binding.root
+     return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CatchViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

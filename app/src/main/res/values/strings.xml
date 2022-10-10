@@ -1,18 +1,42 @@
 <resources>
     <string name="app_name">Geofishing</string>
+
+    <!-- Navigation bar -->
     <string name="Catch">Catch</string>
-    <string name="userpage">UserPage</string>
     <string name="map">Map</string>
     <string name="new_catch">New Catch</string>
     <string name="feed">Feed</string>
     <string name="my_page">My page</string>
-    <string name="rank">Rank</string>
+    <!-- End of Navigation bar -->
+
+    <!-- User page -->
+    <string name="UserPage_Title">Profile</string>
+    <string name="UserPage_Name">Ole-Jørgen Andersen</string>
+    <string name="UserPage_About_Title">About</string>
+    <string name="UserPage_About_Text">I really love tuna fish</string>
+    <string name="UserPage_RecyclerView_Title">Last catches</string>
+    <string name="UserPage_ImageView_Alternative_Text">Profile Image</string>
+    <!-- End of User page -->
+
+    <!-- Settings -->
     <string name="settings">Settings</string>
+    <!-- End of Settings -->
+
+    <!-- Rank-->
+    <string name="Rank_Title">Rank</string>
+    <string name="Rank_Number">1</string>
+    <string name="Rank_Name">Name</string>
+    <string name="Rank_Dots"> </string>
+    <string name="Rank_Points">69</string>
+    <!-- End of Rank-->
+
+    <!-- Feed -->
     <string name="feedposterimageview">feedPosterImageView</string>
     <string name="post_image">post_image</string>
     <string name="feedposttitle1">feedposttitle1</string>
     <string name="feedposttitle2">feedposttitle2</string>
     <string name="description">description</string>
+    <!-- End of Feed -->
 
     <!-- New Catch -->
     <string name="New_Catch">Add a new Catch</string>
@@ -23,9 +47,10 @@
     <string name="New_Catch_Take_Picture">Take a picture</string>
     <string name="New_Catch_Add_Picture">Add a picture</string>
     <string name="New_Catch__Rod">Fishing rod (optional)</string>
-    <string name="New_Catch_Lure">Fishing rod (optional)</string>
+    <string name="New_Catch_Lure">Fishing lure (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>
     <string name="New_Catch_Species_Choose">Choose species</string>
+<<<<<<< HEAD
     <string name="auth_password_hint">Passord</string>
     <string name="auth_email_hint">E-post</string>
     <string name="auth_login_button_text">Logg inn</string>
@@ -34,9 +59,11 @@
     <string name="auth_confirm_password_hint">Bekreft passord</string>
     <string name="auth_signup_title_text">Opprett bruker</string>
 
+=======
+>>>>>>> viewModel
     <string-array name="fish_array">
         <item>Cod</item>
-        <item>Salmod</item>
+        <item>Salmon</item>
         <item>Blobfish</item>
         <item>Blowfish</item>
         <item>Brill</item>
@@ -44,4 +71,6 @@
         <item>Dogfish</item>
         <item>Pirate perch</item>
     </string-array>
+    <!-- End of New Catch-->
+
 </resources>
