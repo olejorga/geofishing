@@ -2,12 +2,15 @@ package no.hiof.geofishing
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.hiof.geofishing.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -44,7 +47,18 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         // setting up the binding and navController for bottomNavigation
-        val navView: BottomNavigationView = binding.bottomNavigation
-        navView.setupWithNavController(navController)
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, view, _ ->
+            if (view.id == R.id.loginFragment || view.id == R.id.signupFragment) {
+                binding.bottomNavigation.visibility = View.GONE
+                binding.toolbar.visibility = View.GONE
+            } else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.VISIBLE
+            }
+        }
+
+        //Log.d("HERE", "RUN REPO!")
     }
 }
