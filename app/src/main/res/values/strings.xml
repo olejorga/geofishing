@@ -50,17 +50,6 @@
     <string name="New_Catch_Lure">Fishing lure (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>
     <string name="New_Catch_Species_Choose">Choose species</string>
-<<<<<<< HEAD
-    <string name="auth_password_hint">Passord</string>
-    <string name="auth_email_hint">E-post</string>
-    <string name="auth_login_button_text">Logg inn</string>
-    <string name="auth_signup_button_text">Registrer deg</string>
-    <string name="auth_name_hint">Navn</string>
-    <string name="auth_confirm_password_hint">Bekreft passord</string>
-    <string name="auth_signup_title_text">Opprett bruker</string>
-
-=======
->>>>>>> viewModel
     <string-array name="fish_array">
         <item>Cod</item>
         <item>Salmon</item>
@@ -72,5 +61,16 @@
         <item>Pirate perch</item>
     </string-array>
     <!-- End of New Catch-->
+
+    <!-- Auth -->
+    <string name="auth_password_hint">Passord</string>
+    <string name="auth_email_hint">E-post</string>
+    <string name="auth_login_button_text">Logg inn</string>
+    <string name="auth_signup_button_text">Registrer deg</string>
+    <string name="auth_name_hint">Navn</string>
+    <string name="auth_confirm_password_hint">Bekreft passord</string>
+    <string name="auth_signup_title_text">Opprett bruker</string>
+    <!-- End of Auth -->
+
 
 </resources>

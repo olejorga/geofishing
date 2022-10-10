@@ -6,21 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-<<<<<<< HEAD
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
 import no.hiof.geofishing.viewmodels.CatchViewModel
-=======
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
-import no.hiof.geofishing.viewmodels.CatchViewModel
-import no.hiof.geofishing.R
-import no.hiof.geofishing.databinding.FragmentCatchBinding
 import no.hiof.geofishing.models.Catch
 import kotlin.math.log
->>>>>>> viewModel
+
 
 class CatchFragment : Fragment() {
     private var _binding : FragmentCatchBinding? = null
