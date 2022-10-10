@@ -28,7 +28,6 @@ data class Catch(
     @Exclude
     @DocumentId
     val id: String? = null,
-    @Exclude
     @ServerTimestamp
     val created: Date? = null,
     val description: String? = null,
