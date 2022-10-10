@@ -21,6 +21,7 @@ object FirebaseAuthService: AuthService {
     override var profileRepository: Repository<Profile>? = null
     override val authenticated get() = user != null
     override val email get() = user?.email
+    override val id get() = user?.uid
 
     override suspend fun login(email: String, password: String): Response<Unit> {
         return try {
