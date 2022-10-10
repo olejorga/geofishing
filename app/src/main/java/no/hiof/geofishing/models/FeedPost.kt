@@ -2,7 +2,12 @@ package no.hiof.geofishing.models
 
 import no.hiof.geofishing.R
 
-data class FeedPost(val uid: Int, var title: String, var description: String, var posterUrl: Int) {
+data class FeedPost(
+    val uid: Int,
+    var title: String,
+    var description: String,
+    var posterUrl: Int
+) {
 
     companion object {
         fun getFeedPosts(): List<FeedPost> {
@@ -11,7 +16,11 @@ data class FeedPost(val uid: Int, var title: String, var description: String, va
                 FeedPost(
                     1,
                     "Test1",
-                    "Kjempe lang setning for å teste constraints på fragmentet så det går nok kjempebra 10/10 simenerbesteteststststsst mange ord jajajaj iajwif jaiwejf iajew fijaeif jaeij fiaje fijaei jfaief jiaej fiaejf iaej ifjaei jfiaejf iaejf iaej ifjaei fjaiej fiaj eijfa iej BLI DESSA ORDA MED DA TRUUUUUUUU?`??????? END OF LINE",
+                    "Kjempe lang setning for å teste constraints på fragmentet så det " +
+                            "går nok kjempebra 10/10 simenerbesteteststststsst mange ord jajajaj " +
+                            "iajwif jaiwejf iajew fijaeif jaeij fiaje fijaei jfaief jiaej fiaejf " +
+                            "iaej ifjaei jfiaejf iaejf iaej ifjaei fjaiej fiaj eijfa iej BLI " +
+                            "DESSA" + " ORDA MED DA TRUUUUUUUU?`??????? END OF LINE",
                     R.drawable.fish_9
                 ),
                 FeedPost(2, "Test2", "Stor Fisk", R.drawable.fish_9),

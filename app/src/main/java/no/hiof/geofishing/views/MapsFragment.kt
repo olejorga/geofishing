@@ -1,12 +1,19 @@
 package no.hiof.geofishing.views
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
+import android.provider.SettingsSlicesContract.KEY_LOCATION
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -18,6 +25,93 @@ import no.hiof.geofishing.databinding.FragmentMapsBinding
 class MapsFragment : Fragment() {
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private lateinit var activityResultLauncher: ActivityResultLauncher<Array<String>>
+
+
+    //private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    private var locationPermissionGranted = false
+
+    //private var lastKnownLocation: Location? = null
+
+    val permissionQuery = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissionGranted ->
+        if (permissionGranted) {
+
+        }
+        else {
+
+        }
+
+    }
+
+
+//    private val permissionsRequired = arrayOf(
+//        Manifest.permission.ACCESS_FINE_LOCATION,
+//        Manifest.permission.ACCESS_COARSE_LOCATION
+//    )
+
+//    val locationPermissionRequest = registerForActivityResult(
+//        ActivityResultContracts.RequestMultiplePermissions()
+//    ) { permissions ->
+//        when {
+//            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+//                // Precise location access granted.
+//            }
+//            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+//                // Only approximate location access granted.
+//            } else -> {
+//            // No location access granted.
+//        }
+//        }
+//    }
+
+
+
+//
+//    private val requestMultiplePermissions =
+//        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+//            permissions.entries.forEach {
+//                val granted = it.value
+//                val permission = it.key
+//                if (!granted) {
+//                    val neverAskAgain = !ActivityCompat.shouldShowRequestPermissionRationale(
+//                        requireActivity(),
+//                        permission
+//                    )
+//                    if (neverAskAgain) {
+//                        //user click "never ask again"
+//                    } else {
+//                        //show explain dialog
+//                    }
+//                    return@registerForActivityResult
+//                }
+//            }
+//        }
+
+//    private fun checkAppPermission() {
+//        permissionsRequired.forEach { permission ->
+//            if (ContextCompat.checkSelfPermission(requireContext(), permission)
+//                == PackageManager.PERMISSION_DENIED
+//            ) {
+//                requestMultiplePermissions.launch(permissionsRequired)
+//                return
+//            }
+//        }
+//    }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        if (savedInstanceState != null) {
+//            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
+//            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
+//        }
+//
+//    }
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -39,6 +133,8 @@ class MapsFragment : Fragment() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hio, 17.0f))
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +146,31 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        locationPermissionRequest.launch(arrayOf(
+//            Manifest.permission.ACCESS_FINE_LOCATION,
+//            Manifest.permission.ACCESS_COARSE_LOCATION))
+
+        //checkAppPermission()
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
     }
+
+//    private fun getLocationPermission() {
+//        /*
+//         * Request location permission, so that we can get the location of the
+//         * device. The result of the permission request is handled by a callback,
+//         * onRequestPermissionsResult.
+//         */
+//        if (ContextCompat.checkSelfPermission(requireContext(),
+//                Manifest.permission.ACCESS_FINE_LOCATION)
+//            == PackageManager.PERMISSION_GRANTED) {
+//            locationPermissionGranted = true
+//        } else {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+//                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+//        }
+//    }
 }

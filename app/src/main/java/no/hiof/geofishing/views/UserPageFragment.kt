@@ -24,7 +24,7 @@ class UserPageFragment : Fragment() {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
         val action =
-            no.hiof.geofishing.views.UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
+            UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
             Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
 

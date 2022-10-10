@@ -39,7 +39,7 @@ class FeedFragment : Fragment() {
             val clickedPost = feedList[position]
 
             val action =
-                no.hiof.geofishing.views.FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
+                FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
             action.uid = clickedPost.uid
 
             findNavController().navigate(action)
