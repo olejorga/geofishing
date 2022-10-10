@@ -65,7 +65,7 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/menu_maps_fragment" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
@@ -80,6 +80,6 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_signupFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/menu_maps_fragment" />
     </fragment>
 </navigation>
