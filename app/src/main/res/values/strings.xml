@@ -23,10 +23,10 @@
     <!-- End of Settings -->
 
     <!-- Rank-->
-    <string name="Rank_Title">Rank1</string>
+    <string name="Rank_Title">Rank</string>
     <string name="Rank_Number">1</string>
     <string name="Rank_Name">Name</string>
-    <string name="Rank_Dots">........</string>
+    <string name="Rank_Dots"> </string>
     <string name="Rank_Points">69</string>
     <!-- End of Rank-->
 
@@ -47,7 +47,7 @@
     <string name="New_Catch_Take_Picture">Take a picture</string>
     <string name="New_Catch_Add_Picture">Add a picture</string>
     <string name="New_Catch__Rod">Fishing rod (optional)</string>
-    <string name="New_Catch_Lure">Fishing rod (optional)</string>
+    <string name="New_Catch_Lure">Fishing lure (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>
     <string name="New_Catch_Species_Choose">Choose species</string>
     <string-array name="fish_array">

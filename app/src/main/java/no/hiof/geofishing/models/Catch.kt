@@ -2,6 +2,7 @@ package no.hiof.geofishing.models
 
 data class Catch(val uid: Int, var title: String, var description: String, var species: String, var weight: Int, var length: Int, var pictureId: Int?, var fishingRod: String?, var fishingLure: String?) {
 
+
     companion object {
         fun getCatch() : Catch {
             return Catch(1,
