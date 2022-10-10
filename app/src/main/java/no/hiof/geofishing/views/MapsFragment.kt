@@ -36,17 +36,17 @@ class MapsFragment : Fragment() {
 
     //private var lastKnownLocation: Location? = null
 
-    val permissionQuery = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissionGranted ->
-        if (permissionGranted) {
-
-        }
-        else {
-
-        }
-
-    }
+//    val permissionQuery = registerForActivityResult(
+//        ActivityResultContracts.RequestMultiplePermissions()
+//    ) { permissionGranted ->
+//        if (permissionGranted) {
+//
+//        }
+//        else {
+//
+//        }
+//
+//    }
 
 
 //    private val permissionsRequired = arrayOf(
