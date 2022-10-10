@@ -13,8 +13,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import no.hiof.geofishing.R
+import no.hiof.geofishing.databinding.FragmentMapsBinding
 
 class MapsFragment : Fragment() {
+    private var _binding: FragmentMapsBinding? = null
+    private val binding get() = _binding!!
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -26,17 +29,23 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        //val sydney = LatLng(-34.0, 151.0)
+        //googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val hio = LatLng(59.12927227233991, 11.352814708532474)
+        googleMap.addMarker(MarkerOptions().position(hio).title("Marker for Høgskolen i Østfold"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hio, 17.0f))
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+    ): View {
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

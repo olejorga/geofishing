@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import no.hiof.geofishing.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         // navHost is at a top-level fragment
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.mapsFragment,
+                R.id.menu_maps_fragment,
                 R.id.feedFragment,
-                R.id.catchFragment,
-                R.id.rankFragment,
+                R.id.menu_catch_fragment,
+                R.id.menu_rank_fragment,
                 R.id.userPageFragment
             )
         )

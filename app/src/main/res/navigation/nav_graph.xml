@@ -4,24 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
-
     <fragment
-        android:id="@+id/mapsFragment"
+        android:id="@+id/menu_maps_fragment"
         android:name="no.hiof.geofishing.views.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/catchFragment"
+        android:id="@+id/menu_catch_fragment"
         android:name="no.hiof.geofishing.views.CatchFragment"
         android:label="fragment_catch"
         tools:layout="@layout/fragment_catch" />
     <fragment
-        android:id="@+id/rankFragment"
+        android:id="@+id/menu_rank_fragment"
         android:name="no.hiof.geofishing.views.RankFragment"
         android:label="fragment_rank"
         tools:layout="@layout/fragment_rank" />
-    <navigation
-        android:id="@+id/nestedGraph"
+    <navigation android:id="@+id/menu_nested_graph"
         app:startDestination="@id/userPageFragment">
         <fragment
             android:id="@+id/userPageFragment"
@@ -38,8 +36,7 @@
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings" />
     </navigation>
-    <navigation
-        android:id="@+id/navigation2"
+    <navigation android:id="@+id/menu_feed_fragment"
         app:startDestination="@id/feedFragment">
         <fragment
             android:id="@+id/feedFragment"
