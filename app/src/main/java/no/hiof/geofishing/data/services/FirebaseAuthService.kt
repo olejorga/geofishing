@@ -2,6 +2,9 @@ package no.hiof.geofishing.data.services
 
 import android.util.Log
 import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -23,6 +26,9 @@ object FirebaseAuthService: AuthService {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
             Response()
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
+            Response(error = "Wrong username or password.")
         } catch (e: Exception) {
             Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
             Response(error = "Could not sign in user.")
@@ -44,6 +50,12 @@ object FirebaseAuthService: AuthService {
             auth.createUserWithEmailAndPassword(email, password).await()
             profileRepository!!.create(Profile(user!!.uid, null, name))
             Response()
+        } catch (e: FirebaseAuthWeakPasswordException) {
+            Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
+            Response(error = "Password is not strong enough.")
+        } catch (e: FirebaseAuthUserCollisionException) {
+            Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
+            Response(error = "Email already in use.")
         } catch (e: Exception) {
             Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
             Response(error = "Could not sign up user.")

@@ -32,4 +32,6 @@ class App: Application() {
         // Injecting implementation of a profile repository into auth service.
         _authService.profileRepository = profileRepository
     }
+
+    // TODO: Make all error messages strings!
 }
