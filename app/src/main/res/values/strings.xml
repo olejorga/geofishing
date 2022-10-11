@@ -37,6 +37,7 @@
     <string name="perm_request_rationale">needlocationtogetlocation</string>
     <string name="request_perm_again">askagain</string>
     <string name="dismiss">dismiss</string>
+    <string name="log_out">Log out</string>
 
     <string-array name="fish_array">
         <item>Cod</item>
