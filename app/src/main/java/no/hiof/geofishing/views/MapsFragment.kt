@@ -75,11 +75,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 //            }
 //        }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        checkLocationPermissions()
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+////        checkLocationPermissions()
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -88,8 +88,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED)
+            ) == PackageManager.PERMISSION_GRANTED) {
             locationPermissionGranted = true
+        }
 
         return binding.root
     }
@@ -105,12 +106,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initializeMap() {
-        val locationRequest = com.google.android.gms.location.LocationRequest()
-        locationRequest.interval = 5000
-        locationRequest.priority =
-            com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.smallestDisplacement = 16.0f
-        locationRequest.fastestInterval = 3000
+//        val locationRequest = com.google.android.gms.location.LocationRequest()
+//        locationRequest.interval = 5000
+//        locationRequest.priority =
+//            com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+//        locationRequest.smallestDisplacement = 16.0f
+//        locationRequest.fastestInterval = 3000
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
