@@ -1,9 +1,16 @@
 package no.hiof.geofishing
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -19,11 +26,49 @@ import no.hiof.geofishing.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+    private var locationPermissionGranted: Boolean = false
     private lateinit var binding: ActivityMainBinding
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController
-    // Maps
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private val locationPermissionsRequired = arrayOf(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
+
+    // TODO legg te else der du sett locationPermissionGranted = true
+    private fun checkLocationPermissions() {
+        locationPermissionsRequired.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(
+                    this, permission
+                ) == PackageManager.PERMISSION_DENIED
+            ) {
+                requestLocationPermissions.launch(locationPermissionsRequired)
+                return
+            }
+        }
+    }
+
+    private val requestLocationPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach {
+                val isGranted = it.value
+                val permission = it.key
+                when {
+                    isGranted ->  locationPermissionGranted = true
+                    ActivityCompat.shouldShowRequestPermissionRationale(
+                        this, permission
+                    ) -> {
+                        AlertDialog.Builder(this)
+                            .setTitle(R.string.perm_request_rationale_title)
+                            .setMessage(R.string.perm_request_rationale)
+                            .setPositiveButton(R.string.request_perm_again) { _, _ ->
+                                checkLocationPermissions()
+                            }.setNegativeButton(R.string.dismiss, null).create().show()
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
-
+        checkLocationPermissions()
         //Log.d("HERE", "RUN REPO!")
     }
 }

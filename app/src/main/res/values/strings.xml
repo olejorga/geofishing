@@ -33,6 +33,10 @@
     <string name="auth_name_hint">Navn</string>
     <string name="auth_confirm_password_hint">Bekreft passord</string>
     <string name="auth_signup_title_text">Opprett bruker</string>
+    <string name="perm_request_rationale_title">hallo</string>
+    <string name="perm_request_rationale">needlocationtogetlocation</string>
+    <string name="request_perm_again">askagain</string>
+    <string name="dismiss">dismiss</string>
 
     <string-array name="fish_array">
         <item>Cod</item>

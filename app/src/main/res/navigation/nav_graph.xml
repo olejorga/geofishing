@@ -19,7 +19,7 @@
         android:name="no.hiof.geofishing.views.RankFragment"
         android:label="fragment_rank"
         tools:layout="@layout/fragment_rank" />
-    <navigation android:id="@+id/menu_nested_graph"
+    <navigation android:id="@+id/menu_userPage_fragment"
         app:startDestination="@id/userPageFragment">
         <fragment
             android:id="@+id/userPageFragment"

@@ -5,5 +5,5 @@ package no.hiof.geofishing.data.constants
  */
 enum class Specie {
     COD,
-    SAMON
+    SALMON
 }
