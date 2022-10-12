@@ -26,19 +26,6 @@
     <string name="New_Catch_Lure">Fishing rod (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>
     <string name="New_Catch_Species_Choose">Choose species</string>
-    <string name="auth_password_hint">Passord</string>
-    <string name="auth_email_hint">E-post</string>
-    <string name="auth_login_button_text">Logg inn</string>
-    <string name="auth_signup_button_text">Registrer deg</string>
-    <string name="auth_name_hint">Navn</string>
-    <string name="auth_confirm_password_hint">Bekreft passord</string>
-    <string name="auth_signup_title_text">Opprett bruker</string>
-    <string name="perm_request_rationale_title">hallo</string>
-    <string name="perm_request_rationale">needlocationtogetlocation</string>
-    <string name="request_perm_again">askagain</string>
-    <string name="dismiss">dismiss</string>
-    <string name="log_out">Log out</string>
-
     <string-array name="fish_array">
         <item>Cod</item>
         <item>Salmod</item>
@@ -49,4 +36,25 @@
         <item>Dogfish</item>
         <item>Pirate perch</item>
     </string-array>
+
+    <!-- Login/signup -->
+    <string name="auth_password_hint">Passord</string>
+    <string name="auth_email_hint">E-post</string>
+    <string name="auth_login_button_text">Logg inn</string>
+    <string name="auth_signup_button_text">Registrer deg</string>
+    <string name="auth_name_hint">Navn</string>
+    <string name="auth_confirm_password_hint">Bekreft passord</string>
+    <string name="auth_signup_title_text">Opprett bruker</string>
+
+    <!-- Permissions -->
+    <string name="permission_request_rationale_title">Location</string>
+    <string name="permission_request_rationale">This app needs access to your location for some functionality to work</string>
+    <string name="request_permission_again">Back</string>
+    <string name="dismiss_permission_dialog">Dismiss</string>
+
+    <!-- User Page -->
+    <string name="log_out">Log out</string>
+
+
+
 </resources>

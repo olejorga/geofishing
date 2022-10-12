@@ -26,14 +26,13 @@ class UserPageFragment : Fragment() {
         ViewModelFactory.create { UserPageViewModel((activity?.application as App).authService) }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
-        binding.logoutButton.setOnClickListener {
+        binding.buttonLogout.setOnClickListener {
             viewModel.viewModelScope.launch {
 
                 val (_, error) = viewModel.logout()
