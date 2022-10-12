@@ -7,31 +7,28 @@ import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
 import java.util.*
 
-class CatchViewModel(authService: AuthService, catchRepository : Repository<Catch>) : ViewModel() {
+class CatchViewModel(catchRepository : Repository<Catch>) : ViewModel() {
     private var catchRepo : Repository<Catch>
-    private var auth : AuthService
     suspend fun createCatch() = catchRepo.create(newCatch(), UUID.randomUUID().toString())
 
     init {
         catchRepo = catchRepository
-        auth = authService
     }
-
 
     private fun newCatch() = Catch(id, date, description, latitude, length, longitude, lure, picture, place, rod, species, title, profile, weight)
 
-        var id: String? = null
-        var date: Date? = null
-        var description: String? = null
-        var latitude: Double? = null
-        var length: Int? = null
-        var longitude: Double? = null
-        var lure: String? = null
-        var picture: String? = null
-        var place: String? = null
-        var rod: String? = null
-        var species: Specie? = null
-        var title: String? = null
-        var profile: String? = null
-        var weight: Int? = null
+    var id: String? = null
+    var date: Date? = null
+    var description: String? = null
+    var latitude: Double? = null
+    var length: Int? = null
+    var longitude: Double? = null
+    var lure: String? = null
+    var picture: String? = null
+    var place: String? = null
+    var rod: String? = null
+    var species: Specie? = null
+    var title: String? = null
+    var profile: String? = null
+    var weight: Int? = null
 }
