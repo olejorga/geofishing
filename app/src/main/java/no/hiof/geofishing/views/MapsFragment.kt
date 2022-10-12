@@ -58,6 +58,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+// TODO hent FAB og sett nav action te catch fragment med latlng data!
+
+    /**
+     * Requests user to choose between either coarse or fine location, if dismissed shows an
+     * AlertDialog of why the app needs these permissions depending on the
+     * shouldShowRequestPermissionRationale method.
+     * weird if check on array to prevent double AlertDialog
+     */
     private val requestLocationPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
@@ -67,16 +75,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     isGranted -> setUserLocation(it.value)
                     ActivityCompat.shouldShowRequestPermissionRationale(
                         requireActivity(), permission
-                    ) -> { // TODO slett alert på dismiss og fiks aldri spør igjen logikk
-//                        count++
-//                        if (count < 1)
-//                            return@forEach
-                        AlertDialog.Builder(requireContext())
-                            .setTitle(R.string.permission_request_rationale_title)
-                            .setMessage(R.string.permission_request_rationale)
-                            .setPositiveButton(R.string.request_permission_again) { _, _ ->
-                                checkLocationPermissions()
-                            }.setNegativeButton(R.string.dismiss_permission_dialog, null).create().show()
+                    ) -> {
+                        if (it.key == locationPermissionsRequired[1]) {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle(R.string.permission_request_title)
+                                .setMessage(R.string.permission_request_rationale)
+                                .setPositiveButton(R.string.request_permission_again) { _, _ ->
+                                    checkLocationPermissions()
+                                }.setNegativeButton(R.string.dismiss_permission_dialog, null).create().show()
+                        } else
+                            return@forEach
                     }
                 }
             }
