@@ -1,8 +1,7 @@
 package no.hiof.geofishing.viewmodels
 
 import androidx.lifecycle.ViewModel
-import no.hiof.geofishing.data.constants.Specie
-import no.hiof.geofishing.data.contracts.AuthService
+import no.hiof.geofishing.data.constants.Species
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
 import java.util.*
@@ -27,7 +26,7 @@ class CatchViewModel(catchRepository : Repository<Catch>) : ViewModel() {
     var picture: String? = null
     var place: String? = null
     var rod: String? = null
-    var species: Specie? = null
+    var species: String? = null
     var title: String? = null
     var profile: String? = null
     var weight: Int? = null

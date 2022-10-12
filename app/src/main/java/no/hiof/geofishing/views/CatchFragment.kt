@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.data.constants.Species
 import no.hiof.geofishing.models.Catch
 import no.hiof.geofishing.utils.ViewModelFactory
 import kotlin.math.log
@@ -38,7 +39,7 @@ class CatchFragment : Fragment() {
         _binding = FragmentCatchBinding.inflate(inflater, container, false)
         val spinner : Spinner = binding.spinnerSpecies
         context?.let { context ->
-            ArrayAdapter.createFromResource(context, R.array.fish_array, android.R.layout.simple_spinner_item)
+            ArrayAdapter.createFromResource(context, R.array.fish_array , android.R.layout.simple_spinner_item)
                 .also { arrayAdapter ->
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spinner.adapter = arrayAdapter
@@ -53,7 +54,7 @@ class CatchFragment : Fragment() {
                 viewModel.weight = binding.fieldWeight.text.toString().toInt()
                 viewModel.rod = binding.fieldFishingRod.text.toString()
                 viewModel.lure = binding.fieldFishingLure.text.toString()
-
+                viewModel.species = binding.spinnerSpecies.selectedItem.toString()
                 val (_, error) = viewModel.createCatch()
 
                 if(error != null) {
@@ -71,6 +72,5 @@ class CatchFragment : Fragment() {
         super.onDestroyView()
     }
 }
-
-// TODO: Implement 'create catch logic'
+// TODO: Output fra spinner
 // TODO: Link spinner to species
