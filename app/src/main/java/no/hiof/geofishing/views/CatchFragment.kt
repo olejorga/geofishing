@@ -50,9 +50,8 @@ class CatchFragment : Fragment() {
             viewModel.viewModelScope.launch {
                 viewModel.title = binding.fieldTitle.text.toString()
                 viewModel.description = binding.fieldDescription.text.toString()
-                // TODO: Change length and weight input
-                viewModel.length = binding.fieldLength.text.length
-                viewModel.weight = binding.fieldWeight.text.length
+                viewModel.length = binding.fieldLength.text.toString().toInt()
+                viewModel.weight = binding.fieldWeight.text.toString().toInt()
                 viewModel.rod = binding.fieldFishingRod.text.toString()
                 viewModel.lure = binding.fieldFishingLure.text.toString()
 

@@ -5,7 +5,7 @@ import no.hiof.geofishing.models.FeedPost
 
 class FeedViewModel : ViewModel() {
     private lateinit var _feedList : MutableList<FeedPost>
-    public val feedList get() = _feedList
+    val feedList get() = _feedList
 
     init {
         retrieveFeed()

@@ -5,14 +5,12 @@ import no.hiof.geofishing.data.constants.Specie
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
-import no.hiof.geofishing.data.repositories.CatchRepository
-import java.time.Instant
 import java.util.*
 
 class CatchViewModel(authService: AuthService, catchRepository : Repository<Catch>) : ViewModel() {
     private var catchRepo : Repository<Catch>
     private var auth : AuthService
-    suspend fun createCatch() = catchRepo.create(newCatch(), auth.id)
+    suspend fun createCatch() = catchRepo.create(newCatch(), UUID.randomUUID().toString())
 
     init {
         catchRepo = catchRepository
@@ -36,5 +34,4 @@ class CatchViewModel(authService: AuthService, catchRepository : Repository<Catc
         var title: String? = null
         var profile: String? = null
         var weight: Int? = null
-    }
-    var catch : Catch? = null
+}
