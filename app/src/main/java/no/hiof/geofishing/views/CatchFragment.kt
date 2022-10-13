@@ -55,13 +55,20 @@ class CatchFragment : Fragment() {
                 viewModel.rod = binding.fieldFishingRod.text.toString()
                 viewModel.lure = binding.fieldFishingLure.text.toString()
                 viewModel.species = binding.spinnerSpecies.selectedItem.toString()
+
+                // TODO: Error handling here. Crashed if no input in fields.
                 val (_, error) = viewModel.createCatch()
 
                 if(error != null) {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    Toast.makeText(context, "Catch added", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
+                    // TODO: Clear field after adding new catch.
+//                    binding.fieldTitle.text.clear()
+//                    binding.fieldDescription.text.clear()
+//                    binding.fieldLength.text.clear()
+//                    binding.fieldWeight.text.clear()
                 }
             }
         }

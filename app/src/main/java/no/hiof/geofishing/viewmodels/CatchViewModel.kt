@@ -8,13 +8,32 @@ import java.util.*
 
 class CatchViewModel(catchRepository : Repository<Catch>) : ViewModel() {
     private var catchRepo : Repository<Catch>
-    suspend fun createCatch() = catchRepo.create(newCatch(), UUID.randomUUID().toString())
+    suspend fun createCatch() = catchRepo.create(newCatch())
+//, UUID.randomUUID().toString()
 
     init {
         catchRepo = catchRepository
     }
 
-    private fun newCatch() = Catch(id, date, description, latitude, length, longitude, lure, picture, place, rod, species, title, profile, weight)
+    private fun newCatch() = Catch(null, date, description, latitude, length, longitude, lure, picture, place, rod, species, title, profile, weight)
+
+//    private fun clear() {
+//        id = null
+//        date = null
+//        description = null
+//        latitude = null
+//        length = null
+//        longitude = null
+//        lure = null
+//        picture = null
+//        place = null
+//        rod = null
+//        species = null
+//        title = null
+//        profile = null
+//        weight = null
+//
+//    }
 
     var id: String? = null
     var date: Date? = null

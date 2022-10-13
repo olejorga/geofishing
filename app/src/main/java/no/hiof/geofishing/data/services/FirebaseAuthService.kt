@@ -49,7 +49,7 @@ object FirebaseAuthService: AuthService {
     override suspend fun signup(email: String, password: String, name: String): Response<Unit> {
         return try {
             auth.createUserWithEmailAndPassword(email, password).await()
-            profileRepository!!.create(Profile(user!!.uid, null, name))
+            profileRepository!!.create(Profile(null, null, name), user!!.uid)
             Response()
         } catch (e: FirebaseAuthWeakPasswordException) {
             Log.d(Tags.AUTH_SERVICE.toString(), e.toString())
