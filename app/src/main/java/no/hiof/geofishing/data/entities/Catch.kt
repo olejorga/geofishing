@@ -3,7 +3,7 @@ package no.hiof.geofishing.data.entities
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.ServerTimestamp
-import no.hiof.geofishing.data.constants.Specie
+import no.hiof.geofishing.data.constants.Species
 import java.util.*
 
 /**
@@ -38,7 +38,7 @@ data class Catch(
     val picture: String? = null,
     val place: String? = null,
     val rod: String? = null,
-    val species: Specie? = null,
+    val species: String? = null,
     val title: String? = null,
     val profile: String? = null,
     val weight: Int? = null

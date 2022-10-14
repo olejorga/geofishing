@@ -3,6 +3,7 @@ package no.hiof.geofishing.data.repositories
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.snapshots
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.catch
@@ -11,6 +12,7 @@ import kotlinx.coroutines.tasks.await
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
+import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Subscription
 
 /**
@@ -61,7 +63,16 @@ object SubscriptionRepository: Repository<Subscription> {
         }
     }
 
-    override fun find(property: String, value: Any) = database
+    override fun find(id: String) = database
+        .document(id)
+        .snapshots()
+        .mapNotNull { Response(it.toObject<Subscription>()) }
+        .catch { e ->
+            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            emit(Response(error = "Could not find subscription with id=$id."))
+        }
+
+    override fun search(property: String, value: Any) = database
         .whereEqualTo(property, value)
         .snapshots()
         .mapNotNull { Response(it.toObjects<Subscription>()) }

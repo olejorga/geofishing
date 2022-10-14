@@ -44,11 +44,19 @@ interface Repository<T> {
     suspend fun delete(id: String): Response<Unit>
 
     /**
+     * Create a realtime stream of the entity that has the matching id.
+     *
+     * @param id The target id.
+     * @return A standardized response (Data is the entity with the matching id).
+     */
+    fun find(id: String): Flow<Response<T>>
+
+    /**
      * Create a realtime stream of entities that has a property with a specific value.
      *
      * @param property The target property within the entity.
      * @param value The value of the targeted property.
      * @return A standardized response (Data is a list of matching entities).
      */
-    fun find(property: String, value: Any): Flow<Response<List<T>>>
+    fun search(property: String, value: Any): Flow<Response<List<T>>>
 }

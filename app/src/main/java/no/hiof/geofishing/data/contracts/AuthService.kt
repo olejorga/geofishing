@@ -13,6 +13,7 @@ interface AuthService {
     var profileRepository: Repository<Profile>?
     val authenticated: Boolean?
     val email: String?
+    val id: String?
 
     /**
      * Asynchronously authenticate a user by email and password.
