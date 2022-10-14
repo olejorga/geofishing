@@ -12,20 +12,11 @@ import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Catch
 
 class FeedViewModel(catchRepository: Repository<Catch>) : ViewModel() {
-//    private lateinit var _feedList : MutableList<FeedPost>
-//    val feedList get() = _feedList
     lateinit var catchList : LiveData<Response<List<Catch>>>
 
     init {
-//        retrieveFeed()
         viewModelScope.launch {
             catchList = catchRepository.read().asLiveData()
-            Log.d("FEED",catchRepository.read().collect().toString())
         }
-
     }
-
-//    private fun retrieveFeed() {
-//        _feedList = ArrayList(FeedPost.getFeedPosts())
-//    }
 }
