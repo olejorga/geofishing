@@ -33,9 +33,10 @@
     <!-- Feed -->
     <string name="feedposterimageview">feedPosterImageView</string>
     <string name="post_image">post_image</string>
-    <string name="feedposttitle1">feedposttitle1</string>
-    <string name="feedposttitle2">feedposttitle2</string>
+    <string name="feedTitle">Title</string>
+    <string name="feedProfile">Profile</string>
     <string name="description">description</string>
+    <string name="feedLocation">Location</string>
     <!-- End of Feed -->
 
     <!-- New Catch -->

@@ -26,8 +26,7 @@ class FeedFragment : Fragment() {
     private val viewModel : FeedViewModel by viewModels {
         ViewModelFactory.create { FeedViewModel(
                 (activity?.application as App).catchRepository
-            )
-        }
+        )}
     }
 
     override fun onCreateView(
@@ -57,8 +56,6 @@ class FeedFragment : Fragment() {
                 feedRecyclerView.layoutManager = GridLayoutManager(context, 1)
             }
         }
-
-
         return binding.root
     }
 

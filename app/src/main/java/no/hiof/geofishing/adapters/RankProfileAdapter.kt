@@ -26,14 +26,14 @@ class RankProfileAdapter (private val rankList: List<Profile>, private val click
     }
 
     class RankViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val rankNameTextView : TextView = view.findViewById(R.id.rankNameTextView)
-        private val rankPointsTextView : TextView = view.findViewById(R.id.rankPointsTextView)
-        private val rankNumberTextView : TextView = view.findViewById(R.id.rankNumberTextView)
+        private val textName : TextView = view.findViewById(R.id.rankNameTextView)
+        private val textPoints : TextView = view.findViewById(R.id.rankPointsTextView)
+        private val textPositionNumber : TextView = view.findViewById(R.id.rankNumberTextView)
 
         fun bind (profile: Profile, clickListener: OnClickListener) {
-            rankNameTextView.text = profile.name
-            rankPointsTextView.text = profile.bio
-            rankNumberTextView.text = position().toString()
+            textName.text = profile.name
+            textPoints.text = profile.bio
+            textPositionNumber.text = position().toString()
             itemView.setOnClickListener(clickListener)
         }
 

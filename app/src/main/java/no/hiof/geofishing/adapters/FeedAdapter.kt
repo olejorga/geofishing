@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Catch
-import no.hiof.geofishing.models.FeedPost
 
 class FeedAdapter(private val feedList: List<Catch>, private val clickListener: View.OnClickListener) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
@@ -32,12 +31,16 @@ class FeedAdapter(private val feedList: List<Catch>, private val clickListener: 
     }
 
     class FeedViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val imageView : ImageView = view.findViewById(R.id.image_catch_feed)
+        private val imageView : ImageView = view.findViewById(R.id.image_catch)
         private val textTitle : TextView = view.findViewById(R.id.text_title)
+        private val textProfile : TextView = view.findViewById(R.id.text_profile)
+        private val textDesc : TextView = view.findViewById(R.id.text_description)
 
         fun bind(post: Catch, clickListener: OnClickListener) {
             Picasso.get().load(post.picture).resize(imageView.maxWidth, imageView.maxHeight).into(imageView)
             textTitle.text = post.title
+            textProfile.text = post.profile
+            textDesc.text = post.description
 
             itemView.setOnClickListener(clickListener)
         }

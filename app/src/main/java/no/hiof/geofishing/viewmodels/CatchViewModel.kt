@@ -2,14 +2,14 @@ package no.hiof.geofishing.viewmodels
 
 import androidx.lifecycle.ViewModel
 import no.hiof.geofishing.data.constants.Species
+import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
 import java.util.*
 
-class CatchViewModel(catchRepository : Repository<Catch>) : ViewModel() {
+class CatchViewModel(authService: AuthService, catchRepository : Repository<Catch>) : ViewModel() {
     private var catchRepo : Repository<Catch>
     suspend fun createCatch() = catchRepo.create(newCatch())
-//, UUID.randomUUID().toString()
 
     init {
         catchRepo = catchRepository
@@ -47,6 +47,6 @@ class CatchViewModel(catchRepository : Repository<Catch>) : ViewModel() {
     var rod: String? = null
     var species: String? = null
     var title: String? = null
-    var profile: String? = null
+    var profile: String? = authService.id
     var weight: Int? = null
 }

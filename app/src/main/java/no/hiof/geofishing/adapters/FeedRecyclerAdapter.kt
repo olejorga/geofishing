@@ -30,7 +30,7 @@ class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clic
     }
 
     class FeedViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val feedPostImageView : ImageView = view.findViewById(R.id.image_catch_feed)
+        private val feedPostImageView : ImageView = view.findViewById(R.id.image_catch)
         private val feedPostTitleTextView : TextView = view.findViewById(R.id.text_title)
 
         fun bind(post: FeedPost, clickListener: OnClickListener) {

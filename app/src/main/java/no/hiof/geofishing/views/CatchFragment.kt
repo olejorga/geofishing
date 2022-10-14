@@ -28,6 +28,7 @@ class CatchFragment : Fragment() {
 
     private val viewModel : CatchViewModel by viewModels {
         ViewModelFactory.create { CatchViewModel(
+            (activity?.application as App).authService,
             (activity?.application as App).catchRepository)
         }
     }
