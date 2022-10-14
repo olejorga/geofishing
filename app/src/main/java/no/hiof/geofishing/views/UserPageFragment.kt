@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.adapters.FeedAdapter
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
@@ -28,7 +32,8 @@ class UserPageFragment : Fragment() {
     private val viewModel: UserPageViewModel by viewModels {
         ViewModelFactory.create { UserPageViewModel(
             (activity?.application as App).authService,
-            (activity?.application as App).profileRepository)
+            (activity?.application as App).profileRepository,
+            (activity?.application as App).catchRepository)
         }
     }
     private lateinit var user : Profile
@@ -38,6 +43,25 @@ class UserPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
+
+        viewModel.catches.observe(viewLifecycleOwner){ response ->
+            if(response.error == null && response.data != null){
+                val recyclerView = binding.userPageRecyclerView
+                Log.d("UserPageF", response.data.firstOrNull().toString())
+                // TODO: Lag en egen adapter, som passer litt bedre.
+                // TODO: Lag et eget detailview som passer litt bedre.
+                recyclerView.adapter = FeedAdapter(response.data){
+                    val position = recyclerView.getChildAdapterPosition(it)
+                }
+                recyclerView.layoutManager = GridLayoutManager(context, 1)
+            }
+            else if(response.error != null){
+                Log.d(Tags.REPOSITORY.toString(), response.error.toString())
+            }
+            else {
+                Log.d(Tags.REPOSITORY.toString(), "Could not find any data")
+            }
+        }
 
         viewModel.profile.observe(viewLifecycleOwner){ response ->
             if(response.error == null && response.data != null){

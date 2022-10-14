@@ -39,7 +39,6 @@ class RankFragment : Fragment() {
 
         val rankRecyclerView = binding.rankRecyclerView
 
-        //var rankedList = viewModel.userList
         var rankedList : MutableList<Profile>
 
         viewModel.profileList.observe(viewLifecycleOwner) { response ->
