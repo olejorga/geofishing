@@ -2,9 +2,11 @@ package no.hiof.geofishing.views
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,6 +23,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.PlaceLikelihood
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
+import com.google.android.libraries.places.api.net.PlacesClient
+import no.hiof.geofishing.BuildConfig.MAPS_API_KEY
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentMapsBinding
 
@@ -32,11 +39,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var mGoogleMap: GoogleMap? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var locationPermissionGranted = false
 
     // default coordinates HIØ
     private val defLatitude = 59.12927227233991
     private val defLongitude = 11.352814708532474
+
+//    private lateinit var placesClient: PlacesClient
 
     // Permissions required for location
     private val locationPermissionsRequired = arrayOf(
@@ -44,7 +52,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_FINE_LOCATION
     )
 
-    // TODO legg te else der du sett locationPermissionGranted = true
     // Checks if permissions are granted, if not starts a new req, else set user location.
     private fun checkLocationPermissions() {
         locationPermissionsRequired.forEach { permission ->
@@ -55,12 +62,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 requestLocationPermissions.launch(locationPermissionsRequired)
                 return
             } else {
-                setUserLocation(locationPermissionGranted)
+                setUserLocation()
             }
         }
     }
 
-// TODO hent FAB og sett nav action te catch fragment med latlng data!
+// TODO hvis bruker velger coarse_loc og deny, for så å klikke back og velge coarse og accept så vil AlertDialog poppe opp for Fine_loc
 
     /**
      * Requests user to choose between either coarse or fine location, if dismissed shows an
@@ -70,36 +77,33 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
      * if only coarse setUserLocation, if none, only build AlertDialog on fine_location
      */
     private val requestLocationPermissions =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
             permissions.entries.forEach {
                 val isGranted = it.value
                 val permission = it.key
                 when {
-                    isGranted -> setUserLocation(it.value)
+                    isGranted -> setUserLocation()
                     ActivityCompat.shouldShowRequestPermissionRationale(
                         requireActivity(), permission
                     ) -> {
-                        if (it.key == locationPermissionsRequired[1]) {
-                            AlertDialog.Builder(requireContext())
-                                .setTitle(R.string.permission_request_title)
-                                .setMessage(R.string.permission_request_rationale)
-                                .setPositiveButton(R.string.request_permission_again) { _, _ ->
-                                    checkLocationPermissions()
-                                }.setNegativeButton(R.string.dismiss_permission_dialog, null).create().show()
-                        } else
-                            return@forEach
+                        AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.permission_request_title)
+                            .setMessage(R.string.permission_request_rationale)
+                            .setPositiveButton(R.string.request_permission_again) { _, _ ->
+                                checkLocationPermissions()
+                            }.setNegativeButton(R.string.deny_permission_dialog, null).create()
+                            .show()
                     }
                 }
             }
         }
 
-    /**
-     * @param permissionsEnabledBool A Boolean set through permission requests.
-     *
-     * */
+
     @SuppressLint("MissingPermission")
-    private fun setUserLocation(permissionsEnabledBool: Boolean) {
-        mGoogleMap?.isMyLocationEnabled = permissionsEnabledBool
+    private fun setUserLocation() {
+        mGoogleMap?.isMyLocationEnabled = true
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location? ->
             val latLng =
                 LatLng(
@@ -108,19 +112,51 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 )
             mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f))
         }
+
+
+//        // Use fields to define the data types to return.
+//        val placeFields: List<Place.Field> = listOf(Place.Field.NAME)
+//
+//        // Use the builder to create a FindCurrentPlaceRequest.
+//        val request: FindCurrentPlaceRequest = FindCurrentPlaceRequest.newInstance(placeFields)
+//
+//        // Call findCurrentPlace and handle the response (first check that the user has granted permission).
+//
+//        val placeResponse = placesClient.findCurrentPlace(request)
+//        placeResponse.addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                val response = task.result
+//                for (placeLikelihood: PlaceLikelihood in response?.placeLikelihoods
+//                    ?: emptyList()) {
+//                    Log.d(
+//                        "lol1",
+//                        "Place '${placeLikelihood.place.name}' has likelihood: ${placeLikelihood.likelihood}"
+//                    )
+//                }
+//            } else {
+//                val exception = task.exception
+//                if (exception is ApiException) {
+//                    Log.d("lol2", "Place not found: ${exception.statusCode}")
+//                }
+//            }
+//        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Construct a PlacesClient
+//        Places.initialize(requireContext(), MAPS_API_KEY)
+//        placesClient = Places.createClient(requireContext())
+
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
-
-        if (ContextCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            locationPermissionGranted = true
-        }
         return binding.root
     }
 
@@ -132,30 +168,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
-
-        val action = MapsFragmentDirections.actionMenuMapsFragmentToMenuCatchFragment()
-
-        binding.floatingActionButton.setOnClickListener{
-            //if (mGoogleMap != null )
-                //findNavController().navigate(action)
-        }
-        //initializeMap()
-    }
-
-    // TODO add fab for adding catch der du sende latlng som input via action?
-    // TODO easy permissions
-    private fun initializeMap() {
-//        val locationRequest = com.google.android.gms.location.LocationRequest()
-//        locationRequest.interval = 5000
-//        locationRequest.priority =
-//            com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-//        locationRequest.smallestDisplacement = 16.0f
-//        locationRequest.fastestInterval = 3000
-
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
     }
 
     @SuppressLint("MissingPermission")

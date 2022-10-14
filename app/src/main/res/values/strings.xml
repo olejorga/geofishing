@@ -53,7 +53,7 @@
     <string name="permission_request_title">Location</string>
     <string name="permission_request_rationale">This app needs access to your location for some functionality to work</string>
     <string name="request_permission_again">Back</string>
-    <string name="dismiss_permission_dialog">Dismiss</string>
+    <string name="deny_permission_dialog">No thanks</string>
 
     <!-- User Page -->
     <string name="log_out">Log out</string>
