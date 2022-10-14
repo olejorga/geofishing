@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,15 +26,15 @@ import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentMapsBinding
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
+
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
 
     private var mGoogleMap: GoogleMap? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var locationPermissionGranted = false
-    private var count = 0
 
-    // def coordinates HIØ
+    // default coordinates HIØ
     private val defLatitude = 59.12927227233991
     private val defLongitude = 11.352814708532474
 
@@ -64,7 +66,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
      * Requests user to choose between either coarse or fine location, if dismissed shows an
      * AlertDialog of why the app needs these permissions depending on the
      * shouldShowRequestPermissionRationale method.
-     * weird if check on array to prevent double AlertDialog
+     * if check on array to prevent double AlertDialog, if fine_location is granted so is coarse
+     * if only coarse setUserLocation, if none, only build AlertDialog on fine_location
      */
     private val requestLocationPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -129,7 +132,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        initializeMap()
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+
+        val action = MapsFragmentDirections.actionMenuMapsFragmentToMenuCatchFragment()
+
+        binding.floatingActionButton.setOnClickListener{
+            //if (mGoogleMap != null )
+                //findNavController().navigate(action)
+        }
+        //initializeMap()
     }
 
     // TODO add fab for adding catch der du sende latlng som input via action?

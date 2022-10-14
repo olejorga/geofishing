@@ -8,7 +8,11 @@
         android:id="@+id/menu_maps_fragment"
         android:name="no.hiof.geofishing.views.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_menu_maps_fragment_to_menu_catch_fragment"
+            app:destination="@id/menu_catch_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/menu_catch_fragment"
         android:name="no.hiof.geofishing.views.CatchFragment"
