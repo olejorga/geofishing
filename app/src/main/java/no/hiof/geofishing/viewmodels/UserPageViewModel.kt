@@ -15,20 +15,13 @@ import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.data.services.FirebaseAuthService
 
 class UserPageViewModel(authService: AuthService, profileRepository: Repository<Profile>) : ViewModel() {
-    val profile : LiveData<Response<Profile>>
+    lateinit var profile : LiveData<Response<Profile>>
 
     init {
-        // TODO: Rydd opp her
-        Log.d("Before scope", authService.id.toString())
         viewModelScope.launch {
-            Log.d("Før", authService.id.toString())
             if(authService.authenticated == true){
-                profileRepository.find(authService.id.toString()).collect {
-                    Log.d("UserpageViewModel",it.toString())
-                }
+                profile = profileRepository.find(authService.id.toString()).asLiveData()
             }
         }
-        profile = profileRepository.find(authService.id.toString()).asLiveData()
-
     }
 }

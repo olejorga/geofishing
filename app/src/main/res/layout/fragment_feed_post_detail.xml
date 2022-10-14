@@ -8,20 +8,20 @@
     tools:context=".views.FeedPostDetailFragment">
 
     <TextView
-        android:id="@+id/postTitleTextView"
+        android:id="@+id/text_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="@string/feedposttitle2"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/postImageView"
+        app:layout_constraintBottom_toTopOf="@+id/image_catch_feed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/postImageView"
+        android:id="@+id/image_catch_feed"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postImageView">
+        app:layout_constraintTop_toBottomOf="@+id/image_catch_feed">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:textAlignment="center">
 
             <TextView
-                android:id="@+id/postDescriptiontextView"
+                android:id="@+id/text_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"

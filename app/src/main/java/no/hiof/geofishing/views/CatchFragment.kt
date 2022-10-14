@@ -79,5 +79,3 @@ class CatchFragment : Fragment() {
         super.onDestroyView()
     }
 }
-// TODO: Output fra spinner
-// TODO: Link spinner to species

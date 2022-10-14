@@ -29,9 +29,9 @@ class FeedPostDetailFragment : Fragment() {
 
         val feedPost = FeedPost.getFeedPosts()[args.uid]
 
-        binding.postTitleTextView.text = feedPost.title
-        binding.postImageView.setImageResource(feedPost.posterUrl)
-        binding.postDescriptiontextView.text = feedPost.description
+        binding.textTitle.text = feedPost.title
+        binding.imageCatchFeed.setImageResource(feedPost.posterUrl)
+        binding.textDescription.text = feedPost.description
 
     }
 

@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import no.hiof.geofishing.R
+import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.models.FeedPost
 
-class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clickListener: View.OnClickListener) : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
+class FeedAdapter(private val feedList: List<Catch>, private val clickListener: View.OnClickListener) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.feed_post_item, parent, false)
@@ -30,12 +32,12 @@ class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clic
     }
 
     class FeedViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val feedPostImageView : ImageView = view.findViewById(R.id.image_catch_feed)
-        private val feedPostTitleTextView : TextView = view.findViewById(R.id.text_title)
+        private val imageView : ImageView = view.findViewById(R.id.image_catch_feed)
+        private val textTitle : TextView = view.findViewById(R.id.text_title)
 
-        fun bind(post: FeedPost, clickListener: OnClickListener) {
-            feedPostImageView.setImageResource(post.posterUrl)
-            feedPostTitleTextView.text = post.title
+        fun bind(post: Catch, clickListener: OnClickListener) {
+            Picasso.get().load(post.picture).resize(imageView.maxWidth, imageView.maxHeight).into(imageView)
+            textTitle.text = post.title
 
             itemView.setOnClickListener(clickListener)
         }

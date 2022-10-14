@@ -1,23 +1,25 @@
 package no.hiof.geofishing.views
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.flow.first
+import com.squareup.picasso.Picasso
 import no.hiof.geofishing.App
 import no.hiof.geofishing.data.constants.Tags
-import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Profile
-import no.hiof.geofishing.viewmodels.UserPageViewModel
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
 import no.hiof.geofishing.utils.ViewModelFactory
+import no.hiof.geofishing.viewmodels.UserPageViewModel
+import java.io.InputStream
+
 
 class UserPageFragment : Fragment() {
     private var _binding : FragmentUserPageBinding? = null
@@ -36,12 +38,13 @@ class UserPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
-//        binding.userPageViewModel = viewModel
-//        binding.lifecycleOwner = this
 
         viewModel.profile.observe(viewLifecycleOwner){ response ->
             if(response.error == null && response.data != null){
                 user = response.data
+                binding.textName.text = user.name
+                binding.textBio.text = user.bio
+                Picasso.get().load(user.portrait).resize(binding.imageProfile.maxWidth, binding.imageProfile.maxHeight).into(binding.imageProfile)
             }
             else if(response.error != null){
                 Log.d(Tags.REPOSITORY.toString(), response.error.toString())

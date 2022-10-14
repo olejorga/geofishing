@@ -38,7 +38,6 @@ data class Catch(
     val picture: String? = null,
     val place: String? = null,
     val rod: String? = null,
-    // TODO: Decide if species should be enum or string.
     val species: String? = null,
     val title: String? = null,
     val profile: String? = null,
