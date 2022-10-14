@@ -71,7 +71,15 @@
     <string name="auth_name_hint">Navn</string>
     <string name="auth_confirm_password_hint">Bekreft passord</string>
     <string name="auth_signup_title_text">Opprett bruker</string>
+    <string name="auth_log_out_button_text">Log out</string>
     <!-- End of Auth -->
 
-
+    <!-- Map Fragment -->
+    <string name="fab_label">Add catch</string>
+    <string name="extended_fab_content_desc">Add Catch</string>
+    <string name="permission_request_title">Location</string>
+    <string name="permission_request_rationale">This app needs access to your location for some functionality to work</string>
+    <string name="request_permission_again">Back</string>
+    <string name="deny_permission_dialog">No thanks</string>
+    <!-- End of Map Fragment -->
 </resources>

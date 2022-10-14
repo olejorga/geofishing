@@ -1,18 +1,32 @@
 package no.hiof.geofishing
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import no.hiof.geofishing.databinding.ActivityMainBinding
+
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+import no.hiof.geofishing.databinding.ActivityMainBinding
+
+
 class MainActivity : AppCompatActivity() {
+//    private var locationPermissionGranted: Boolean = false
     private lateinit var binding: ActivityMainBinding
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController

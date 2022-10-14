@@ -14,7 +14,7 @@ import java.util.*
  * @property length The length of the fish caught.
  * @property latitude Latitude and longitude for where the fish was caught (defaults to now).
  * @property lure What type of lure was used to catch the fish.
- * @property latitude Latitude and longitude for where the fish was caught (defaults to now).
+ * @property longitude Latitude and longitude for where the fish was caught (defaults to now).
  * @property picture A reference to a photo of the catch (usually url).
  * @property place The general area where the fish was caught (should be filled based on location).
  * @property rod What type of rod was used to catch the fish.

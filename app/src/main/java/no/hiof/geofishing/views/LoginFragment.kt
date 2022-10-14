@@ -1,10 +1,16 @@
 package no.hiof.geofishing.views
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -19,6 +25,8 @@ import no.hiof.geofishing.viewmodels.LoginViewModel
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    //private var locationPermissionGranted: Boolean = false
+
     private val viewModel : LoginViewModel by viewModels {
         ViewModelFactory.create { LoginViewModel((activity?.application as App).authService) }
     }
@@ -28,6 +36,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+//        checkLocationPermissions()
         return binding.root
     }
 
