@@ -1,4 +1,4 @@
-package no.hiof.geofishing.views
+package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.util.Log
@@ -7,17 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import no.hiof.geofishing.App
-import no.hiof.geofishing.viewmodels.FeedViewModel
-import no.hiof.geofishing.adapters.FeedAdapter
-import no.hiof.geofishing.data.entities.Catch
+import no.hiof.geofishing.ui.viewmodels.FeedViewModel
+import no.hiof.geofishing.ui.adapters.FeedAdapter
 import no.hiof.geofishing.databinding.FragmentFeedBinding
-import no.hiof.geofishing.models.FeedPost
-import no.hiof.geofishing.utils.ViewModelFactory
-import no.hiof.geofishing.viewmodels.CatchViewModel
+import no.hiof.geofishing.ui.utils.ViewModelFactory
 
 class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
@@ -26,7 +22,8 @@ class FeedFragment : Fragment() {
     private val viewModel : FeedViewModel by viewModels {
         ViewModelFactory.create { FeedViewModel(
                 (activity?.application as App).catchRepository
-        )}
+        )
+        }
     }
 
     override fun onCreateView(
@@ -48,7 +45,8 @@ class FeedFragment : Fragment() {
 
                     val clickedPost = feedList[position]
 
-                    val action = FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
+                    val action =
+                        no.hiof.geofishing.ui.views.FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
                     action.uid = feedList.indexOf(clickedPost)
 
                     findNavController().navigate(action)

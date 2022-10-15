@@ -1,4 +1,4 @@
-package no.hiof.geofishing.viewmodels
+package no.hiof.geofishing.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 

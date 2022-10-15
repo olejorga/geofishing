@@ -1,7 +1,5 @@
-package no.hiof.geofishing.views
+package no.hiof.geofishing.ui.views
 
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,19 +8,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
-import no.hiof.geofishing.adapters.FeedAdapter
+import no.hiof.geofishing.ui.adapters.FeedAdapter
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
-import no.hiof.geofishing.utils.ViewModelFactory
-import no.hiof.geofishing.viewmodels.UserPageViewModel
-import java.io.InputStream
+import no.hiof.geofishing.ui.utils.ViewModelFactory
+import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 
 
 class UserPageFragment : Fragment() {
@@ -79,7 +74,8 @@ class UserPageFragment : Fragment() {
         }
 
         // SETTINGS
-        val action = UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
+        val action =
+            no.hiof.geofishing.ui.views.UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
             Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
 

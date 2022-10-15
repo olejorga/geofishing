@@ -1,4 +1,4 @@
-package no.hiof.geofishing.models
+package no.hiof.geofishing.ui.models
 
 data class Catch(val uid: Int, var title: String, var description: String, var species: String, var weight: Int, var length: Int, var pictureId: Int?, var fishingRod: String?, var fishingLure: String?) {
 

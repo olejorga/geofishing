@@ -1,4 +1,4 @@
-package no.hiof.geofishing.views
+package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentSignupBinding
-import no.hiof.geofishing.utils.ViewModelFactory
-import no.hiof.geofishing.viewmodels.SignupViewModel
+import no.hiof.geofishing.ui.utils.ViewModelFactory
+import no.hiof.geofishing.ui.viewmodels.SignupViewModel
 
 class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null

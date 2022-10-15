@@ -1,4 +1,4 @@
-package no.hiof.geofishing.adapters
+package no.hiof.geofishing.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import no.hiof.geofishing.R
-import no.hiof.geofishing.models.User
+import no.hiof.geofishing.ui.models.User
 
 class RankAdapter (private val rankList: List<User>, private val clickListener: OnClickListener) : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
 

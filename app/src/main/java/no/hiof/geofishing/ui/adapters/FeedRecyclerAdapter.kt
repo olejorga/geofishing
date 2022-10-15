@@ -1,4 +1,4 @@
-package no.hiof.geofishing.adapters
+package no.hiof.geofishing.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import no.hiof.geofishing.R
-import no.hiof.geofishing.models.FeedPost
+import no.hiof.geofishing.ui.models.FeedPost
 
 class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clickListener: View.OnClickListener) : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
 

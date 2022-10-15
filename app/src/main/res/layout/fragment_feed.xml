@@ -8,14 +8,14 @@
     <data>
         <variable
             name="feedViewModel"
-            type="no.hiof.geofishing.viewmodels.FeedViewModel"
+            type="no.hiof.geofishing.ui.viewmodels.FeedViewModel"
             />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.FeedFragment">
+        tools:context=".ui.views.FeedFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/feedRecyclerView"

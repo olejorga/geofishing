@@ -1,4 +1,4 @@
-package no.hiof.geofishing.models
+package no.hiof.geofishing.ui.models
 
 import no.hiof.geofishing.R
 

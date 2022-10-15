@@ -1,13 +1,10 @@
-package no.hiof.geofishing.viewmodels
+package no.hiof.geofishing.ui.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import no.hiof.geofishing.data.contracts.Repository
-import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Profile
-import no.hiof.geofishing.data.services.FirebaseAuthService
-import no.hiof.geofishing.models.User
+import no.hiof.geofishing.ui.models.User
 
 class RankViewModel(profileRepository : Repository<Profile>) : ViewModel() {
     private lateinit var _userList : MutableList<User>

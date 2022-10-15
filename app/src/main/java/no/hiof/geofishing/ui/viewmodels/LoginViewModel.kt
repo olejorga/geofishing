@@ -1,9 +1,9 @@
-package no.hiof.geofishing.viewmodels
+package no.hiof.geofishing.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import no.hiof.geofishing.data.contracts.AuthService
 
-class SignupViewModel(authService: AuthService) : ViewModel() {
+class LoginViewModel(authService: AuthService) : ViewModel() {
     private var auth: AuthService
     val authenticated get() = auth.authenticated
 
@@ -11,6 +11,6 @@ class SignupViewModel(authService: AuthService) : ViewModel() {
         auth = authService
     }
 
-    suspend fun signup(email: String, password: String, name: String) =
-        auth.signup(email, password, name)
+    suspend fun login(email: String, password: String) =
+        auth.login(email, password)
 }

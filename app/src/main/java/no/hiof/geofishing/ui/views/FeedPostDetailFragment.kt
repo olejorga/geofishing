@@ -1,4 +1,4 @@
-package no.hiof.geofishing.views
+package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,27 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
-import no.hiof.geofishing.adapters.FeedAdapter
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
-import no.hiof.geofishing.models.FeedPost
-import no.hiof.geofishing.utils.ViewModelFactory
-import no.hiof.geofishing.viewmodels.FeedViewModel
+import no.hiof.geofishing.ui.utils.ViewModelFactory
+import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
 class FeedPostDetailFragment : Fragment() {
-    private val args : no.hiof.geofishing.views.FeedPostDetailFragmentArgs by navArgs()
+    private val args : no.hiof.geofishing.ui.views.FeedPostDetailFragmentArgs by navArgs()
     private var fragmentBinding : FragmentFeedPostDetailBinding? = null
 
     private val viewModel : FeedViewModel by viewModels {
         ViewModelFactory.create { FeedViewModel(
             (activity?.application as App).catchRepository
-        )}
+        )
+        }
     }
 
     override fun onCreateView(

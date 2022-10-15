@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="no.hiof.geofishing.viewmodels.CatchViewModel" />
+            type="no.hiof.geofishing.ui.viewmodels.CatchViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +11,7 @@
         android:id="@+id/inputWeight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.CatchFragment">
+        tools:context=".ui.views.CatchFragment">
 
         <EditText
             android:id="@+id/field_fishing_lure"

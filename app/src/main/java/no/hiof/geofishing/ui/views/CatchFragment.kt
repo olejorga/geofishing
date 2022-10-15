@@ -1,4 +1,4 @@
-package no.hiof.geofishing.views
+package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,18 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
-import no.hiof.geofishing.viewmodels.CatchViewModel
+import no.hiof.geofishing.ui.viewmodels.CatchViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
-import no.hiof.geofishing.data.constants.Species
-import no.hiof.geofishing.models.Catch
-import no.hiof.geofishing.utils.ViewModelFactory
-import kotlin.math.log
+import no.hiof.geofishing.ui.utils.ViewModelFactory
 
 
 class CatchFragment : Fragment() {

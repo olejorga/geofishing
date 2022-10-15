@@ -1,4 +1,4 @@
-package no.hiof.geofishing.models
+package no.hiof.geofishing.ui.models
 
 data class Task(val uid: Int, var name: String, val completed: Boolean = false) {
 
