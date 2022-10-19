@@ -19,7 +19,6 @@ import no.hiof.geofishing.ui.viewmodels.LoginViewModel
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    //private var locationPermissionGranted: Boolean = false
 
     private val viewModel : LoginViewModel by viewModels {
         ViewModelFactory.create { LoginViewModel((activity?.application as App).authService) }
@@ -30,7 +29,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-//        checkLocationPermissions()
         return binding.root
     }
 
