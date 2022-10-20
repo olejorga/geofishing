@@ -27,15 +27,17 @@ import java.io.File
 
 
 class CatchFragment : Fragment() {
-    private var _binding : FragmentCatchBinding? = null
+    private var _binding: FragmentCatchBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : CatchViewModel by viewModels {
-        ViewModelFactory.create { CatchViewModel(
-            (activity?.application as App).authService,
-            (activity?.application as App).catchRepository,
-            (activity?.application as App).fileService
-        )}
+    private val viewModel: CatchViewModel by viewModels {
+        ViewModelFactory.create {
+            CatchViewModel(
+                (activity?.application as App).authService,
+                (activity?.application as App).catchRepository,
+                (activity?.application as App).fileService
+            )
+        }
     }
 
     override fun onCreateView(
@@ -43,9 +45,13 @@ class CatchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCatchBinding.inflate(inflater, container, false)
-        val spinner : Spinner = binding.spinnerSpecies
+        val spinner: Spinner = binding.spinnerSpecies
         context?.let { context ->
-            ArrayAdapter.createFromResource(context, R.array.fish_array , android.R.layout.simple_spinner_item)
+            ArrayAdapter.createFromResource(
+                context,
+                R.array.fish_array,
+                android.R.layout.simple_spinner_item
+            )
                 .also { arrayAdapter ->
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spinner.adapter = arrayAdapter
@@ -69,7 +75,7 @@ class CatchFragment : Fragment() {
                 // TODO: Error handling here. Crashed if no input in fields.
                 val (_, error) = viewModel.createCatch()
 
-                if(error != null) {
+                if (error != null) {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
                 }
 
@@ -82,13 +88,14 @@ class CatchFragment : Fragment() {
             }
         }
 
-        val photoPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            if (uri != null) {
-                viewModel.setPicture(uri)
-            } else {
-                Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+        val photoPicker =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                if (uri != null) {
+                    viewModel.setPicture(uri)
+                } else {
+                    Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+                }
             }
-        }
 
         binding.buttonAddPicture.setOnClickListener {
             photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -98,7 +105,7 @@ class CatchFragment : Fragment() {
             Picasso.get().load(uri).into(binding.imagePreview)
         }
 
-     return binding.root
+        return binding.root
     }
 
     override fun onDestroyView() {

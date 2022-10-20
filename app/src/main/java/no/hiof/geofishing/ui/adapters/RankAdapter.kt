@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import no.hiof.geofishing.R
 import no.hiof.geofishing.ui.models.User
 
-class RankAdapter (private val rankList: List<User>, private val clickListener: OnClickListener) : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
+class RankAdapter(private val rankList: List<User>, private val clickListener: OnClickListener) :
+    RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RankViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.rank_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.rank_item, parent, false)
         return RankViewHolder(itemView)
     }
 
@@ -25,19 +27,19 @@ class RankAdapter (private val rankList: List<User>, private val clickListener: 
         return rankList.size
     }
 
-    class RankViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val rankNameTextView : TextView = view.findViewById(R.id.rankNameTextView)
-        private val rankPointsTextView : TextView = view.findViewById(R.id.rankPointsTextView)
-        private val rankNumberTextView : TextView = view.findViewById(R.id.rankNumberTextView)
+    class RankViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val rankNameTextView: TextView = view.findViewById(R.id.rankNameTextView)
+        private val rankPointsTextView: TextView = view.findViewById(R.id.rankPointsTextView)
+        private val rankNumberTextView: TextView = view.findViewById(R.id.rankNumberTextView)
 
-        fun bind (user: User, clickListener: OnClickListener) {
+        fun bind(user: User, clickListener: OnClickListener) {
             rankNameTextView.text = user.name
             rankPointsTextView.text = user.points.toString()
             rankNumberTextView.text = position().toString()
             itemView.setOnClickListener(clickListener)
         }
 
-        private fun position() : Int{
+        private fun position(): Int {
             return adapterPosition + 1
         }
     }

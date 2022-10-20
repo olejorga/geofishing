@@ -20,7 +20,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : LoginViewModel by viewModels {
+    private val viewModel: LoginViewModel by viewModels {
         ViewModelFactory.create { LoginViewModel((activity?.application as App).authService) }
     }
 
@@ -49,7 +49,8 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
                 if (viewModel.authenticated == true)
-                    Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_mapsFragment)
+                    Navigation.findNavController(it)
+                        .navigate(R.id.action_loginFragment_to_mapsFragment)
             }
         }
 

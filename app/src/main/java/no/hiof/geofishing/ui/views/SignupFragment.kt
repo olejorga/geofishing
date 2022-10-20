@@ -20,7 +20,7 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : SignupViewModel by viewModels {
+    private val viewModel: SignupViewModel by viewModels {
         ViewModelFactory.create { SignupViewModel((activity?.application as App).authService) }
     }
 
@@ -54,7 +54,8 @@ class SignupFragment : Fragment() {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
                 if (viewModel.authenticated == true)
-                    Navigation.findNavController(it).navigate(R.id.action_signupFragment_to_mapsFragment)
+                    Navigation.findNavController(it)
+                        .navigate(R.id.action_signupFragment_to_mapsFragment)
             }
         }
 

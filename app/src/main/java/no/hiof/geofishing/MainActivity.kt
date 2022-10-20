@@ -8,20 +8,18 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.hiof.geofishing.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
-//    private var locationPermissionGranted: Boolean = false
     private lateinit var binding: ActivityMainBinding
+
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController
 
     // TODO LatLng test
     companion object {
-        var longitude : Double = 0.0
-        var latitude : Double = 0.0
+        var longitude: Double = 0.0
+        var latitude: Double = 0.0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

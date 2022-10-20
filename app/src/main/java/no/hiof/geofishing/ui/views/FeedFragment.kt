@@ -19,10 +19,11 @@ class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : FeedViewModel by viewModels {
-        ViewModelFactory.create { FeedViewModel(
+    private val viewModel: FeedViewModel by viewModels {
+        ViewModelFactory.create {
+            FeedViewModel(
                 (activity?.application as App).catchRepository
-        )
+            )
         }
     }
 
@@ -36,7 +37,7 @@ class FeedFragment : Fragment() {
         val feedRecyclerView = binding.feedRecyclerView
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
             Log.d("FEEED", response.toString())
-            if(response.error == null && response.data != null) {
+            if (response.error == null && response.data != null) {
                 val feedList = response.data
 
                 feedRecyclerView.adapter = FeedAdapter(feedList) {

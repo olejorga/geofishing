@@ -15,13 +15,14 @@ import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
 class FeedPostDetailFragment : Fragment() {
-    private val args : no.hiof.geofishing.ui.views.FeedPostDetailFragmentArgs by navArgs()
-    private var fragmentBinding : FragmentFeedPostDetailBinding? = null
+    private val args: no.hiof.geofishing.ui.views.FeedPostDetailFragmentArgs by navArgs()
+    private var fragmentBinding: FragmentFeedPostDetailBinding? = null
 
-    private val viewModel : FeedViewModel by viewModels {
-        ViewModelFactory.create { FeedViewModel(
-            (activity?.application as App).catchRepository
-        )
+    private val viewModel: FeedViewModel by viewModels {
+        ViewModelFactory.create {
+            FeedViewModel(
+                (activity?.application as App).catchRepository
+            )
         }
     }
 
@@ -41,7 +42,7 @@ class FeedPostDetailFragment : Fragment() {
         fragmentBinding = binding
 
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
-            if(response.error == null && response.data != null) {
+            if (response.error == null && response.data != null) {
                 val feedPost = response.data[args.uid]
                 binding.textTitle.text = feedPost.title
                 val img = binding.imageCatch

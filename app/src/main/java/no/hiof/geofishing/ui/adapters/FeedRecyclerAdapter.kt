@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import no.hiof.geofishing.R
 import no.hiof.geofishing.ui.models.FeedPost
 
-class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clickListener: View.OnClickListener) : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
+class FeedRecyclerAdapter(
+    private val feedList: List<FeedPost>,
+    private val clickListener: View.OnClickListener
+) : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.feed_post_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.feed_post_item, parent, false)
 
         return FeedViewHolder(itemView)
     }
@@ -29,9 +33,9 @@ class FeedRecyclerAdapter(private val feedList: List<FeedPost>, private val clic
         return feedList.size
     }
 
-    class FeedViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val feedPostImageView : ImageView = view.findViewById(R.id.image_catch)
-        private val feedPostTitleTextView : TextView = view.findViewById(R.id.text_title)
+    class FeedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val feedPostImageView: ImageView = view.findViewById(R.id.image_catch)
+        private val feedPostTitleTextView: TextView = view.findViewById(R.id.text_title)
 
         fun bind(post: FeedPost, clickListener: OnClickListener) {
             feedPostImageView.setImageResource(post.posterUrl)

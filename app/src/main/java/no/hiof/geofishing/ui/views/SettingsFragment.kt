@@ -17,12 +17,13 @@ import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.SignupViewModel
 
 class SettingsFragment : Fragment() {
-    private var _binding : FragmentSettingsBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : SettingsViewModel by viewModels {
+    private val viewModel: SettingsViewModel by viewModels {
         ViewModelFactory.create { SettingsViewModel((activity?.application as App).authService) }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

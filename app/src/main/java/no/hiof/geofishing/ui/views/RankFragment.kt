@@ -20,10 +20,11 @@ class RankFragment : Fragment() {
     private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : RankViewModel by viewModels {
+    private val viewModel: RankViewModel by viewModels {
         ViewModelFactory.create {
             RankViewModel(
-            (activity?.application as App).profileRepository)
+                (activity?.application as App).profileRepository
+            )
         }
     }
 
@@ -36,19 +37,17 @@ class RankFragment : Fragment() {
 
         val rankRecyclerView = binding.rankRecyclerView
 
-        var rankedList : MutableList<Profile>
+        var rankedList: MutableList<Profile>
 
         viewModel.profileList.observe(viewLifecycleOwner) { response ->
-            if(response.error == null && response.data != null){
+            if (response.error == null && response.data != null) {
                 rankedList = ArrayList(response.data)
                 rankRecyclerView.adapter = RankProfileAdapter(rankedList) {
                     val position = rankRecyclerView.getChildAdapterPosition(it)
-                    }
                 }
-            else if(response.error != null){
+            } else if (response.error != null) {
                 Log.d(Tags.REPOSITORY.toString(), response.error.toString())
-            }
-            else {
+            } else {
                 Log.d(Tags.REPOSITORY.toString(), "Could not find any data")
             }
         }
@@ -58,7 +57,6 @@ class RankFragment : Fragment() {
         return binding.root
 
     }
-
 
 
     override fun onDestroyView() {
