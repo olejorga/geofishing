@@ -1,7 +1,6 @@
 package no.hiof.geofishing.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import no.hiof.geofishing.data.constants.Species
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
