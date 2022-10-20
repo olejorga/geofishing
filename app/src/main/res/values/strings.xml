@@ -78,7 +78,7 @@
     <string name="fab_label">Add catch</string>
     <string name="extended_fab_content_desc">Add Catch</string>
     <string name="permission_request_title">Location</string>
-    <string name="permission_request_rationale">This app needs access to your location for some functionality to work</string>
+    <string name="permission_request_rationale">This app needs access to your precise location for some functionality to work</string>
     <string name="request_permission_again">Back</string>
     <string name="deny_permission_dialog">No thanks</string>
     <string name="log_out">Log Out</string>
