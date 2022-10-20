@@ -35,12 +35,17 @@ class FeedAdapter(private val feedList: List<Catch>, private val clickListener: 
         private val textTitle : TextView = view.findViewById(R.id.text_title)
         private val textProfile : TextView = view.findViewById(R.id.text_profile)
         private val textDesc : TextView = view.findViewById(R.id.text_description)
+        // LatLng test
+        private val textLocation : TextView = view.findViewById(R.id.text_location_date_feed)
 
         fun bind(post: Catch, clickListener: OnClickListener) {
             Picasso.get().load(post.picture).resize(imageView.maxWidth, imageView.maxHeight).into(imageView)
             textTitle.text = post.title
             textProfile.text = post.profile
             textDesc.text = post.description
+            // TODO LatLng test
+            val latLngToString = "lat: ${post.latitude.toString()} \nlong: ${post.longitude.toString()}"
+            textLocation.text = latLngToString
 
             itemView.setOnClickListener(clickListener)
         }

@@ -20,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import java.io.File
 
@@ -59,6 +60,10 @@ class CatchFragment : Fragment() {
                 viewModel.rod = binding.fieldFishingRod.text.toString()
                 viewModel.lure = binding.fieldFishingLure.text.toString()
                 viewModel.species = binding.spinnerSpecies.selectedItem.toString()
+
+                // TODO LatLng test
+                viewModel.longitude = MainActivity.longitude
+                viewModel.latitude = MainActivity.latitude
 
                 // TODO: Error handling here. Crashed if no input in fields.
                 val (_, error) = viewModel.createCatch()

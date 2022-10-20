@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController
 
+    // TODO LatLng test
+    companion object {
+        var longitude : Double = 0.0
+        var latitude : Double = 0.0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
