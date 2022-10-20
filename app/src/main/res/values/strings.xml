@@ -46,7 +46,7 @@
     <string name="New_Catch_Weight">Weight (g)</string>
     <string name="New_Catch_Length">Length (cm)</string>
     <string name="New_Catch_Take_Picture">Take a picture</string>
-    <string name="New_Catch_Add_Picture">Add a picture</string>
+    <string name="New_Catch_Add_Picture">Select a picture</string>
     <string name="New_Catch__Rod">Fishing rod (optional)</string>
     <string name="New_Catch_Lure">Fishing lure (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>

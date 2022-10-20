@@ -18,6 +18,7 @@ import no.hiof.geofishing.databinding.FragmentCatchBinding
 import no.hiof.geofishing.ui.viewmodels.CatchViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.MainActivity
@@ -71,20 +72,19 @@ class CatchFragment : Fragment() {
                 if(error != null) {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
                 }
-                else{
-                    Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
-                    // TODO: Clear field after adding new catch.
-//                    binding.fieldTitle.text.clear()
-//                    binding.fieldDescription.text.clear()
-//                    binding.fieldLength.text.clear()
-//                    binding.fieldWeight.text.clear()
-                }
+
+                Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
+                // TODO: Clear field after adding new catch.
+                //  * binding.fieldTitle.text.clear()
+                //  * binding.fieldDescription.text.clear()
+                //  * binding.fieldLength.text.clear()
+                //  * binding.fieldWeight.text.clear()
             }
         }
 
         val photoPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
-                viewModel.setImage(uri)
+                viewModel.setPicture(uri)
             } else {
                 Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
             }
@@ -92,6 +92,10 @@ class CatchFragment : Fragment() {
 
         binding.buttonAddPicture.setOnClickListener {
             photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+        viewModel.picture.observe(viewLifecycleOwner) { uri ->
+            Picasso.get().load(uri).into(binding.imagePreview)
         }
 
      return binding.root
