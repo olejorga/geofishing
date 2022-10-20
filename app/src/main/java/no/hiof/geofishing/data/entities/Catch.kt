@@ -3,7 +3,6 @@ package no.hiof.geofishing.data.entities
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.ServerTimestamp
-import no.hiof.geofishing.data.constants.Species
 import java.util.*
 
 /**
