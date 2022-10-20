@@ -1,6 +1,5 @@
 package no.hiof.geofishing.ui.views
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
@@ -14,27 +13,27 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import no.hiof.geofishing.App
-import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentMapsBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
-import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 import no.hiof.geofishing.ui.viewmodels.MapViewModel
 
-class MapsFragment : Fragment(), OnMapReadyCallback {
+class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: MapViewModel by viewModels {
         ViewModelFactory.create {
             MapViewModel(
@@ -42,7 +41,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             )
         }
     }
-
     private var mGoogleMap: GoogleMap? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -51,11 +49,82 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val defLongitude = 11.352814708532474
     private var catchesMarkerList = mutableListOf<LatLng>()
 
-//    // Permissions required for location
-//    private val locationPermissionsRequired = arrayOf(
-//        Manifest.permission.ACCESS_COARSE_LOCATION,
-//        Manifest.permission.ACCESS_FINE_LOCATION
-//    )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Gets the map async, callback = onMapReady
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onMapReady(googleMap: GoogleMap) {
+        mGoogleMap = googleMap
+        checkLocationPermissions()
+
+        viewModel.catchList.observe(viewLifecycleOwner) { response ->
+            if (response.error == null && response.data != null) {
+                val catchList = response.data
+
+                // TODO itte iterer gjennom lista kår gong, og skill på species for forskjellige markers
+                catchList.forEach {
+                    if (it.latitude != null && it.longitude != null) {
+                        var markerColor = 0.0F
+                        when (it.species) {
+                            resources.getStringArray(R.array.fish_array)[0] -> markerColor =
+                                BitmapDescriptorFactory.HUE_RED
+                            resources.getStringArray(R.array.fish_array)[1] -> markerColor =
+                                BitmapDescriptorFactory.HUE_ORANGE
+                            resources.getStringArray(R.array.fish_array)[2] -> markerColor =
+                                BitmapDescriptorFactory.HUE_YELLOW
+                            resources.getStringArray(R.array.fish_array)[3] -> markerColor =
+                                BitmapDescriptorFactory.HUE_GREEN
+                            resources.getStringArray(R.array.fish_array)[4] -> markerColor =
+                                BitmapDescriptorFactory.HUE_CYAN
+                            resources.getStringArray(R.array.fish_array)[5] -> markerColor =
+                                BitmapDescriptorFactory.HUE_AZURE
+                            resources.getStringArray(R.array.fish_array)[6] -> markerColor =
+                                BitmapDescriptorFactory.HUE_BLUE
+                            resources.getStringArray(R.array.fish_array)[7] -> markerColor =
+                                BitmapDescriptorFactory.HUE_VIOLET
+                        }
+
+                        // TODO legg te navigering ved trykk via marker.tag te catchID?
+//                        var marker: Marker? =
+                        googleMap.addMarker(
+                            MarkerOptions()
+                                .position(LatLng(it.latitude, it.longitude))
+                                .icon(BitmapDescriptorFactory.defaultMarker(markerColor))
+                        )
+//                        marker?.tag =
+                        // catchesMarkerList.add(LatLng(it.latitude, it.longitude))
+                    } else
+                        return@forEach
+                }
+            }
+//            catchesMarkerList.forEach{
+//                mGoogleMap!!.addMarker(
+//                    MarkerOptions()
+//                        .position(it)
+//                )
+//            }
+        }
+
+//        googleMap.setOnMarkerClickListener(this)
+    }
+
 
     // Checks if permissions are granted, if not starts a new req, else set user location.
     private fun checkLocationPermissions() {
@@ -109,7 +178,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private fun setUserLocation() {
         mGoogleMap?.isMyLocationEnabled = true
         fusedLocationProviderClient.getCurrentLocation(
-            100, null).addOnSuccessListener { location: Location? ->
+            100, null
+        ).addOnSuccessListener { location: Location? ->
             val currentLocationLatLng =
                 LatLng(
                     location?.latitude ?: defLatitude,
@@ -121,64 +191,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     17.0f
                 )
             )
-
             // TODO LatLng test
-            viewModel.setLocation(location?.latitude ?: 0.0, location?.longitude?: 0.0)
-//            MainActivity.latitude = location?.latitude ?: 0.0
-//            MainActivity.longitude = location?.longitude ?: 0.0
+            viewModel.setLocation(location?.latitude ?: 0.0, location?.longitude ?: 0.0)
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // Gets the map async, callback = onMapReady
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
-    }
-
-    @SuppressLint("MissingPermission")
-    override fun onMapReady(googleMap: GoogleMap) {
-        mGoogleMap = googleMap
-        checkLocationPermissions()
-
-        viewModel.catchList.observe(viewLifecycleOwner) { response ->
-            if (response.error == null && response.data != null) {
-                val catchList = response.data
-
-                // TODO itte iterer gjennom lista kår gong, og skill på species for forskjellige markers
-                catchList.forEach {
-                    if (it.latitude != null && it.longitude != null) {
-                        val markerLat = it.latitude
-                        val markerLng = it.longitude
-                        catchesMarkerList.add(LatLng(markerLat, markerLng))
-                    } else
-                        return@forEach
-                }
-            }
-            catchesMarkerList.forEach{
-                mGoogleMap!!.addMarker(
-                    MarkerOptions()
-                        .position(it)
-                )
-            }
-        }
-
-
-
+    override fun onMarkerClick(p0: Marker): Boolean {
+        TODO("Not yet implemented")
     }
 
 }

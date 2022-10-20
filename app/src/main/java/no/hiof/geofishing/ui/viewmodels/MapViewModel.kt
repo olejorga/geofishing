@@ -18,14 +18,12 @@ class MapViewModel(catchRepository: Repository<Catch>) : ViewModel() {
         Manifest.permission.ACCESS_FINE_LOCATION
     )
 
-    lateinit var catchList : LiveData<Response<List<Catch>>>
+    lateinit var catchList: LiveData<Response<List<Catch>>>
 
     init {
         viewModelScope.launch {
             catchList = catchRepository.read().asLiveData()
         }
-
-
     }
 
     fun setLocation(lat: Double, long: Double) {
