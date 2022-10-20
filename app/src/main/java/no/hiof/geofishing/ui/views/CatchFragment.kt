@@ -1,12 +1,17 @@
 package no.hiof.geofishing.ui.views
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
@@ -16,6 +21,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.ui.utils.ViewModelFactory
+import java.io.File
 
 
 class CatchFragment : Fragment() {
@@ -25,8 +31,9 @@ class CatchFragment : Fragment() {
     private val viewModel : CatchViewModel by viewModels {
         ViewModelFactory.create { CatchViewModel(
             (activity?.application as App).authService,
-            (activity?.application as App).catchRepository)
-        }
+            (activity?.application as App).catchRepository,
+            (activity?.application as App).fileService
+        )}
     }
 
     override fun onCreateView(
@@ -69,6 +76,19 @@ class CatchFragment : Fragment() {
                 }
             }
         }
+
+        val photoPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                viewModel.setImage(uri)
+            } else {
+                Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        binding.buttonAddPicture.setOnClickListener {
+            photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
      return binding.root
     }
 

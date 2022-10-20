@@ -14,11 +14,9 @@ object FirebaseFileService: FileService {
     // Creating a getter for retrieving the firebase instance (singleton).
     private val storage get() = Firebase.storage
 
-    override suspend fun upload(file: File): Response<String> {
+    override suspend fun upload(filename: String, uri: Uri): Response<String> {
         return try {
-            val uri = Uri.fromFile(file)
-            val ref = storage.reference.child(uri.lastPathSegment!!)
-
+            val ref = storage.reference.child(filename)
             ref.putFile(uri).await()
 
             Response(ref.downloadUrl.await().toString())
@@ -31,7 +29,6 @@ object FirebaseFileService: FileService {
     override suspend fun delete(filename: String): Response<Unit> {
         return try {
             val ref = storage.reference.child(filename)
-
             ref.delete().await()
 
             Response()
