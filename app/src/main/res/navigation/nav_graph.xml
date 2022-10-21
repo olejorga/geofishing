@@ -33,6 +33,9 @@
             <action
                 android:id="@+id/action_userPageFragment_to_settingsFragment"
                 app:destination="@id/settingsFragment" />
+            <action
+                android:id="@+id/action_userPageFragment_to_updateUserFragment"
+                app:destination="@id/updateUserFragment" />
         </fragment>
         <fragment
             android:id="@+id/settingsFragment"
@@ -42,6 +45,11 @@
         <action
             android:id="@+id/action_global_loginFragment"
             app:destination="@id/loginFragment" />
+        <fragment
+            android:id="@+id/updateUserFragment"
+            android:name="no.hiof.geofishing.ui.views.UpdateUserFragment"
+            android:label="fragment_update_user"
+            tools:layout="@layout/fragment_update_user" />
     </navigation>
     <navigation android:id="@+id/menu_feed_fragment"
         app:startDestination="@id/feedFragment">
