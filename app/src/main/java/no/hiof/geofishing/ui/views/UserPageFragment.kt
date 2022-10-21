@@ -77,8 +77,6 @@ class UserPageFragment : Fragment() {
         val settingsAction =
             UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
-            Toast.makeText(it.context, "SettingsButton Pressed", Toast.LENGTH_SHORT).show()
-
             findNavController().navigate(settingsAction)
         }
 
@@ -86,7 +84,6 @@ class UserPageFragment : Fragment() {
         val updateUserAction =
             UserPageFragmentDirections.actionUserPageFragmentToUpdateUserFragment()
         binding.buttonUpdateUser.setOnClickListener {
-            Toast.makeText(it.context, "UserPageButton Pressed", Toast.LENGTH_SHORT).show()
             findNavController().navigate(updateUserAction)
         }
 
