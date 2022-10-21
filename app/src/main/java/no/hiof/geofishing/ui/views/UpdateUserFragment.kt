@@ -62,6 +62,7 @@ class UpdateUserFragment : DialogFragment() {
                 viewModel.email = binding.fieldUpdateEmail.text.toString()
                 viewModel.password = binding.fieldUpdatePassword.text.toString()
                 viewModel.passwordConfirm = binding.fieldUpdatePasswordConfirm.text.toString()
+                viewModel.oldPassword = binding.fieldOldPassword.text.toString()
                 viewModel.updateUser()
                 Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
             }

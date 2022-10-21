@@ -49,17 +49,21 @@ class UpdateUserViewModel(
 
             mapOf("portrait" to data.toString()).let { profileRepo.update(auth.id.toString(), it) }
         }
-//        if (password()) {
-//            auth.changePassword(password, "old")
-//        }
-//        if (email.isNotEmpty()){
-//        }
+        if (email.isNotEmpty() && oldPassword.isNotEmpty()){
+            auth.changeEmail(email, oldPassword)
+        }
+        if (password() && oldPassword.isNotEmpty()) {
+            auth.changePassword(password, oldPassword)
+        }
+
     }
 
     private fun password(): Boolean {
         return (
-                password.isNullOrEmpty() && passwordConfirm.isNullOrEmpty()
-                        ||
+                password.isNotEmpty()
+                &&
+                passwordConfirm.isNotEmpty()
+                &&
                 password.equals(passwordConfirm))
     }
 
@@ -72,7 +76,7 @@ class UpdateUserViewModel(
     var name: String = ""
     var bio: String = ""
     var email: String = ""
-    var pictureUrl: String = ""
     var password: String = ""
     var passwordConfirm: String = ""
+    var oldPassword: String = ""
 }
