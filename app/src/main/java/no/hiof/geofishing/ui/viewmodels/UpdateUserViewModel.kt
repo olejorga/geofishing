@@ -2,7 +2,6 @@ package no.hiof.geofishing.ui.viewmodels
 
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,12 +49,21 @@ class UpdateUserViewModel(
 
             mapOf("portrait" to data.toString()).let { profileRepo.update(auth.id.toString(), it) }
         }
+        if (email.isNotEmpty() && oldPassword.isNotEmpty()){
+            auth.changeEmail(email, oldPassword)
+        }
+        if (password() && oldPassword.isNotEmpty()) {
+            auth.changePassword(password, oldPassword)
+        }
+
     }
 
-    fun enabled(): Boolean {
+    private fun password(): Boolean {
         return (
-                password.isNullOrEmpty() && passwordConfirm.isNullOrEmpty()
-                        ||
+                password.isNotEmpty()
+                &&
+                passwordConfirm.isNotEmpty()
+                &&
                 password.equals(passwordConfirm))
     }
 
@@ -68,7 +76,7 @@ class UpdateUserViewModel(
     var name: String = ""
     var bio: String = ""
     var email: String = ""
-    var pictureUrl: String = ""
     var password: String = ""
     var passwordConfirm: String = ""
+    var oldPassword: String = ""
 }

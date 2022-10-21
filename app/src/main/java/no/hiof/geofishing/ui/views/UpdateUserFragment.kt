@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ import no.hiof.geofishing.databinding.FragmentUpdateUserBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.UpdateUserViewModel
 
-class UpdateUserFragment : Fragment() {
+class UpdateUserFragment : DialogFragment() {
     private var _binding: FragmentUpdateUserBinding? = null
     private val binding get() = _binding!!
 
@@ -61,6 +62,7 @@ class UpdateUserFragment : Fragment() {
                 viewModel.email = binding.fieldUpdateEmail.text.toString()
                 viewModel.password = binding.fieldUpdatePassword.text.toString()
                 viewModel.passwordConfirm = binding.fieldUpdatePasswordConfirm.text.toString()
+                viewModel.oldPassword = binding.fieldOldPassword.text.toString()
                 viewModel.updateUser()
                 Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
             }

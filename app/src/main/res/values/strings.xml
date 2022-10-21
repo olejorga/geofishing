@@ -68,8 +68,9 @@
     <string name="update_profile_field_name">Update Name</string>
     <string name="update_profile_field_bio">Update Bio</string>
     <string name="update_profile_field_email">Update Email</string>
-    <string name="update_profile_field_password">Update Password</string>
-    <string name="update_profile_field_confirm_password">Confirm Password</string>
+    <string name="update_profile_field_password">New Password</string>
+    <string name="update_profile_field_confirm_password">Confirm new Password</string>
+    <string name="update_profile_field_old_password">Old Password</string>
     <string name="update_profile_button_picture">Image</string>
     <string name="update_profile_button_save_changes">Save Changes</string>
     <string name="update_profile_button_cancel_changes">Cancel Changes</string>
