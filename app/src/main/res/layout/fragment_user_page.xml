@@ -15,6 +15,18 @@
         android:layout_height="match_parent"
         tools:context=".ui.views.UserPageFragment">
 
+        <ImageButton
+            android:id="@+id/button_update_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/UserPage_About_Title"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_mode_edit_24"
+            app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -74,13 +74,22 @@ class UserPageFragment : Fragment() {
         }
 
         // SETTINGS
-        val action =
-            no.hiof.geofishing.ui.views.UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
+        val settingsAction =
+            UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
-            Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
+            Toast.makeText(it.context, "SettingsButton Pressed", Toast.LENGTH_SHORT).show()
 
-            findNavController().navigate(action)
+            findNavController().navigate(settingsAction)
         }
+
+        // UPDATE USER
+        val updateUserAction =
+            UserPageFragmentDirections.actionUserPageFragmentToUpdateUserFragment()
+        binding.buttonUpdateUser.setOnClickListener {
+            Toast.makeText(it.context, "UserPageButton Pressed", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(updateUserAction)
+        }
+
         return binding.root
     }
 

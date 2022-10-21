@@ -63,6 +63,15 @@
     </string-array>
     <!-- End of New Catch-->
 
+    <!-- Update User -->
+    <string name="update_profile_text_title">Update Profile</string>
+    <string name="update_profile_text_name">Update Name</string>
+    <string name="update_profile_text_bio">Update Bio</string>
+    <string name="update_profile_button_picture">Image</string>
+    <string name="update_profile_button_save_changes">Save Changes</string>
+    <string name="update_profile_button_cancel_changes">Cancel Changes</string>
+    <!-- End of Update User -->
+
     <!-- Auth -->
     <string name="auth_password_hint">Passord</string>
     <string name="auth_email_hint">E-post</string>
