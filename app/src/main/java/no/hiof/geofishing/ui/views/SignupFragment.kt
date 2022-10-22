@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
@@ -54,8 +55,9 @@ class SignupFragment : Fragment() {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
                 if (viewModel.authenticated == true)
-                    Navigation.findNavController(it)
-                        .navigate(R.id.action_signupFragment_to_mapsFragment)
+                    findNavController().navigate(R.id.action_signupFragment_to_mapsFragment)
+//                    Navigation.findNavController(it)
+//                        .navigate(R.id.action_signupFragment_to_mapsFragment)
             }
         }
 

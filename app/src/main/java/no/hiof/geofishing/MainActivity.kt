@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
 
     // TODO LatLng test
     companion object {
-        var longitude: Double = 0.0
         var latitude: Double = 0.0
+        var longitude: Double = 0.0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

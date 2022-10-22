@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
@@ -36,7 +37,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (viewModel.authenticated == true)
-            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mapsFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+//            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mapsFragment)
 
         binding.buttonLogin.setOnClickListener {
             viewModel.viewModelScope.launch {
@@ -49,13 +51,15 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
                 if (viewModel.authenticated == true)
-                    Navigation.findNavController(it)
-                        .navigate(R.id.action_loginFragment_to_mapsFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+//                    Navigation.findNavController(it)
+//                        .navigate(R.id.action_loginFragment_to_mapsFragment)
             }
         }
 
         binding.buttonSignup.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signupFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 

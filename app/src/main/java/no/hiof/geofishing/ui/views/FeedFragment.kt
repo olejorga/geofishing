@@ -47,9 +47,8 @@ class FeedFragment : Fragment() {
                     val clickedPost = feedList[position]
 
                     val action =
-                        no.hiof.geofishing.ui.views.FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
+                        FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
                     action.uid = feedList.indexOf(clickedPost)
-
                     findNavController().navigate(action)
                 }
                 feedRecyclerView.layoutManager = GridLayoutManager(context, 1)

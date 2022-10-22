@@ -3,7 +3,9 @@ package no.hiof.geofishing.ui.views
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,19 +23,21 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentMapsBinding
+import no.hiof.geofishing.ui.utils.VectorToBitmapDescriptor.bitmapDescriptorFromVector
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.MapViewModel
 
 class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel: MapViewModel by viewModels {
         ViewModelFactory.create {
             MapViewModel(
@@ -45,9 +49,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     // default coordinates HIØ
-    private val defLatitude = 59.12927227233991
-    private val defLongitude = 11.352814708532474
-    private var catchesMarkerList = mutableListOf<LatLng>()
+//    private val defLatitude = 59.12927227233991
+//    private val defLongitude = 11.352814708532474
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +72,53 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         mapFragment?.getMapAsync(this)
     }
 
+
+    private val COORDINATE_OFFSET = 0.000085f
+    private val markerCoordinates: ArrayList<LatLng> = ArrayList()
+    private var offsetType = 0
+
+    private fun getLatLng(latLng: LatLng): LatLng {
+        var updateLatLng: LatLng
+
+        if (markerCoordinates.contains(latLng)) {
+            var latitude = 0.0
+            var longitude = 0.0
+            when (offsetType) {
+                0 -> {
+                    latitude = latLng.latitude + COORDINATE_OFFSET
+                    longitude = latLng.longitude
+                }
+                1 -> {
+                    latitude = latLng.latitude + COORDINATE_OFFSET
+                    longitude = latLng.longitude
+                }
+                2 -> {
+                    latitude = latLng.latitude
+                    longitude = latLng.longitude + COORDINATE_OFFSET
+                }
+                3 -> {
+                    latitude = latLng.latitude
+                    longitude = latLng.longitude + COORDINATE_OFFSET
+                }
+                4 -> {
+                    latitude = latLng.latitude + COORDINATE_OFFSET
+                    longitude = latLng.longitude + COORDINATE_OFFSET
+                }
+            }
+            offsetType++
+            if (offsetType == 5)
+                offsetType = 0
+
+            updateLatLng = getLatLng(LatLng(latitude, longitude))
+
+        } else {
+            markerCoordinates.add(latLng)
+            updateLatLng = latLng
+        }
+        return updateLatLng
+
+    }
+
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap
@@ -77,54 +127,84 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 val catchList = response.data
+//                var counter = 0
 
-                // TODO itte iterer gjennom lista kår gong, og skill på species for forskjellige markers
-                catchList.forEach {
-                    if (it.latitude != null && it.longitude != null) {
-                        var markerColor = 0.0F
-                        when (it.species) {
+                // TODO Mulig itereringa bli feil mot lista i feed??
+                catchList.forEachIndexed { index, catch ->
+                    if (catch.latitude != null && catch.longitude != null) {
+                        val catchLatLng = getLatLng(LatLng(catch.latitude, catch.longitude))
+                        var markerColor: BitmapDescriptor? = null
+                        when (catch.species) {
                             resources.getStringArray(R.array.fish_array)[0] -> markerColor =
-                                BitmapDescriptorFactory.HUE_RED
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_blue_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[1] -> markerColor =
-                                BitmapDescriptorFactory.HUE_ORANGE
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_bright_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[2] -> markerColor =
-                                BitmapDescriptorFactory.HUE_YELLOW
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_brown_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[3] -> markerColor =
-                                BitmapDescriptorFactory.HUE_GREEN
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_cartoon_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[4] -> markerColor =
-                                BitmapDescriptorFactory.HUE_CYAN
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_cyan_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[5] -> markerColor =
-                                BitmapDescriptorFactory.HUE_AZURE
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_gold_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[6] -> markerColor =
-                                BitmapDescriptorFactory.HUE_BLUE
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_green_fish
+                                )
                             resources.getStringArray(R.array.fish_array)[7] -> markerColor =
-                                BitmapDescriptorFactory.HUE_VIOLET
+                                bitmapDescriptorFromVector(
+                                    requireContext(),
+                                    R.drawable.reshot_icon_leaf_fish
+                                )
                         }
 
-                        // TODO legg te navigering ved trykk via marker.tag te catchID?
-//                        var marker: Marker? =
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(it.latitude, it.longitude))
-                                .icon(BitmapDescriptorFactory.defaultMarker(markerColor))
-                        )
-//                        marker?.tag =
-                        // catchesMarkerList.add(LatLng(it.latitude, it.longitude))
-                    } else
-                        return@forEach
+                        val marker: Marker? =
+                            googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(catchLatLng)
+                                    .title(catch.title)
+                                    .icon(markerColor)
+                            )
+
+                        marker?.tag = index
+                    }
                 }
             }
-//            catchesMarkerList.forEach{
-//                mGoogleMap!!.addMarker(
-//                    MarkerOptions()
-//                        .position(it)
-//                )
-//            }
         }
-
-//        googleMap.setOnMarkerClickListener(this)
+        googleMap.setOnMarkerClickListener(this)
     }
 
+    // passing along marker.tag to deeplink for arg in FeedPostDetailFragment.kt
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val markerCatchId = marker.tag.toString()
+        val uri = Uri.parse("my-app://Feed/${markerCatchId}")
+        if (findNavController().graph.hasDeepLink(uri)) {
+            Log.d("DEEPLINK EXIST", findNavController().graph.hasDeepLink(uri).toString())
+            findNavController().navigate(uri)
+        } else {
+            Log.d("DEEPLINK EXISTN'T", findNavController().graph.hasDeepLink(uri).toString())
+        }
+        return false
+    }
 
     // Checks if permissions are granted, if not starts a new req, else set user location.
     private fun checkLocationPermissions() {
@@ -167,7 +247,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                             .setMessage(R.string.permission_request_rationale)
                             .setPositiveButton(R.string.request_permission_again) { _, _ ->
                                 checkLocationPermissions()
-                            }.setNegativeButton(R.string.deny_permission_dialog, null).create()
+                            }.setNegativeButton(R.string.deny_permission_dialog, null)
+                            .create()
                             .show()
                     }
                 }
@@ -182,8 +263,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         ).addOnSuccessListener { location: Location? ->
             val currentLocationLatLng =
                 LatLng(
-                    location?.latitude ?: defLatitude,
-                    location?.longitude ?: defLongitude
+                    location?.latitude ?: viewModel.defLatitude,
+                    location?.longitude ?: viewModel.defLongitude
                 )
             mGoogleMap?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
@@ -192,13 +273,37 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                 )
             )
             // TODO LatLng test
-            viewModel.setLocation(location?.latitude ?: 0.0, location?.longitude ?: 0.0)
+            viewModel.setLocation(currentLocationLatLng)
         }
     }
 
-    override fun onMarkerClick(p0: Marker): Boolean {
-        TODO("Not yet implemented")
+//    // TODO https://stackoverflow.com/a/45564994
+//    fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+//        return ContextCompat.getDrawable(context, vectorResId)?.run {
+//            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+//            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+//            draw(Canvas(bitmap))
+//            BitmapDescriptorFactory.fromBitmap(bitmap)
+//        }
+//    }
+
+    override fun onResume() {
+        super.onResume()
+        if (markerCoordinates.isNotEmpty()) {
+            markerCoordinates.clear()
+        }
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (markerCoordinates.isNotEmpty()) {
+            markerCoordinates.clear()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
 
