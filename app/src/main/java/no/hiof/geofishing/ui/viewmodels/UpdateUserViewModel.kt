@@ -2,11 +2,7 @@ package no.hiof.geofishing.ui.viewmodels
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
@@ -19,7 +15,7 @@ class UpdateUserViewModel(
     authService: AuthService,
     fileService: FileService,
     profileRepository: Repository<Profile>
-    ) : ViewModel() {
+) : ViewModel() {
     lateinit var profile: LiveData<Response<Profile>>
     val auth = authService
     val fileService = fileService
@@ -32,13 +28,13 @@ class UpdateUserViewModel(
     }
 
     suspend fun updateUser() {
-        if (name.isNotEmpty()){
+        if (name.isNotEmpty()) {
             mapOf("name" to name).let { profileRepo.update(auth.id.toString(), it) }
         }
-        if (bio.isNotEmpty()){
+        if (bio.isNotEmpty()) {
             mapOf("bio" to bio).let { profileRepo.update(auth.id.toString(), it) }
         }
-        if (picture.value != null){
+        if (picture.value != null) {
             val filename = UUID.randomUUID().toString()
             val (data, error) = fileService.upload(filename, _picture.value!!)
 
@@ -49,7 +45,7 @@ class UpdateUserViewModel(
 
             mapOf("portrait" to data.toString()).let { profileRepo.update(auth.id.toString(), it) }
         }
-        if (email.isNotEmpty() && oldPassword.isNotEmpty()){
+        if (email.isNotEmpty() && oldPassword.isNotEmpty()) {
             auth.changeEmail(email, oldPassword)
         }
         if (password() && oldPassword.isNotEmpty()) {
@@ -61,10 +57,10 @@ class UpdateUserViewModel(
     private fun password(): Boolean {
         return (
                 password.isNotEmpty()
-                &&
-                passwordConfirm.isNotEmpty()
-                &&
-                password.equals(passwordConfirm))
+                        &&
+                        passwordConfirm.isNotEmpty()
+                        &&
+                        password.equals(passwordConfirm))
     }
 
     private val _picture = MutableLiveData<Uri>()

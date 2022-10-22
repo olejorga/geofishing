@@ -1,18 +1,14 @@
 package no.hiof.geofishing.ui.viewmodels
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Catch
-import java.io.File
 import java.util.*
 
 class CatchViewModel(

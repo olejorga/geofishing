@@ -5,17 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.App
-import no.hiof.geofishing.ui.adapters.FeedAdapter
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
+import no.hiof.geofishing.ui.adapters.FeedAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 

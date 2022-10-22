@@ -14,8 +14,7 @@ import no.hiof.geofishing.data.entities.Catch
 class FeedAdapter(
     private val feedList: List<Catch>,
     private val clickListener: View.OnClickListener
-) :
-    RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val itemView =

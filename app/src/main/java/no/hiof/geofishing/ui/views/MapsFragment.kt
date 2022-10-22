@@ -45,12 +45,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
             )
         }
     }
+
     private var mGoogleMap: GoogleMap? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-    // default coordinates HIØ
-//    private val defLatitude = 59.12927227233991
-//    private val defLongitude = 11.352814708532474
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -227,8 +224,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
      * Requests user to choose between either coarse or fine location, if dismissed shows an
      * AlertDialog of why the app needs these permissions depending on the
      * shouldShowRequestPermissionRationale method.
-     * if check on array to prevent double AlertDialog, if fine_location is granted so is coarse
-     * if only coarse setUserLocation, if none, only build AlertDialog on fine_location
+     * - If check on array to prevent double AlertDialog, if fine_location is granted so is coarse.
+     * - If only coarse setUserLocation, if none, only build AlertDialog on fine_location.
      */
     private val requestLocationPermissions =
         registerForActivityResult(
@@ -276,16 +273,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
             viewModel.setLocation(currentLocationLatLng)
         }
     }
-
-//    // TODO https://stackoverflow.com/a/45564994
-//    fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
-//        return ContextCompat.getDrawable(context, vectorResId)?.run {
-//            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-//            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
-//            draw(Canvas(bitmap))
-//            BitmapDescriptorFactory.fromBitmap(bitmap)
-//        }
-//    }
 
     override fun onResume() {
         super.onResume()

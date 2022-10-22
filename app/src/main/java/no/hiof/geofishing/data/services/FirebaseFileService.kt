@@ -8,9 +8,8 @@ import kotlinx.coroutines.tasks.await
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Response
-import java.io.File
 
-object FirebaseFileService: FileService {
+object FirebaseFileService : FileService {
     // Creating a getter for retrieving the firebase instance (singleton).
     private val storage get() = Firebase.storage
 

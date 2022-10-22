@@ -1,20 +1,19 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
-import no.hiof.geofishing.ui.viewmodels.SettingsViewModel
 import no.hiof.geofishing.databinding.FragmentSettingsBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
-import no.hiof.geofishing.ui.viewmodels.SignupViewModel
+import no.hiof.geofishing.ui.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null

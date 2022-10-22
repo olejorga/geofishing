@@ -1,7 +1,6 @@
 package no.hiof.geofishing.data.contracts
 
 import android.net.Uri
-import java.io.File
 
 interface FileService {
     /**

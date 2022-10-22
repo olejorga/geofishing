@@ -1,8 +1,6 @@
 package no.hiof.geofishing.ui.views
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,19 +9,17 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
-import no.hiof.geofishing.R
-import no.hiof.geofishing.databinding.FragmentCatchBinding
-import no.hiof.geofishing.ui.viewmodels.CatchViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.MainActivity
+import no.hiof.geofishing.R
+import no.hiof.geofishing.databinding.FragmentCatchBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
-import java.io.File
+import no.hiof.geofishing.ui.viewmodels.CatchViewModel
 
 
 class CatchFragment : Fragment() {
@@ -41,7 +37,8 @@ class CatchFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCatchBinding.inflate(inflater, container, false)
@@ -51,11 +48,10 @@ class CatchFragment : Fragment() {
                 context,
                 R.array.fish_array,
                 android.R.layout.simple_spinner_item
-            )
-                .also { arrayAdapter ->
-                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = arrayAdapter
-                }
+            ).also { arrayAdapter ->
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = arrayAdapter
+            }
         }
 
         binding.buttonCreateCatch.setOnClickListener {
@@ -92,8 +88,6 @@ class CatchFragment : Fragment() {
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri != null) {
                     viewModel.setPicture(uri)
-                } else {
-                    Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
                 }
             }
 

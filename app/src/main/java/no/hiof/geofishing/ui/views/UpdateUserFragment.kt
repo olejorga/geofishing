@@ -2,7 +2,6 @@ package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
-import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUpdateUserBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -41,14 +39,15 @@ class UpdateUserFragment : DialogFragment() {
     ): View? {
         _binding = FragmentUpdateUserBinding.inflate(inflater, container, false)
 
-        val photoPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            if(uri != null){
-                Log.d("URI", uri.toString())
-                viewModel.setPicture(uri)
-            } else {
-                Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+        val photoPicker =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                if (uri != null) {
+                    Log.d("URI", uri.toString())
+                    viewModel.setPicture(uri)
+                } else {
+                    Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+                }
             }
-        }
         binding.buttonUpdateProfilePicture.setOnClickListener {
             Log.d("BUTTON", "Image button pressed")
             photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -76,7 +75,6 @@ class UpdateUserFragment : DialogFragment() {
 
         return binding.root
     }
-
 
 
 }

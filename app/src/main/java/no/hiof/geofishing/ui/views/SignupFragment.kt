@@ -56,8 +56,6 @@ class SignupFragment : Fragment() {
 
                 if (viewModel.authenticated == true)
                     findNavController().navigate(R.id.action_signupFragment_to_mapsFragment)
-//                    Navigation.findNavController(it)
-//                        .navigate(R.id.action_signupFragment_to_mapsFragment)
             }
         }
 

@@ -12,13 +12,12 @@ import kotlinx.coroutines.tasks.await
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
-import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Subscription
 
 /**
  * A firebase implementation of a subscription repository.
  */
-object SubscriptionRepository: Repository<Subscription> {
+object SubscriptionRepository : Repository<Subscription> {
     // Creating a getter for retrieving the firebase instance (singleton).
     private val database get() = Firebase.firestore.collection("todos")
 

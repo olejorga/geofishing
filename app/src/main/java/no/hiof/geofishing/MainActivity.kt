@@ -1,15 +1,18 @@
 package no.hiof.geofishing
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import no.hiof.geofishing.databinding.ActivityMainBinding
 
+/**
+ * The main activity - all fragments stem from this activity.
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         // setting up the binding and navController for bottomNavigation
         binding.bottomNavigation.setupWithNavController(navController)
 
+        // Makes sure that the toolbar and bottom nav is not visible in the login and signup views.
         navController.addOnDestinationChangedListener { _, view, _ ->
             if (view.id == R.id.loginFragment || view.id == R.id.signupFragment) {
                 binding.bottomNavigation.visibility = View.GONE
@@ -63,7 +67,5 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
-
-        //Log.d("HERE", "RUN REPO!")
     }
 }

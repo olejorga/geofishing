@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
@@ -38,7 +37,6 @@ class LoginFragment : Fragment() {
 
         if (viewModel.authenticated == true)
             findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
-//            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mapsFragment)
 
         binding.buttonLogin.setOnClickListener {
             viewModel.viewModelScope.launch {
@@ -52,14 +50,11 @@ class LoginFragment : Fragment() {
 
                 if (viewModel.authenticated == true)
                     findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
-//                    Navigation.findNavController(it)
-//                        .navigate(R.id.action_loginFragment_to_mapsFragment)
             }
         }
 
         binding.buttonSignup.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
-//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 
