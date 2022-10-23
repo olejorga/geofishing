@@ -12,7 +12,7 @@ import no.hiof.geofishing.data.entities.Catch
 
 class MapViewModel(catchRepository: Repository<Catch>) : ViewModel() {
     private var catchRepo: Repository<Catch>
-
+    var catchList2: MutableList<Catch> = mutableListOf()
     // Coordinates defaults to HiØ Remmen.
     val defLatitude = 59.12927227233991
     val defLongitude = 11.352814708532474

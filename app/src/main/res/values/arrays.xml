@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Int id values of drawable images -->
+    <integer-array name="icons">
+        <item>@drawable/reshot_icon_blue_fish</item>
+        <item>@drawable/reshot_icon_bright_fish</item>
+        <item>@drawable/reshot_icon_brown_fish</item>
+        <item>@drawable/reshot_icon_cartoon_fish</item>
+        <item>@drawable/reshot_icon_cyan_fish</item>
+        <item>@drawable/reshot_icon_gold_fish</item>
+        <item>@drawable/reshot_icon_green_fish</item>
+        <item>@drawable/reshot_icon_leaf_fish</item>
+    </integer-array>
+    <!--End of Int id value-->
+</resources>

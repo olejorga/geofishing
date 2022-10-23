@@ -96,4 +96,17 @@
     <string name="deny_permission_dialog">No thanks</string>
     <string name="log_out">Log Out</string>
     <!-- End of Map Fragment -->
+
+<!--    &lt;!&ndash; Int id values of drawable images &ndash;&gt;-->
+<!--    <integer-array name="icons">-->
+<!--        <item>@drawable/reshot_icon_blue_fish</item>-->
+<!--        <item>@drawable/reshot_icon_bright_fish</item>-->
+<!--        <item>@drawable/reshot_icon_brown_fish</item>-->
+<!--        <item>@drawable/reshot_icon_cartoon_fish</item>-->
+<!--        <item>@drawable/reshot_icon_cyan_fish</item>-->
+<!--        <item>@drawable/reshot_icon_gold_fish</item>-->
+<!--        <item>@drawable/reshot_icon_green_fish</item>-->
+<!--        <item>@drawable/reshot_icon_leaf_fish</item>-->
+<!--    </integer-array>-->
+<!--    &lt;!&ndash;End of Int id value&ndash;&gt;-->
 </resources>
