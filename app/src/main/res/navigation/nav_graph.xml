@@ -62,7 +62,7 @@
                 tools:layout="@layout/fragment_feed_post_detail">
 
                 <deepLink android:id="@+id/deepLink"
-                    app:uri="my-app://Feed/{uid}" />
+                    app:uri="myapp://Geofishing.com/{uid}" />
 
                 <argument
                     android:name="uid"

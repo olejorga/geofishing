@@ -44,6 +44,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     private lateinit var speciesImgResourceIds: IntArray
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var mGoogleMap: GoogleMap? = null
+    private var offsetBy = 0
+
+    companion object {
+        private const val POSITION_OFFSET = 0.000085f
+    }
 
     private val viewModel: MapViewModel by viewModels {
         ViewModelFactory.create {
@@ -76,87 +81,84 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Gets the map async, callback = onMapReady
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
-    private val COORDINATE_OFFSET = 0.000085f
-    private val markerCoordinates: ArrayList<LatLng> = ArrayList()
-    private var offsetType = 0
+    private fun checkMarkerOverLap(originalMarkerPosition: LatLng): LatLng {
+        val updatedMarkerPosition: LatLng
 
-    private fun getLatLng(latLng: LatLng): LatLng {
-        val updateLatLng: LatLng
-
-        if (markerCoordinates.contains(latLng)) {
+        if (viewModel.markerPositionArray.contains(originalMarkerPosition)) {
             var latitude = 0.0
             var longitude = 0.0
-            when (offsetType) {
+            when (offsetBy) {
                 0 -> {
-                    latitude = latLng.latitude + COORDINATE_OFFSET
-                    longitude = latLng.longitude
+                    latitude = originalMarkerPosition.latitude + POSITION_OFFSET
+                    longitude = originalMarkerPosition.longitude
                 }
                 1 -> {
-                    latitude = latLng.latitude + COORDINATE_OFFSET
-                    longitude = latLng.longitude
+                    latitude = originalMarkerPosition.latitude + POSITION_OFFSET
+                    longitude = originalMarkerPosition.longitude
                 }
                 2 -> {
-                    latitude = latLng.latitude
-                    longitude = latLng.longitude + COORDINATE_OFFSET
+                    latitude = originalMarkerPosition.latitude
+                    longitude = originalMarkerPosition.longitude + POSITION_OFFSET
                 }
                 3 -> {
-                    latitude = latLng.latitude
-                    longitude = latLng.longitude + COORDINATE_OFFSET
+                    latitude = originalMarkerPosition.latitude
+                    longitude = originalMarkerPosition.longitude + POSITION_OFFSET
                 }
                 4 -> {
-                    latitude = latLng.latitude + COORDINATE_OFFSET
-                    longitude = latLng.longitude + COORDINATE_OFFSET
+                    latitude = originalMarkerPosition.latitude + POSITION_OFFSET
+                    longitude = originalMarkerPosition.longitude + POSITION_OFFSET
                 }
             }
-            offsetType++
-            if (offsetType == 5)
-                offsetType = 0
+            offsetBy++
+            if (offsetBy == 5)
+                offsetBy = 0
 
-            updateLatLng = getLatLng(LatLng(latitude, longitude))
-
+            updatedMarkerPosition = checkMarkerOverLap(LatLng(latitude, longitude))
         } else {
-            markerCoordinates.add(latLng)
-            updateLatLng = latLng
+            viewModel.markerPositionArray.add(originalMarkerPosition)
+            updatedMarkerPosition = originalMarkerPosition
         }
-        return updateLatLng
-
+        return updatedMarkerPosition
     }
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-        mGoogleMap = googleMap
+        if (mGoogleMap == null)
+            mGoogleMap = googleMap
+
         checkLocationPermissions()
 
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 if (viewModel.catchList2 != response.data)
                     viewModel.catchList2 = response.data as MutableList<Catch>
-            }
-            // TODO Mulig itereringa bli feil mot lista i feed??
-            viewModel.catchList2.forEachIndexed { index, catch ->
-                if (catch.latitude != null && catch.longitude != null) {
-                    val catchLatLng = LatLng(catch.latitude, catch.longitude)
-//                  val catchLatLng = getLatLng(LatLng(catch.latitude, catch.longitude))
-                    val currentSpecies = fishSpeciesArray.indexOf(catch.species)
-                    val markerImg = speciesImgResourceIds[currentSpecies]
-                    val markerColor =
-                        bitmapDescriptorFromVector(requireContext(), markerImg)
 
-                    val marker = createMapMarker(catchLatLng, markerColor)
-                    marker?.tag = index.toString()
-                }
+                    viewModel.catchList2.forEachIndexed { index, catch ->
+                        if (catch.latitude != null && catch.longitude != null) {
+                            val catchLatLng = LatLng(catch.latitude, catch.longitude)
+                            val currentSpecies = fishSpeciesArray.indexOf(catch.species)
+                            val markerImg = speciesImgResourceIds[currentSpecies]
+                            val markerColor =
+                                bitmapDescriptorFromVector(requireContext(), markerImg)
+                            val marker = createMapMarker(catchLatLng, markerColor)
+                            marker?.tag = index.toString()
+                        }
+                    }
+
             }
+
         }
         googleMap.setOnMarkerClickListener(this)
     }
 
     // passing along marker.tag to deeplink for arg in FeedPostDetailFragment.kt
     override fun onMarkerClick(marker: Marker): Boolean {
-        val uri = Uri.parse("my-app://Feed/${marker.tag}")
+        val uri = Uri.parse("myapp://Geofishing.com/${marker.tag}")
         if (findNavController().graph.hasDeepLink(uri)) {
             findNavController().navigate(uri)
         } else {
@@ -177,9 +179,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     }
 
     private fun createMapMarker(markerPosition: LatLng, markerIcon: BitmapDescriptor?): Marker? {
+        val uniquePosition = checkMarkerOverLap(markerPosition)
         return mGoogleMap?.addMarker(
             MarkerOptions()
-                .position(markerPosition)
+                .position(uniquePosition)
                 .icon(markerIcon)
         )
     }

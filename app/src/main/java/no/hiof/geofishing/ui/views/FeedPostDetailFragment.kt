@@ -1,5 +1,6 @@
 package no.hiof.geofishing.ui.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
+
 
 class FeedPostDetailFragment : Fragment() {
     private val args: FeedPostDetailFragmentArgs by navArgs()
@@ -54,5 +56,6 @@ class FeedPostDetailFragment : Fragment() {
             }
         }
     }
+
 
 }
