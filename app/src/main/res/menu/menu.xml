@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_baseline_map_24"
         android:title="@string/map" />
     <item
-        android:id="@+id/menu_feed_fragment"
+        android:id="@+id/feed_page_graph"
         android:icon="@drawable/ic_baseline_feed_24"
         android:title="@string/feed" />
     <item
@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_baseline_workspace_premium_24"
         android:title="@string/Rank_Title" />
     <item
-        android:id="@+id/menu_userPage_fragment"
+        android:id="@+id/userPage_graph"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/my_page" />
 </menu>
