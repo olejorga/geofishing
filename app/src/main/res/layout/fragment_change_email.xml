@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:minWidth="300dp"
     tools:context=".ui.views.ChangeEmailFragment">
 
@@ -34,12 +34,12 @@
         app:layout_constraintTop_toBottomOf="@+id/text_change_email_title" />
 
     <EditText
-        android:id="@+id/field_change_email_old_password"
+        android:id="@+id/field_change_email_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/update_profile_field_old_password"
+        android:hint="@string/update_profile_field_confirm_password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button_change_email_save"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field_change_email_old_password" />
+        app:layout_constraintTop_toBottomOf="@+id/field_change_email_password" />
 
     <Button
         android:id="@+id/button_change_email_save"
@@ -66,6 +66,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_change_email_cancel"
-        app:layout_constraintTop_toBottomOf="@+id/field_change_email_old_password" />
+        app:layout_constraintTop_toBottomOf="@+id/field_change_email_password" />
+
+    <TextView
+        android:id="@+id/text_change_email_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="#B81818"
+        android:textColorHint="#9A0808"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_email_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

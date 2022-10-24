@@ -19,25 +19,10 @@ class ChangePasswordViewModel(
     init {
     }
 
-    suspend fun changePassword() {
-
-        if (password() && oldPassword.isNotEmpty()) {
-            auth.changePassword(password, oldPassword)
+    suspend fun changePassword(password: String, confirmPassword: String, oldPassword: String) : Response<Unit> {
+        if (password == confirmPassword){
+            return auth.changePassword(password, oldPassword)
         }
-
+        return Response(null, error = "Confirm password must be identical to new password")
     }
-
-    private fun password(): Boolean {
-        return (
-                password.isNotEmpty()
-                        &&
-                        passwordConfirm.isNotEmpty()
-                        &&
-                        password.equals(passwordConfirm))
-    }
-
-
-    var password: String = ""
-    var passwordConfirm: String = ""
-    var oldPassword: String = ""
 }

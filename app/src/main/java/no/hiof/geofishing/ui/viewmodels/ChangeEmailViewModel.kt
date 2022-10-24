@@ -19,14 +19,7 @@ class ChangeEmailViewModel(
     init {
     }
 
-    suspend fun changeEmail() {
-
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            auth.changeEmail(email, password)
-        }
+    suspend fun changeEmail(email: String, password: String): Response<Unit> {
+        return auth.changeEmail(email, password)
     }
-
-
-    var email: String = ""
-    var password: String = ""
 }
