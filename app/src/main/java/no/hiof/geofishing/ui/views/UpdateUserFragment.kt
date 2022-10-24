@@ -58,10 +58,10 @@ class UpdateUserFragment : DialogFragment() {
             viewModel.viewModelScope.launch {
                 viewModel.name = binding.fieldUpdateName.text.toString()
                 viewModel.bio = binding.fieldUpdateBio.text.toString()
-                viewModel.email = binding.fieldUpdateEmail.text.toString()
-                viewModel.password = binding.fieldUpdatePassword.text.toString()
-                viewModel.passwordConfirm = binding.fieldUpdatePasswordConfirm.text.toString()
-                viewModel.oldPassword = binding.fieldOldPassword.text.toString()
+//                viewModel.email = binding.fieldUpdateEmail.text.toString()
+//                viewModel.password = binding.fieldUpdatePassword.text.toString()
+//                viewModel.passwordConfirm = binding.fieldUpdatePasswordConfirm.text.toString()
+//                viewModel.oldPassword = binding.fieldOldPassword.text.toString()
                 viewModel.updateUser()
                 Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
             }
@@ -69,6 +69,7 @@ class UpdateUserFragment : DialogFragment() {
 
         binding.buttonCancelChanges.setOnClickListener {
             Log.d("BUTTON", "Cancel changes button pressed")
+            dismiss()
         }
 
 
