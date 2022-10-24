@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.data.entities.Profile
@@ -53,22 +54,27 @@ class UpdateUserFragment : DialogFragment() {
             photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
+        viewModel.picture.observe(viewLifecycleOwner) { uri ->
+            Picasso.get().load(uri)
+                .resize(
+                    binding.imageUpdateProfilePreview.maxWidth,
+                    binding.imageUpdateProfilePreview.maxHeight)
+                .into(binding.imageUpdateProfilePreview)
+        }
+
         binding.buttonSaveChanges.setOnClickListener {
-            Log.d("BUTTON", "Save changed button pressed!")
             viewModel.viewModelScope.launch {
                 viewModel.name = binding.fieldUpdateName.text.toString()
                 viewModel.bio = binding.fieldUpdateBio.text.toString()
-                viewModel.email = binding.fieldUpdateEmail.text.toString()
-                viewModel.password = binding.fieldUpdatePassword.text.toString()
-                viewModel.passwordConfirm = binding.fieldUpdatePasswordConfirm.text.toString()
-                viewModel.oldPassword = binding.fieldOldPassword.text.toString()
                 viewModel.updateUser()
                 Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
             }
+            dismiss()
         }
 
         binding.buttonCancelChanges.setOnClickListener {
             Log.d("BUTTON", "Cancel changes button pressed")
+            dismiss()
         }
 
 
