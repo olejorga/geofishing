@@ -36,7 +36,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (viewModel.authenticated == true)
-            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+            //findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_todoFragment)
 
         binding.buttonLogin.setOnClickListener {
             viewModel.viewModelScope.launch {
