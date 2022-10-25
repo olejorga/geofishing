@@ -45,23 +45,8 @@ class UpdateUserViewModel(
 
             mapOf("portrait" to data.toString()).let { profileRepo.update(auth.id.toString(), it) }
         }
-        if (email.isNotEmpty() && oldPassword.isNotEmpty()) {
-            auth.changeEmail(email, oldPassword)
-        }
-        if (password() && oldPassword.isNotEmpty()) {
-            auth.changePassword(password, oldPassword)
-        }
-
     }
 
-    private fun password(): Boolean {
-        return (
-                password.isNotEmpty()
-                        &&
-                        passwordConfirm.isNotEmpty()
-                        &&
-                        password.equals(passwordConfirm))
-    }
 
     private val _picture = MutableLiveData<Uri>()
     val picture: LiveData<Uri> get() = _picture
@@ -71,8 +56,4 @@ class UpdateUserViewModel(
 
     var name: String = ""
     var bio: String = ""
-    var email: String = ""
-    var password: String = ""
-    var passwordConfirm: String = ""
-    var oldPassword: String = ""
 }

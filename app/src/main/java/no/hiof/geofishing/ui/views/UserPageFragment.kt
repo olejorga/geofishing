@@ -80,10 +80,8 @@ class UserPageFragment : Fragment() {
         }
 
         // UPDATE USER
-        val updateUserAction =
-            UserPageFragmentDirections.actionUserPageFragmentToUpdateUserFragment()
         binding.buttonUpdateUser.setOnClickListener {
-            findNavController().navigate(updateUserAction)
+            UpdateUserFragment().show(childFragmentManager, "UpdateProfile")
         }
 
         return binding.root

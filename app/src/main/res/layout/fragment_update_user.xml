@@ -11,17 +11,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frameLayout4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="300dp"
             tools:context=".ui.views.UpdateUserFragment">
 
             <TextView
                 android:id="@+id/text_title_update_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/update_profile_text_title"
                 android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,14 +34,15 @@
                 android:ems="10"
                 android:hint="@string/update_profile_field_name"
                 android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_title_update_user" />
 
             <EditText
                 android:id="@+id/field_update_bio"
-                android:layout_width="376dp"
-                android:layout_height="100dp"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -48,6 +50,7 @@
                 android:gravity="start|top"
                 android:hint="@string/update_profile_field_bio"
                 android:inputType="textMultiLine"
+                android:minHeight="150dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/field_update_name" />
@@ -66,72 +69,43 @@
                 android:id="@+id/button_cancel_changes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/update_profile_button_cancel_changes"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_save_changes"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_update_password_confirm" />
+                app:layout_constraintTop_toBottomOf="@+id/button_update_profile_picture" />
 
             <Button
                 android:id="@+id/button_save_changes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/update_profile_button_save_changes"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_cancel_changes"
-                app:layout_constraintTop_toBottomOf="@+id/field_update_password_confirm" />
-
-            <EditText
-                android:id="@+id/field_update_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/update_profile_field_email"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_update_profile_picture" />
 
-            <EditText
-                android:id="@+id/field_update_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/image_update_profile_preview"
+                android:layout_width="44dp"
+                android:layout_height="49dp"
                 android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/update_profile_field_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:minWidth="150dp"
+                android:minHeight="150dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_update_profile_picture"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_old_password" />
+                app:layout_constraintTop_toBottomOf="@+id/field_update_bio"
+                app:srcCompat="@drawable/ic_baseline_person_24" />
 
-            <EditText
-                android:id="@+id/field_update_password_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/update_profile_field_confirm_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_update_password" />
 
-            <EditText
-                android:id="@+id/field_old_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/update_profile_field_old_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_update_email" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

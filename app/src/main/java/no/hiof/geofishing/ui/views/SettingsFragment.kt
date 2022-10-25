@@ -41,6 +41,14 @@ class SettingsFragment : Fragment() {
                 Navigation.findNavController(it).navigate(R.id.action_global_loginFragment)
             }
         }
+
+        binding.buttonChangePassword.setOnClickListener {
+            ChangePasswordFragment().show(childFragmentManager, "ChangePassword")
+        }
+
+        binding.buttonChangeEmail.setOnClickListener {
+            ChangeEmailFragment().show(childFragmentManager, "ChangeEmail")
+        }
     }
 
     override fun onDestroyView() {
