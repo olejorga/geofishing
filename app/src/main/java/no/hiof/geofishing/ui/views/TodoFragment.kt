@@ -7,12 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.data.constants.Tags
-import no.hiof.geofishing.data.entities.Profile
-import no.hiof.geofishing.data.entities.Todo
 import no.hiof.geofishing.databinding.FragmentTodoBinding
 import no.hiof.geofishing.ui.adapters.TodoAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -39,8 +38,15 @@ class TodoFragment : Fragment() {
 
         viewModel.todos.observe(viewLifecycleOwner) { res ->
             if (res.error == null && res.data != null) {
-                Log.d(Tags.REPOSITORY.toString(), res.data.toString())
-                binding.recyclerViewTodos.adapter = TodoAdapter(res.data)
+                binding.recyclerViewTodos.adapter = TodoAdapter(res.data) {
+                    viewModel.viewModelScope.launch {
+                        val position = binding.recyclerViewTodos.getChildAdapterPosition(it)
+                        val todo = res.data[position]
+                        val (_, error) = viewModel.completeTodo(todo.id!!, todo.completed)
+
+                        if (error != null) Log.d(Tags.REPOSITORY.toString(), error)
+                    }
+                }
                 binding.recyclerViewTodos.layoutManager = GridLayoutManager(context, 1)
             } else if (res.error != null) {
                 Log.d(Tags.REPOSITORY.toString(), res.error)

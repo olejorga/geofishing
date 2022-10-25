@@ -11,4 +11,7 @@ class TodoViewModel(
     private val todoRepository: Repository<Todo>
 ) : ViewModel() {
     val todos = todoRepository.search("profile", authService.id!!).asLiveData()
+
+    suspend fun completeTodo(id: String, state: Boolean) =
+        todoRepository.update(id, hashMapOf("completed" to !state))
 }
