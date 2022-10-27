@@ -205,7 +205,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
             mGoogleMap?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     currentLocationLatLng,
-                    17.0f
+                    20.0f
                 )
             )
             viewModel.setLocation(currentLocationLatLng)
