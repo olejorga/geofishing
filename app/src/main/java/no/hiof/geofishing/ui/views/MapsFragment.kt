@@ -139,17 +139,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
             if (response.error == null && response.data != null) {
                 if (viewModel.catchList2 != response.data) {
                     viewModel.catchList2 = response.data as MutableList<Catch>
+                    var catchLatLng = LatLng(viewModel.defLatitude, viewModel.defLongitude)
 
                     viewModel.catchList2.forEachIndexed { index, catch ->
                         if (catch.latitude != null && catch.longitude != null) {
-                            val catchLatLng = LatLng(catch.latitude, catch.longitude)
-                            val currentSpecies = fishSpeciesArray.indexOf(catch.species)
-                            val markerImg = speciesImgResourceIds[currentSpecies]
-                            val markerColor =
-                                bitmapDescriptorFromVector(requireContext(), markerImg)
-                            val marker = createMapMarker(catchLatLng, markerColor)
-                            marker?.tag = index.toString()
+                            catchLatLng = LatLng(catch.latitude, catch.longitude)
                         }
+                        val currentSpecies = fishSpeciesArray.indexOf(catch.species)
+                        val markerImg = speciesImgResourceIds[currentSpecies]
+                        val markerColor =
+                            bitmapDescriptorFromVector(requireContext(), markerImg)
+                        val marker = createMapMarker(catchLatLng, markerColor)
+                        marker?.tag = index.toString()
                     }
                 }
             }
