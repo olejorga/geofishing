@@ -137,11 +137,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         // Checks view model list against Db then places markers
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
-                if (viewModel.catchList2 != response.data) {
-                    viewModel.catchList2 = response.data as MutableList<Catch>
+                if (viewModel.catchListCache != response.data) {
+                    viewModel.catchListCache = response.data as MutableList<Catch>
                     var catchLatLng = LatLng(viewModel.defLatitude, viewModel.defLongitude)
 
-                    viewModel.catchList2.forEachIndexed { index, catch ->
+                    viewModel.catchListCache.forEachIndexed { index, catch ->
                         if (catch.latitude != null && catch.longitude != null) {
                             catchLatLng = LatLng(catch.latitude, catch.longitude)
                         }
