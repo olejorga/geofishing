@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.App
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUserPageBinding
@@ -72,11 +73,14 @@ class UserPageFragment : Fragment() {
             }
         }
 
+        // TODOS
+        binding.buttonTodoView.setOnClickListener {
+            findNavController().navigate(R.id.action_userPageFragment_to_todoFragment)
+        }
+
         // SETTINGS
-        val settingsAction =
-            UserPageFragmentDirections.actionUserPageFragmentToSettingsFragment()
         binding.settingsButton.setOnClickListener {
-            findNavController().navigate(settingsAction)
+            findNavController().navigate(R.id.action_userPageFragment_to_settingsFragment)
         }
 
         // UPDATE USER

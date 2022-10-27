@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_userPageFragment_to_updateUserFragment"
             app:destination="@id/updateUserFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -29,4 +32,22 @@
         android:name="no.hiof.geofishing.ui.views.UpdateUserFragment"
         android:label="fragment_update_user"
         tools:layout="@layout/fragment_update_user" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="no.hiof.geofishing.ui.views.TodoFragment"
+        android:label="fragment_todo"
+        tools:layout="@layout/fragment_todo" >
+        <action
+            android:id="@+id/action_todoFragment_to_newTodoFragment"
+            app:destination="@id/newTodoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTodoFragment"
+        android:name="no.hiof.geofishing.ui.views.NewTodoFragment"
+        android:label="fragment_new_todo"
+        tools:layout="@layout/fragment_new_todo" >
+        <action
+            android:id="@+id/action_newTodoFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
 </navigation>

@@ -51,14 +51,14 @@ class TodoFragment : Fragment() {
                 }
                 binding.recyclerViewTodos.layoutManager = GridLayoutManager(context, 1)
             } else if (res.error != null) {
-                Log.d(Tags.REPOSITORY.toString(), res.error)
+                Log.d(Tags.REPOSITORY.toString(), res.error!!)
             } else {
                 Log.d(Tags.REPOSITORY.toString(), "Could not find any data")
             }
         }
 
         binding.floatingActionButtonNewTodo.setOnClickListener {
-            // findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
+            findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
         }
 
         return binding.root

@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentNewTodoBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.NewTodoViewModel
@@ -89,7 +91,7 @@ class NewTodoFragment : Fragment() {
                 if (error != null) Toast.makeText(context, error, Toast.LENGTH_LONG).show()
                 else {
                     Toast.makeText(context, "Todo added.", Toast.LENGTH_LONG).show()
-                    // findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
+                    findNavController().navigate(R.id.action_newTodoFragment_to_todoFragment)
                 }
             }
         }
