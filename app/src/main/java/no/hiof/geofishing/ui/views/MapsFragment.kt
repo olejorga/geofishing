@@ -146,10 +146,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                             catchLatLng = LatLng(catch.latitude, catch.longitude)
                         }
                         val currentSpecies = fishSpeciesArray.indexOf(catch.species)
-                        val markerImg = speciesImgResourceIds[currentSpecies]
-                        val markerColor =
-                            bitmapDescriptorFromVector(requireContext(), markerImg)
-                        val marker = createMapMarker(catchLatLng, markerColor)
+                        val markerImgId = speciesImgResourceIds[currentSpecies]
+                        val markerIcon =
+                            bitmapDescriptorFromVector(requireContext(), markerImgId)
+                        val marker = createMapMarker(catchLatLng, markerIcon)
                         marker?.tag = index.toString()
                     }
                 }
