@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feed_page_graph"
+    app:startDestination="@id/feedFragment">
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="no.hiof.geofishing.ui.views.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed">
+        <action
+            android:id="@+id/action_feedFragment_to_feedPostDetailFragment"
+            app:destination="@id/feedPostDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedPostDetailFragment"
+        android:name="no.hiof.geofishing.ui.views.FeedPostDetailFragment"
+        android:label="fragment_feed_post_detail"
+        tools:layout="@layout/fragment_feed_post_detail">
+
+        <deepLink android:id="@+id/deepLink"
+            app:uri="myapp://Geofishing.com/{uid}" />
+
+        <argument
+            android:name="uid"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
