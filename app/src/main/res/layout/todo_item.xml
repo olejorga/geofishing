@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:checkable="true"
         android:clickable="false"
+        app:checkedIcon="@drawable/ic_baseline_done_24"
+        app:checkedIconEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

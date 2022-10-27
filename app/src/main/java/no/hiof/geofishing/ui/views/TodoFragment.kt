@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.databinding.FragmentTodoBinding
 import no.hiof.geofishing.ui.adapters.TodoAdapter
@@ -56,5 +58,13 @@ class TodoFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.floatingActionButtonNewTodo.setOnClickListener {
+            findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
+        }
     }
 }
