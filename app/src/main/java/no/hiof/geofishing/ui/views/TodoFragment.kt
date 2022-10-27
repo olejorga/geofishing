@@ -57,14 +57,10 @@ class TodoFragment : Fragment() {
             }
         }
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding.floatingActionButtonNewTodo.setOnClickListener {
-            findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
+            // findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
         }
+
+        return binding.root
     }
 }

@@ -2,41 +2,30 @@ package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
-import no.hiof.geofishing.R
-import no.hiof.geofishing.data.constants.Tags
-import no.hiof.geofishing.data.entities.Todo
 import no.hiof.geofishing.databinding.FragmentNewTodoBinding
-import no.hiof.geofishing.databinding.FragmentTodoBinding
-import no.hiof.geofishing.ui.adapters.TodoAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
-import no.hiof.geofishing.ui.viewmodels.TodoViewModel
-import java.time.LocalDateTime
+import no.hiof.geofishing.ui.viewmodels.NewTodoViewModel
 import java.util.*
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.days
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.seconds
 
 class NewTodoFragment : Fragment() {
     private var _binding: FragmentNewTodoBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TodoViewModel by viewModels {
+    private val viewModel: NewTodoViewModel by viewModels {
         ViewModelFactory.create {
-            TodoViewModel(
+            NewTodoViewModel(
                 (activity?.application as App).authService,
                 (activity?.application as App).todoRepository
             )
@@ -48,13 +37,11 @@ class NewTodoFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentNewTodoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    var date = Calendar.getInstance()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        viewModel.reminder.observe(viewLifecycleOwner) {
+            Log.d("RAN", "HELLO")
+            binding.switchReminder.isChecked = it != null
+        }
 
         binding.switchReminder.setOnClickListener {
             if (binding.switchReminder.isChecked) {
@@ -70,22 +57,43 @@ class NewTodoFragment : Fragment() {
                         .build()
 
                 datePicker.addOnPositiveButtonClickListener {
-                    val x = datePicker.selection.days
+                    viewModel.calendar.timeInMillis = datePicker.selection!!
                 }
 
                 timePicker.addOnPositiveButtonClickListener {
-                    date =
+                    viewModel.calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                    viewModel.calendar.set(Calendar.MINUTE, timePicker.minute)
+                    viewModel.reminder.value = viewModel.calendar.time
+                }
+
+                datePicker.addOnDismissListener {
+                    viewModel.reminder.value = viewModel.reminder.value
+                }
+
+                timePicker.addOnDismissListener {
+                    viewModel.reminder.value = viewModel.reminder.value
                 }
 
                 timePicker.show(childFragmentManager, "")
                 datePicker.show(childFragmentManager, "")
             } else {
-                Log.d("HERE", "Date: " + date.toString() + ", Hour: " + hour.toString() + ", Minute: " + minute.toString())
+                viewModel.reminder.value = null
             }
         }
 
         binding.buttonAddTodo.setOnClickListener {
+            viewModel.viewModelScope.launch {
+                viewModel.description = binding.fieldTodoDescription.text.toString()
 
+                val (_, error) = viewModel.createTodo()
+                if (error != null) Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+                else {
+                    Toast.makeText(context, "Todo added.", Toast.LENGTH_LONG).show()
+                    // findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
+                }
+            }
         }
+
+        return binding.root
     }
 }
