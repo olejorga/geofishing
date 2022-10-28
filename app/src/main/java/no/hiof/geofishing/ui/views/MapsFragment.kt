@@ -90,6 +90,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         }
     }
 
+    // Checks a new marker position against already created markers to prevent overlap.
+    // https://stackoverflow.com/a/57282879/20313954
     private fun checkMarkerOverLap(originalMarkerPosition: LatLng): LatLng {
         val updatedMarkerPosition: LatLng
 
@@ -142,21 +144,29 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         viewModel.catchList.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 if (viewModel.catchListCache != response.data) {
+
+                    // Changing to MutableList so forEachIndexed can be used
                     viewModel.catchListCache = response.data as MutableList<Catch>
                     var catchLatLng: LatLng
 
                     viewModel.catchListCache.forEachIndexed { index, catch ->
                         catchLatLng =
+                            // Set default coordinates if catch cords are null
                             if (catch.latitude == null || catch.longitude == null)
                                 LatLng(viewModel.defLatitude, viewModel.defLongitude)
                             else
                                 LatLng(catch.latitude, catch.longitude)
 
+                        // Gets the current species string int value from res/values/strings.xml
                         val currentSpecies = fishSpeciesArray.indexOf(catch.species)
+                        // Gets the currentSpecies picture Id from res/values/arrays.xml
                         val markerImgId = speciesImgResourceIds[currentSpecies]
+                        // Creates a BitmapDescriptor from a drawable resource defined above
                         val markerIcon =
                             bitmapDescriptorFromVector(requireContext(), markerImgId)
+                        // Checks marker coords are unique and creates a new marker.
                         val marker = createMapMarker(catchLatLng, markerIcon)
+                        // Set marker tag to it's index to use in deeplink to view catch details.
                         marker?.tag = index.toString()
                     }
                 }
