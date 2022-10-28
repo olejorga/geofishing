@@ -17,5 +17,6 @@ data class Profile(
     val id: String? = null,
     val bio: String? = null,
     val name: String? = null,
-    val portrait: String? = null
+    val portrait: String? = null,
+    var points: Int = 0
 )

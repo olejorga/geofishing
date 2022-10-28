@@ -36,7 +36,7 @@ class RankProfileAdapter(
 
         fun bind(profile: Profile, clickListener: OnClickListener) {
             textName.text = profile.name
-            textPoints.text = profile.bio
+            textPoints.text = profile.points.toString()
             textPositionNumber.text = position().toString()
             itemView.setOnClickListener(clickListener)
         }
