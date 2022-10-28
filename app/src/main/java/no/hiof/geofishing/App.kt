@@ -1,6 +1,10 @@
 package no.hiof.geofishing
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Repository
@@ -14,6 +18,7 @@ import no.hiof.geofishing.data.repositories.SubscriptionRepository
 import no.hiof.geofishing.data.repositories.TodoRepository
 import no.hiof.geofishing.data.services.FirebaseAuthService
 import no.hiof.geofishing.data.services.FirebaseFileService
+import no.hiof.geofishing.ui.services.TodoNotificationService
 
 /**
  * The main entry point of the app, this is where all dependencies are injected.
@@ -37,5 +42,23 @@ class App: Application() {
         _authService.profileRepository = profileRepository
     }
 
-    // TODO: Make all error messages strings!
+    override fun onCreate() {
+        super.onCreate()
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                TodoNotificationService.TODO_CHANNEL_ID,
+                "Todo",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+
+            channel.description = "Used to show a reminder for a todo."
+
+            val x = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            x.createNotificationChannel(channel)
+        }
+    }
 }
