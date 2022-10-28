@@ -8,10 +8,14 @@
         android:id="@+id/feedFragment"
         android:name="no.hiof.geofishing.ui.views.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed">
+        tools:layout="@layout/fragment_feed" >
         <action
             android:id="@+id/action_feedFragment_to_feedPostDetailFragment"
-            app:destination="@id/feedPostDetailFragment" />
+            app:destination="@id/feedPostDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_left"/>
     </fragment>
     <fragment
         android:id="@+id/feedPostDetailFragment"

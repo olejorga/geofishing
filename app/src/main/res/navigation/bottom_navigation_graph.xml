@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation_graph"
-    app:startDestination="@id/menu_maps_fragment">
+    app:startDestination="@id/menu_maps_fragment"
+    app:enterAnim="@anim/from_right"
+    app:exitAnim="@anim/to_left">
     <fragment
         android:id="@+id/menu_maps_fragment"
         android:name="no.hiof.geofishing.ui.views.MapsFragment"
@@ -12,13 +14,11 @@
         <action
             android:id="@+id/action_menu_maps_fragment_to_menu_catch_fragment"
             app:destination="@id/menu_catch_fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
     </fragment>
 
-    <include app:graph="@navigation/feed_page_graph"/>
+    <include app:graph="@navigation/feed_page_graph" />
 
     <fragment
         android:id="@+id/menu_catch_fragment"
@@ -27,7 +27,9 @@
         tools:layout="@layout/fragment_catch">
         <action
             android:id="@+id/action_menu_catch_fragment_to_menu_maps_fragment"
-            app:destination="@id/menu_maps_fragment" />
+            app:destination="@id/menu_maps_fragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/menu_rank_fragment"

@@ -11,13 +11,21 @@
         tools:layout="@layout/fragment_user_page">
         <action
             android:id="@+id/action_userPageFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_left"/>
         <action
             android:id="@+id/action_userPageFragment_to_updateUserFragment"
             app:destination="@id/updateUserFragment" />
         <action
             android:id="@+id/action_userPageFragment_to_todoFragment"
-            app:destination="@id/todoFragment" />
+            app:destination="@id/todoFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_left"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -26,7 +34,9 @@
         tools:layout="@layout/fragment_settings" />
     <action
         android:id="@+id/action_global_loginFragment"
-        app:destination="@id/login_page_graph" />
+        app:destination="@id/login_page_graph"
+        app:enterAnim="@anim/from_left"
+        app:exitAnim="@anim/to_right" />
     <fragment
         android:id="@+id/updateUserFragment"
         android:name="no.hiof.geofishing.ui.views.UpdateUserFragment"
@@ -39,7 +49,11 @@
         tools:layout="@layout/fragment_todo" >
         <action
             android:id="@+id/action_todoFragment_to_newTodoFragment"
-            app:destination="@id/newTodoFragment" />
+            app:destination="@id/newTodoFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popExitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_left"/>
     </fragment>
     <fragment
         android:id="@+id/newTodoFragment"
@@ -48,6 +62,10 @@
         tools:layout="@layout/fragment_new_todo" >
         <action
             android:id="@+id/action_newTodoFragment_to_todoFragment"
-            app:destination="@id/todoFragment" />
+            app:destination="@id/todoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popExitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_left"/>
     </fragment>
 </navigation>

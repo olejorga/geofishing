@@ -37,7 +37,7 @@ class NewTodoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentNewTodoBinding.inflate(inflater, container, false)
 
         viewModel.reminder.observe(viewLifecycleOwner) {
