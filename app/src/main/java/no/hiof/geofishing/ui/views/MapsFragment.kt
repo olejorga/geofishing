@@ -280,6 +280,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mGoogleMap = null
         _binding = null
     }
 }
