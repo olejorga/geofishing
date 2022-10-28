@@ -59,16 +59,6 @@ class FeedFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-        val service = context?.let { TodoNotificationService(it) }
-
-        service?.show()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

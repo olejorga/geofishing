@@ -6,8 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-
-
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
 
     <application
         android:name="no.hiof.geofishing.App"
@@ -40,6 +39,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service android:name=".ui.services.TodoNotificationService" />
     </application>
 
 </manifest>

@@ -1,10 +1,7 @@
 package no.hiof.geofishing
 
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.os.Build
+import android.content.Intent
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Repository
@@ -23,7 +20,7 @@ import no.hiof.geofishing.ui.services.TodoNotificationService
 /**
  * The main entry point of the app, this is where all dependencies are injected.
  */
-class App: Application() {
+class App : Application() {
     // The auth service will be initialized at app boot,
     // which is OK since the service is required right after boot to check auth status.
     private val _authService = FirebaseAuthService
@@ -44,21 +41,9 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannel()
-    }
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                TodoNotificationService.TODO_CHANNEL_ID,
-                "Todo",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-
-            channel.description = "Used to show a reminder for a todo."
-
-            val x = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            x.createNotificationChannel(channel)
-        }
+//        Intent(this, TodoNotificationService::class.java).also { intent ->
+//            startService(intent)
+//        }
     }
 }
