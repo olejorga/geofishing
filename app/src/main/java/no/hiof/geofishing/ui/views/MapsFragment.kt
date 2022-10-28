@@ -84,6 +84,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         // Gets the map async, callback = onMapReady
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.floatingActionButton.setOnClickListener{
+            findNavController().navigate(R.id.action_menu_maps_fragment_to_menu_catch_fragment)
+        }
     }
 
     private fun checkMarkerOverLap(originalMarkerPosition: LatLng): LatLng {
@@ -139,12 +143,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
             if (response.error == null && response.data != null) {
                 if (viewModel.catchListCache != response.data) {
                     viewModel.catchListCache = response.data as MutableList<Catch>
-                    var catchLatLng = LatLng(viewModel.defLatitude, viewModel.defLongitude)
+                    var catchLatLng: LatLng
 
                     viewModel.catchListCache.forEachIndexed { index, catch ->
-                        if (catch.latitude != null && catch.longitude != null) {
-                            catchLatLng = LatLng(catch.latitude, catch.longitude)
-                        }
+                        catchLatLng =
+                            if (catch.latitude == null || catch.longitude == null)
+                                LatLng(viewModel.defLatitude, viewModel.defLongitude)
+                            else
+                                LatLng(catch.latitude, catch.longitude)
+
                         val currentSpecies = fishSpeciesArray.indexOf(catch.species)
                         val markerImgId = speciesImgResourceIds[currentSpecies]
                         val markerIcon =

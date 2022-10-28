@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
@@ -40,7 +41,7 @@ class CatchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCatchBinding.inflate(inflater, container, false)
         val spinner: Spinner = binding.spinnerSpecies
         context?.let { context ->
@@ -63,8 +64,6 @@ class CatchFragment : Fragment() {
                 viewModel.rod = binding.fieldFishingRod.text.toString()
                 viewModel.lure = binding.fieldFishingLure.text.toString()
                 viewModel.species = binding.spinnerSpecies.selectedItem.toString()
-
-                // TODO LatLng test
                 viewModel.longitude = MainActivity.longitude
                 viewModel.latitude = MainActivity.latitude
 
@@ -76,6 +75,7 @@ class CatchFragment : Fragment() {
                 }
 
                 Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_menu_catch_fragment_to_menu_maps_fragment)
                 // TODO: Clear field after adding new catch.
                 //  * binding.fieldTitle.text.clear()
                 //  * binding.fieldDescription.text.clear()
