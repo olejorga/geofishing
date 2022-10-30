@@ -18,7 +18,7 @@ import no.hiof.geofishing.data.services.FirebaseFileService
 /**
  * The main entry point of the app, this is where all dependencies are injected.
  */
-class App: Application() {
+class App : Application() {
     // The auth service will be initialized at app boot,
     // which is OK since the service is required right after boot to check auth status.
     private val _authService = FirebaseAuthService
@@ -36,6 +36,4 @@ class App: Application() {
         // Injecting implementation of a profile repository into auth service.
         _authService.profileRepository = profileRepository
     }
-
-    // TODO: Make all error messages strings!
 }
