@@ -12,14 +12,11 @@ import no.hiof.geofishing.data.entities.Profile
 import java.util.*
 
 class UpdateUserViewModel(
-    authService: AuthService,
-    fileService: FileService,
-    profileRepository: Repository<Profile>
+    private val authService: AuthService,
+    private val fileService: FileService,
+    private val profileRepository: Repository<Profile>
 ) : ViewModel() {
     lateinit var profile: LiveData<Response<Profile>>
-    val auth = authService
-    val fileService = fileService
-    val profileRepo = profileRepository
 
     init {
         viewModelScope.launch {
@@ -29,12 +26,12 @@ class UpdateUserViewModel(
 
     suspend fun updateUser() {
         if (name.isNotEmpty()) {
-            mapOf("name" to name).let { profileRepo.update(auth.id.toString(), it) }
+            mapOf("name" to name).let { profileRepository.update(authService.id.toString(), it) }
         }
         if (bio.isNotEmpty()) {
-            mapOf("bio" to bio).let { profileRepo.update(auth.id.toString(), it) }
+            mapOf("bio" to bio).let { profileRepository.update(authService.id.toString(), it) }
         }
-        if (picture.value != null) {
+        if (_picture.value != null) {
             val filename = UUID.randomUUID().toString()
             val (data, error) = fileService.upload(filename, _picture.value!!)
 
@@ -43,7 +40,7 @@ class UpdateUserViewModel(
                 return
             }
 
-            mapOf("portrait" to data.toString()).let { profileRepo.update(auth.id.toString(), it) }
+            mapOf("portrait" to data.toString()).let { profileRepository.update(authService.id.toString(), it) }
         }
     }
 

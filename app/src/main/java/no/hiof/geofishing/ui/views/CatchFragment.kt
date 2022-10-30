@@ -1,6 +1,7 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,37 +57,47 @@ class CatchFragment : Fragment() {
         }
 
         binding.buttonCreateCatch.setOnClickListener {
-            viewModel.viewModelScope.launch {
-                viewModel.title = binding.fieldTitle.text.toString()
-                viewModel.description = binding.fieldDescription.text.toString()
-                viewModel.length = binding.fieldLength.text.toString().toInt()
-                viewModel.weight = binding.fieldWeight.text.toString().toInt()
-                viewModel.rod = binding.fieldFishingRod.text.toString()
-                viewModel.lure = binding.fieldFishingLure.text.toString()
-                viewModel.species = binding.spinnerSpecies.selectedItem.toString()
-                viewModel.longitude = MainActivity.longitude
-                viewModel.latitude = MainActivity.latitude
+            try {
 
-                // TODO: Error handling here. Crashed if no input in fields.
-                val (_, error) = viewModel.createCatch()
+                viewModel.viewModelScope.launch {
+                    viewModel.title = binding.fieldTitle.text.toString()
+                    viewModel.description = binding.fieldDescription.text.toString()
+                    if (binding.fieldLength.text.toString() == "") viewModel.length = 0
+                    else viewModel.length = binding.fieldLength.text.toString().toInt()
+                    if (binding.fieldWeight.text.toString() == "") viewModel.weight = 0
+                    else viewModel.weight = binding.fieldWeight.text.toString().toInt()
+                    viewModel.rod = binding.fieldFishingRod.text.toString()
+                    viewModel.lure = binding.fieldFishingLure.text.toString()
+                    viewModel.species = binding.spinnerSpecies.selectedItem.toString()
+                    viewModel.longitude = MainActivity.longitude
+                    viewModel.latitude = MainActivity.latitude
 
-                if (error != null) {
-                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                    // TODO: Error handling here. Crashed if no input in fields.
+                    val (_, error) = viewModel.createCatch()
+
+                    if (error != null) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                    }
+
+                    Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_menu_catch_fragment_to_menu_maps_fragment)
+                    // TODO: Clear field after adding new catch.
+                    //  * binding.fieldTitle.text.clear()
+                    //  * binding.fieldDescription.text.clear()
+                    //  * binding.fieldLength.text.clear()
+                    //  * binding.fieldWeight.text.clear()
                 }
-
-                Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_menu_catch_fragment_to_menu_maps_fragment)
-                // TODO: Clear field after adding new catch.
-                //  * binding.fieldTitle.text.clear()
-                //  * binding.fieldDescription.text.clear()
-                //  * binding.fieldLength.text.clear()
-                //  * binding.fieldWeight.text.clear()
+            }
+            catch (ex : NumberFormatException) {
+                Log.e("NumberFormatException", ex.message.toString())
+                Toast.makeText(context, "Weight and Length must be numbers", Toast.LENGTH_LONG).show()
             }
         }
 
         val photoPicker =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri != null) {
+                    Log.d("URI", uri.toString())
                     viewModel.setPicture(uri)
                 }
             }
