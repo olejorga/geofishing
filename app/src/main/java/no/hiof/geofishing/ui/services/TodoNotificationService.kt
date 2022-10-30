@@ -1,85 +1,126 @@
 package no.hiof.geofishing.ui.services
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
-import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import kotlinx.coroutines.*
+import androidx.core.app.NotificationManagerCompat
+import androidx.navigation.NavDeepLinkBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
+import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
+import no.hiof.geofishing.ui.receivers.TodoNotificationReceiver
+import no.hiof.geofishing.ui.utils.NotificationChannelFactory
 
-class TodoNotificationService : Service() {
-    private val channelId = "todo_channel"
-    private lateinit var job: CompletableJob
+class TodoNotificationService(private val context: Context) {
 
-    private fun createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
+    companion object {
+        const val CHANNEL_ID = "todo_channel"
+        const val CHANNEL_NAME = "Todo"
+        const val CHANNEL_DESCRIPTION = "Reminders to complete todos."
+    }
+
+    fun scheduleNotifications(runOnce: Boolean = false) {
+        NotificationChannelFactory.create(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION, context)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
+            val intents = ArrayList<PendingIntent>()
+
+            NotificationChannelFactory.create(
+                "todo_channel",
                 "Todo",
-                NotificationManager.IMPORTANCE_DEFAULT
-            ).apply {
-                description = "Reminders to complete todos."
-            }
+                "Reminders to complete todos.",
+                context
+            )
 
-            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
-                .createNotificationChannel(channel)
-        }
-    }
+            val app = context.applicationContext as App
 
+            app.authService.id?.let {
+                app.todoRepository
+                    .search(
+                        "profile",
+                        it
+                    )
+                    .cancellable()
+                    .collect { res ->
+                        if (res.error == null && res.data != null) {
+                            Log.d("HERE", "CHANGED")
 
-    private fun showNotification(text: String) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_baseline_done_24)
-            .setContentTitle("Todo")
-            .setContentText(text)
-            .build()
+                            for (intent in intents) {
+                                alarmManager.cancel(intent)
+                            }
 
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
-            .notify(1, notification)
-    }
+                            intents.clear()
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        super.onStartCommand(intent, flags, startId)
+                            var id = 0
 
-        Log.d("HERE", "Service started.")
+                            for (todo in res.data) {
+                                if (!todo.completed && todo.reminder != null) {
+                                    val intent = Intent(
+                                        context,
+                                        TodoNotificationReceiver::class.java
+                                    ).apply {
+                                        putExtra("id", id)
+                                        putExtra("message", todo.description)
+                                    }.let { intent ->
+                                        PendingIntent.getBroadcast(
+                                            context,
+                                            id,
+                                            intent,
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                                                PendingIntent.FLAG_IMMUTABLE
+                                            else 0
+                                        )
+                                    }
 
-        createChannel()
+                                    intents.add(intent)
 
-        job = Job()
+                                    alarmManager.set(
+                                        AlarmManager.RTC_WAKEUP,
+                                        todo.reminder.time,
+                                        intent
+                                    )
 
-        CoroutineScope(Dispatchers.IO + job).launch {
-            (applicationContext as App)
-                .todoRepository
-                .search(
-                    "profile",
-                    (applicationContext as App).authService.id!!
-                ).collect { res ->
-                    if (res.error == null && res.data != null) {
-                        Log.d("HERE", "Service data fetched.")
-
-                        for (todo in res.data) {
-                            if (!todo.completed) {
-                                Log.d("HERE", todo.reminder.toString())
-                                todo.description?.let { showNotification(it) }
+                                    id++
+                                }
                             }
                         }
-                    }
-                }
-        }
 
-        return START_STICKY
+                        if (runOnce) cancel()
+                    }
+            }
+        }
     }
 
-    override fun onBind(intent: Intent?): IBinder? = null
+    @SuppressLint("MissingPermission")
+    fun showNotification(id: Int, message: String) {
+        val intent = NavDeepLinkBuilder(context)
+            .setComponentName(MainActivity::class.java)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.todoFragment)
+            .createPendingIntent()
 
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_baseline_done_24)
+            .setContentTitle(CHANNEL_NAME)
+            .setContentText(message)
+            .setContentIntent(intent)
+            .setAutoCancel(true)
+            .build()
+
+        with(NotificationManagerCompat.from(context)) {
+            notify(id, notification)
+        }
     }
 }

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import no.hiof.geofishing.App
 import no.hiof.geofishing.databinding.FragmentFeedBinding
 import no.hiof.geofishing.ui.adapters.FeedAdapter
-import no.hiof.geofishing.ui.services.TodoNotificationService
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 

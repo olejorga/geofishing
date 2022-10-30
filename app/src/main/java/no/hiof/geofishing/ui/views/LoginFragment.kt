@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentLoginBinding
+import no.hiof.geofishing.ui.services.TodoNotificationService
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.LoginViewModel
 
@@ -36,7 +37,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (viewModel.authenticated == true)
-            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+            whenAuthenticated()
 
         binding.buttonLogin.setOnClickListener {
             viewModel.viewModelScope.launch {
@@ -49,13 +50,23 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
                 if (viewModel.authenticated == true)
-                    findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+                    whenAuthenticated()
             }
         }
 
         binding.buttonSignup.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
+    }
+
+    private fun whenAuthenticated() {
+        context?.let {
+            TodoNotificationService(it).apply {
+                scheduleNotifications()
+            }
+        }
+
+        findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
     }
 
     override fun onDestroyView() {

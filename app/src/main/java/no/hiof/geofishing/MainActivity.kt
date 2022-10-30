@@ -1,7 +1,6 @@
 package no.hiof.geofishing
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import no.hiof.geofishing.databinding.ActivityMainBinding
-import no.hiof.geofishing.ui.services.TodoNotificationService
 
 /**
  * The main activity - all fragments stem from this activity.

@@ -1,7 +1,6 @@
 package no.hiof.geofishing
 
 import android.app.Application
-import android.content.Intent
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Repository
@@ -15,7 +14,6 @@ import no.hiof.geofishing.data.repositories.SubscriptionRepository
 import no.hiof.geofishing.data.repositories.TodoRepository
 import no.hiof.geofishing.data.services.FirebaseAuthService
 import no.hiof.geofishing.data.services.FirebaseFileService
-import no.hiof.geofishing.ui.services.TodoNotificationService
 
 /**
  * The main entry point of the app, this is where all dependencies are injected.
@@ -37,13 +35,5 @@ class App : Application() {
     init {
         // Injecting implementation of a profile repository into auth service.
         _authService.profileRepository = profileRepository
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-//        Intent(this, TodoNotificationService::class.java).also { intent ->
-//            startService(intent)
-//        }
     }
 }
