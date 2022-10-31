@@ -18,5 +18,6 @@ data class Profile(
     val bio: String? = null,
     val name: String? = null,
     val portrait: String? = null,
+    @Exclude
     var points: Int = 0
 )

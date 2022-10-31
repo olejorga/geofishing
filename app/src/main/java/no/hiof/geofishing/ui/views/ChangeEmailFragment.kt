@@ -43,6 +43,7 @@ class ChangeEmailFragment : DialogFragment() {
                 val response = viewModel.changeEmail(
                     emailField.text.toString(),
                     passwordField.text.toString()
+                // TODO: Error check in text field (se innlogging)
                 )
                 if(response.error == null){
                     Toast.makeText(context, "Email successfully updated", Toast.LENGTH_LONG).show()

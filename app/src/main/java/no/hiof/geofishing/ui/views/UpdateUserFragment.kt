@@ -68,8 +68,8 @@ class UpdateUserFragment : DialogFragment() {
                 viewModel.bio = binding.fieldUpdateBio.text.toString()
                 viewModel.updateUser()
                 Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
+                dismiss()
             }
-            dismiss()
         }
 
         binding.buttonCancelChanges.setOnClickListener {

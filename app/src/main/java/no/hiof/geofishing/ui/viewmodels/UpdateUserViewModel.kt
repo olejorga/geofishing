@@ -33,6 +33,7 @@ class UpdateUserViewModel(
         }
         if (_picture.value != null) {
             val filename = UUID.randomUUID().toString()
+            Log.d("HERE", filename + " " + _picture.value.toString())
             val (data, error) = fileService.upload(filename, _picture.value!!)
 
             if (error != null) {

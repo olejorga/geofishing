@@ -58,10 +58,11 @@ class CatchFragment : Fragment() {
 
         binding.buttonCreateCatch.setOnClickListener {
             try {
-
+                // TODO: Required fields
                 viewModel.viewModelScope.launch {
                     viewModel.title = binding.fieldTitle.text.toString()
                     viewModel.description = binding.fieldDescription.text.toString()
+                    
                     if (binding.fieldLength.text.toString() == "") viewModel.length = 0
                     else viewModel.length = binding.fieldLength.text.toString().toInt()
                     if (binding.fieldWeight.text.toString() == "") viewModel.weight = 0
@@ -72,7 +73,6 @@ class CatchFragment : Fragment() {
                     viewModel.longitude = MainActivity.longitude
                     viewModel.latitude = MainActivity.latitude
 
-                    // TODO: Error handling here. Crashed if no input in fields.
                     val (_, error) = viewModel.createCatch()
 
                     if (error != null) {
@@ -81,11 +81,6 @@ class CatchFragment : Fragment() {
 
                     Toast.makeText(context, "Catch added", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_menu_catch_fragment_to_menu_maps_fragment)
-                    // TODO: Clear field after adding new catch.
-                    //  * binding.fieldTitle.text.clear()
-                    //  * binding.fieldDescription.text.clear()
-                    //  * binding.fieldLength.text.clear()
-                    //  * binding.fieldWeight.text.clear()
                 }
             }
             catch (ex : NumberFormatException) {
