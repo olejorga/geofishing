@@ -91,7 +91,7 @@ class NewTodoFragment : Fragment() {
                 if (error != null) Toast.makeText(context, error, Toast.LENGTH_LONG).show()
                 else {
                     Toast.makeText(context, "Todo added.", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_newTodoFragment_to_todoFragment)
+                    findNavController().navigateUp()
                 }
             }
         }
