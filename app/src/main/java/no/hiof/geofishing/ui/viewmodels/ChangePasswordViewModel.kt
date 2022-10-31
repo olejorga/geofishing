@@ -23,6 +23,6 @@ class ChangePasswordViewModel(
         if (password == confirmPassword){
             return auth.changePassword(password, oldPassword)
         }
-        return Response(null, error = "Confirm password must be identical to new password")
+        return Response(null, error = "Passwords do not match.")
     }
 }

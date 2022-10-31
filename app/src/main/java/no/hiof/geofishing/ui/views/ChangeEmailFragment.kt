@@ -50,7 +50,7 @@ class ChangeEmailFragment : DialogFragment() {
                     dismiss()
                 }
                 else{
-                    binding.textChangeEmailErrorMessage.text = response.error.toString()
+                    passwordField.error = response.error.toString()
                 }
             }
         }

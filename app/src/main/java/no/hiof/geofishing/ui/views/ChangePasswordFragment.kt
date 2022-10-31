@@ -40,7 +40,6 @@ class ChangePasswordFragment : DialogFragment() {
         val oldPasswordField = binding.fieldOldPassword
 
         binding.buttonChangeProfileSave.setOnClickListener {
-            binding.textChangePasswordErrorMessage.text = ""
             viewModel.viewModelScope.launch {
                 val response = viewModel.changePassword(
                     passwordField.text.toString(),
@@ -51,8 +50,11 @@ class ChangePasswordFragment : DialogFragment() {
                     Toast.makeText(context, "Password successfully changed!", Toast.LENGTH_LONG).show()
                     dismiss()
                 }
+                else if (passwordField.text.toString() != confirmPasswordField.text.toString()) {
+                    confirmPasswordField.error = response.error.toString()
+                }
                 else {
-                    binding.textChangePasswordErrorMessage.text = response.error.toString()
+                    oldPasswordField.error = response.error.toString()
                 }
             }
         }
