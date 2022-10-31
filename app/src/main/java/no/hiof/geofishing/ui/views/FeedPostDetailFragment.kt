@@ -57,11 +57,21 @@ class FeedPostDetailFragment : Fragment() {
                     .resize(img.maxWidth, img.maxHeight)
                     .into(img)
 
+                val weight = catch.weight.toString() + "g"
+                val length = catch.length.toString() + "cm"
+
                 binding.textTitle.text = catch.title
                 binding.textDescription.text = catch.description
+                binding.textSpecies.text = catch.species
+                binding.textWeight.text = weight
+                binding.textLength.text = length
+                binding.textRod.text = catch.rod
+                binding.textLure.text = catch.lure
 
                 viewModel.setSingleProfileName(catch, profiles)
                 binding.textProfile.text = catch.profileName
+
+
 
             }
         }
