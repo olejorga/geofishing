@@ -45,7 +45,7 @@ class FeedAdapter(
             Picasso.get().load(post.picture).resize(imageView.maxWidth, imageView.maxHeight)
                 .into(imageView)
             textTitle.text = post.title
-            textProfile.text = post.profile
+            textProfile.text = post.profileName
             textDesc.text = post.description
 
             itemView.setOnClickListener(clickListener)
