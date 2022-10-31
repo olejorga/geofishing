@@ -40,5 +40,7 @@ data class Catch(
     val species: String? = null,
     val title: String? = null,
     val profile: String? = null,
-    val weight: Int? = null
+    val weight: Int? = null,
+    @Exclude
+    var profileName: String = ""
 )

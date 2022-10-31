@@ -1,7 +1,6 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,8 @@ class FeedFragment : Fragment() {
     private val viewModel: FeedViewModel by viewModels {
         ViewModelFactory.create {
             FeedViewModel(
-                (activity?.application as App).catchRepository
+                (activity?.application as App).catchRepository,
+                (activity?.application as App).profileRepository
             )
         }
     }
@@ -39,6 +39,11 @@ class FeedFragment : Fragment() {
         viewModel.catchList.observe(viewLifecycleOwner) { res ->
             if (res.error == null && res.data != null) {
                 val catches = res.data
+
+                viewModel.profileList.observe(viewLifecycleOwner) {
+                    if (it.error == null && it.data != null)
+                        viewModel.setAllProfiles(catches, it.data)
+                }
 
                 feedRecyclerView.adapter = FeedAdapter(catches) {
                     val position = feedRecyclerView.getChildAdapterPosition(it)

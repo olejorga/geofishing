@@ -23,7 +23,8 @@ class FeedPostDetailFragment : Fragment() {
     private val viewModel: FeedViewModel by viewModels {
         ViewModelFactory.create {
             FeedViewModel(
-                (activity?.application as App).catchRepository
+                (activity?.application as App).catchRepository,
+                (activity?.application as App).profileRepository
             )
         }
     }
@@ -52,7 +53,13 @@ class FeedPostDetailFragment : Fragment() {
 
                 binding.textTitle.text = catch.title
                 binding.textDescription.text = catch.description
-                binding.textProfile.text = catch.profile
+
+                viewModel.profileList.observe(viewLifecycleOwner) {
+                    if (it.error == null) it.data?.let { profiles ->
+                        viewModel.setSingleProfile(catch, profiles)
+                        binding.textProfile.text = catch.profileName
+                    }
+                }
             }
         }
     }
