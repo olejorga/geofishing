@@ -1,6 +1,5 @@
 package no.hiof.geofishing.ui.views
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.App
 import no.hiof.geofishing.R
+import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
@@ -41,6 +41,12 @@ class FeedPostDetailFragment : Fragment() {
         val binding = FragmentFeedPostDetailBinding.bind(view)
         fragmentBinding = binding
 
+        lateinit var profiles: List<Profile>
+        viewModel.profileList.observe(viewLifecycleOwner) { res ->
+            if (res.error == null)
+                profiles = res.data!!
+        }
+
         viewModel.catchList.observe(viewLifecycleOwner) { res ->
             if (res.error == null && res.data != null) {
                 val catch = res.data[args.uid]
@@ -54,12 +60,9 @@ class FeedPostDetailFragment : Fragment() {
                 binding.textTitle.text = catch.title
                 binding.textDescription.text = catch.description
 
-                viewModel.profileList.observe(viewLifecycleOwner) {
-                    if (it.error == null) it.data?.let { profiles ->
-                        viewModel.setSingleProfile(catch, profiles)
-                        binding.textProfile.text = catch.profileName
-                    }
-                }
+                viewModel.setSingleProfileName(catch, profiles)
+                binding.textProfile.text = catch.profileName
+
             }
         }
     }

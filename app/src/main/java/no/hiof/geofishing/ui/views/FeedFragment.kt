@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import no.hiof.geofishing.App
+import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedBinding
 import no.hiof.geofishing.ui.adapters.FeedAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -35,15 +36,19 @@ class FeedFragment : Fragment() {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
+        lateinit var profiles: List<Profile>
+        viewModel.profileList.observe(viewLifecycleOwner) { res ->
+            if (res.error == null)
+                profiles = res.data!!
+        }
+
+
         val feedRecyclerView = binding.feedRecyclerView
         viewModel.catchList.observe(viewLifecycleOwner) { res ->
             if (res.error == null && res.data != null) {
                 val catches = res.data
 
-                viewModel.profileList.observe(viewLifecycleOwner) {
-                    if (it.error == null && it.data != null)
-                        viewModel.setAllProfiles(catches, it.data)
-                }
+                viewModel.setAllProfileNames(catches, profiles)
 
                 feedRecyclerView.adapter = FeedAdapter(catches) {
                     val position = feedRecyclerView.getChildAdapterPosition(it)

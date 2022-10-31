@@ -17,7 +17,7 @@ class FeedViewModel(
     lateinit var catchList: LiveData<Response<List<Catch>>>
     lateinit var profileList: LiveData<Response<List<Profile>>>
 
-    fun setAllProfiles(catches: List<Catch>, profiles: List<Profile>) {
+    fun setAllProfileNames(catches: List<Catch>, profiles: List<Profile>) {
         catches.forEach { catch ->
             catch.profileName = profiles.find { profile ->
                 profile.id == catch.profile
@@ -25,7 +25,7 @@ class FeedViewModel(
         }
     }
 
-    fun setSingleProfile(catch: Catch, profiles: List<Profile>){
+    fun setSingleProfileName(catch: Catch, profiles: List<Profile>){
         catch.profileName = profiles.find { profile ->
             profile.id == catch.profile
         }?.name.toString()
