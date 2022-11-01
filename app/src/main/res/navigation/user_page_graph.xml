@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/userPageFragment"
         android:name="no.hiof.geofishing.ui.views.UserPageFragment"
-        android:label="fragment_user_page"
+        android:label="My page"
         tools:layout="@layout/fragment_user_page">
         <action
             android:id="@+id/action_userPageFragment_to_settingsFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="no.hiof.geofishing.ui.views.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <action
         android:id="@+id/action_global_loginFragment"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/todoFragment"
         android:name="no.hiof.geofishing.ui.views.TodoFragment"
-        android:label="fragment_todo"
+        android:label="Todo"
         tools:layout="@layout/fragment_todo" >
         <action
             android:id="@+id/action_todoFragment_to_newTodoFragment"
@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/newTodoFragment"
         android:name="no.hiof.geofishing.ui.views.NewTodoFragment"
-        android:label="fragment_new_todo"
+        android:label="New todo"
         tools:layout="@layout/fragment_new_todo" >
         <action
             android:id="@+id/action_newTodoFragment_to_todoFragment"
