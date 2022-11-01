@@ -1,5 +1,6 @@
 package no.hiof.geofishing.ui.views
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
@@ -244,24 +245,23 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         }
     }
 
-// TODO hvis bruker velger coarse_loc og deny, for så å klikke back og velge coarse og accept så vil AlertDialog poppe opp for Fine_loc
-
     /**
      * Requests user to choose between either coarse or fine location, if dismissed shows an
      * AlertDialog of why the app needs these permissions depending on the
      * shouldShowRequestPermissionRationale method.
-     * - If check on array to prevent double AlertDialog, if fine_location is granted so is coarse.
-     * - If only coarse setUserLocation, if none, only build AlertDialog on fine_location.
      */
     private val requestLocationPermissions =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
-            permissions.entries.forEach {
-                val isGranted = it.value
-                val permission = it.key
+            permissions.entries.forEach { permissionRequest ->
+                val isGranted = permissionRequest.value
+                val permission = permissionRequest.key
                 when {
-                    isGranted -> setUserLocation()
+                    isGranted -> {
+                        setUserLocation()
+                        return@registerForActivityResult
+                    }
                     ActivityCompat.shouldShowRequestPermissionRationale(
                         requireActivity(), permission
                     ) -> {
@@ -273,6 +273,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                             }.setNegativeButton(R.string.deny_permission_dialog, null)
                             .create()
                             .show()
+                        return@registerForActivityResult
                     }
                 }
             }
