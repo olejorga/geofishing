@@ -15,6 +15,9 @@ import no.hiof.geofishing.App
 import no.hiof.geofishing.ui.receivers.TodoNotificationReceiver
 import no.hiof.geofishing.ui.utils.NotificationChannelFactory
 
+/**
+ * Responsible for scheduling todos.
+ */
 class TodoNotificationService : LifecycleService() {
     companion object {
         const val CHANNEL_ID = "todo_channel"
@@ -22,10 +25,19 @@ class TodoNotificationService : LifecycleService() {
         const val CHANNEL_DESCRIPTION = "Reminders to complete todos."
     }
 
+    /**
+     * When the service starts, a coroutine is created in which the todos a fetched from
+     * the globally injected todoRepository. The todos are iterated over and a alarm with a
+     * notification is scheduled for all todos.
+     *
+     * The coroutine remains open and listening for new data until the lifecycle is terminated.
+     * For instance on device startup, when the "BootReceiver" is done running, this service is
+     * terminated.
+     *
+     * If the todos are updated, all alarms are canceled and re-scheduled.
+     */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-
-        Log.d("HERE", "STARTING SERVICE")
 
         val context = this
 
@@ -36,20 +48,10 @@ class TodoNotificationService : LifecycleService() {
         )
 
         lifecycleScope.launch(Dispatchers.IO) {
-            Log.d("HERE", "STARTING SCOPE")
             val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
             val intents = ArrayList<PendingIntent>()
 
-            NotificationChannelFactory.create(
-                "todo_channel",
-                "Todo",
-                "Reminders to complete todos.",
-                context
-            )
-
             val app = context.applicationContext as App
-
-            Log.d("HERE", app.authService.id.toString())
 
             app.authService.id?.let {
                 app.todoRepository
@@ -98,8 +100,6 @@ class TodoNotificationService : LifecycleService() {
                                     id++
                                 }
                             }
-
-                            Log.d("HERE", "TODOS UPDATED!")
                         }
                     }
             }
@@ -111,10 +111,5 @@ class TodoNotificationService : LifecycleService() {
     override fun onBind(intent: Intent): IBinder? {
         super.onBind(intent)
         return null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("HERE", "STOPPING SERVICE")
     }
 }

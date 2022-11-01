@@ -2,6 +2,9 @@ package no.hiof.geofishing.data.contracts
 
 import android.net.Uri
 
+/**
+ * Represents a file service, with the ability to upload and delete files.
+ */
 interface FileService {
     /**
      * Asynchronously upload a file.

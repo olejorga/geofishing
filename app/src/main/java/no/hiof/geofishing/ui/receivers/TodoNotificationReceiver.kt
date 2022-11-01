@@ -11,11 +11,25 @@ import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
 import no.hiof.geofishing.ui.services.TodoNotificationService
 
+/**
+ * Responsible for showing a notification when a broadcast is received.
+ *
+ * The intent passed in the broadcast should contain extras, an "id" and a "message":
+ * - id (int): The desired id of the notification (defaults to 0).
+ * - message (string): The text that will be displayed in the notification (defaults to a std msg).
+ */
 class TodoNotificationReceiver : BroadcastReceiver() {
+    /**
+     * Displays a notification reminder when a broadcast is received.
+     *
+     * @property context A derived application context.
+     * @property intent A intent (should contain an "id" (int) and a "message" (string)).
+     */
     @SuppressLint("MissingPermission")
     override fun onReceive(context: Context, intent: Intent) {
         val id = intent.getIntExtra("id", 0)
         val message = intent.getStringExtra("message")
+            ?: context.getString(R.string.todo_notification_service_message_placeholder)
 
         val action = NavDeepLinkBuilder(context)
             .setComponentName(MainActivity::class.java)
