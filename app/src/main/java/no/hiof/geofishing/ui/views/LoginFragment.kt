@@ -1,5 +1,6 @@
 package no.hiof.geofishing.ui.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,10 +61,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun whenAuthenticated() {
-        context?.let {
-            TodoNotificationService(it).apply {
-                scheduleNotifications()
-            }
+        Intent(context, TodoNotificationService::class.java).also {
+            context?.startService(it)
         }
 
         findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
