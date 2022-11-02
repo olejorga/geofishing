@@ -8,6 +8,13 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
+    <!-- TODO camera   -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
+    <uses-permission android:name="android.permission.CAMERA" android:maxSdkVersion="29"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <!-- TODO camera   -->
+
     <application
         android:name="no.hiof.geofishing.App"
         android:allowBackup="true"
@@ -39,6 +46,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- TODO camera permission for uri img file -->
+        <provider
+            android:authorities="no.hiof.geofishing.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false" >
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <receiver android:name=".ui.receivers.TodoNotificationReceiver" />
 

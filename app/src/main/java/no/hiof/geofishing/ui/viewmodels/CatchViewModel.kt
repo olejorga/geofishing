@@ -1,5 +1,6 @@
 package no.hiof.geofishing.ui.viewmodels
 
+import android.Manifest
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
