@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (viewModel.authenticated == true)
+        if (viewModel.authenticated)
             whenAuthenticated()
 
         binding.buttonLogin.setOnClickListener {
@@ -50,7 +50,7 @@ class LoginFragment : Fragment() {
                 if (error != null)
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
 
-                if (viewModel.authenticated == true)
+                if (viewModel.authenticated)
                     whenAuthenticated()
             }
         }

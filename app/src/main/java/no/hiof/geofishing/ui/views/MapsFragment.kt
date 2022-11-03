@@ -167,7 +167,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                         // Checks marker coords are unique and creates a new marker.
                         val marker = createMapMarker(catchLatLng, markerIcon)
                         // Set marker tag to it's index to use in deeplink to view catch details.
-                        marker?.tag = index.toString()
+                        marker?.tag = catch.id.toString()
                     }
                 }
             }

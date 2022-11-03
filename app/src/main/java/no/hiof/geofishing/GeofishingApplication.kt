@@ -1,6 +1,8 @@
 package no.hiof.geofishing
 
 import android.app.Application
+import android.os.Build
+import com.google.android.material.color.DynamicColors
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -42,5 +44,12 @@ class GeofishingApplication : Application() {
 
     val fileService by lazy<FileService> {
         FirebaseFileService(Firebase.storage, this)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            DynamicColors.applyToActivitiesIfAvailable(this)
+        }
     }
 }

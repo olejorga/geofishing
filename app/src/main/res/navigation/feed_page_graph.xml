@@ -23,8 +23,9 @@
         android:label="Catch detail"
         tools:layout="@layout/fragment_feed_post_detail">
 
-        <deepLink android:id="@+id/deepLink"
-            app:uri="myapp://Geofishing.com/{uid}" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="myapp://Geofishing.com/{catch_id}" />
 
         <argument
             android:name="catch_id"
