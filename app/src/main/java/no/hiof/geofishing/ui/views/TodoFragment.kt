@@ -62,6 +62,12 @@ class TodoFragment : Fragment() {
             findNavController().navigate(R.id.action_todoFragment_to_newTodoFragment)
         }
 
+        binding.buttonClearTodos.setOnClickListener {
+            viewModel.viewModelScope.launch {
+                viewModel.clearTodos()
+            }
+        }
+
         return binding.root
     }
 
