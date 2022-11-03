@@ -25,22 +25,22 @@ import no.hiof.geofishing.data.services.FirebaseFileService
  */
 class GeofishingApplication : Application() {
     val catchRepository by lazy<Repository<Catch>> {
-        CatchRepository(Firebase.firestore.collection("catches"))
+        CatchRepository(Firebase.firestore.collection("catches"), this)
     }
 
     val profileRepository by lazy<Repository<Profile>> {
-        ProfileRepository(Firebase.firestore.collection("profiles"))
+        ProfileRepository(Firebase.firestore.collection("profiles"), this)
     }
 
     val todoRepository by lazy<Repository<Todo>> {
-        TodoRepository(Firebase.firestore.collection("todos"))
+        TodoRepository(Firebase.firestore.collection("todos"), this)
     }
 
     val authService by lazy<AuthService> {
-        FirebaseAuthService(Firebase.auth, profileRepository)
+        FirebaseAuthService(Firebase.auth, profileRepository, this)
     }
 
     val fileService by lazy<FileService> {
-        FirebaseFileService(Firebase.storage)
+        FirebaseFileService(Firebase.storage, this)
     }
 }

@@ -1,9 +1,11 @@
 package no.hiof.geofishing.data.services
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Response
 
@@ -11,7 +13,8 @@ import no.hiof.geofishing.data.contracts.Response
  * A firebase implementation of a file service.
  */
 class FirebaseFileService(
-    private val storage: FirebaseStorage
+    private val storage: FirebaseStorage,
+    private val context: Context,
 ) : FileService {
 
     companion object {
@@ -26,7 +29,7 @@ class FirebaseFileService(
             Response(ref.downloadUrl.await().toString())
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not upload file.")
+            Response(error = context.getString(R.string.file_service_upload_error))
         }
     }
 
@@ -38,7 +41,7 @@ class FirebaseFileService(
             Response()
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not delete file.")
+            Response(error = context.getString(R.string.file_service_delete_error))
         }
     }
 }

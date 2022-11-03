@@ -100,9 +100,53 @@
     <string name="request_permission_again">Back</string>
     <string name="deny_permission_dialog">No thanks</string>
     <string name="log_out">Log Out</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="todo_notification_service_message_placeholder">Remember, you have a things todo</string>
     <!-- End of Map Fragment -->
+
+    <!-- Auth Service -->
+    <string name="auth_service_wrong_credentials_error">Wrong username or password.</string>
+    <string name="auth_service_login_error">Could not sign in user.</string>
+    <string name="auth_service_logout_error">Could not sign out user.</string>
+    <string name="auth_service_password_strength_error">Password is not strong enough.</string>
+    <string name="auth_service_user_exists_error">Email already in use.</string>
+    <string name="auth_service_signup_error">Could not sign up user.</string>
+    <string name="auth_service_change_password_error">Could not change password.</string>
+    <string name="auth_service_change_email_error">Could not change email.</string>
+    <!-- End of Auth Service -->
+
+    <!-- File Service -->
+    <string name="file_service_upload_error">Could not upload file.</string>
+    <string name="file_service_delete_error">Could not delete file.</string>
+    <!-- End of File Service -->
+
+    <!-- Catch Repository -->
+    <string name="catch_repo_create_error">Could not create catch.</string>
+    <string name="catch_repo_read_error">Could not get catches.</string>
+    <string name="catch_repo_update_error">Could not update catch.</string>
+    <string name="catch_repo_delete_error">Could not delete catch.</string>
+    <string name="catch_repo_find_error">Could not find catch.</string>
+    <string name="catch_repo_search_error">Could not find any matching catches.</string>
+    <!-- End of Catch Repository -->
+
+    <!-- Profile Repository -->
+    <string name="profile_repo_create_error">Could not create profile.</string>
+    <string name="profile_repo_read_error">Could not get profiles.</string>
+    <string name="profile_repo_update_error">Could not update profile.</string>
+    <string name="profile_repo_delete_error">Could not delete profile.</string>
+    <string name="profile_repo_find_error">Could not find profile.</string>
+    <string name="profile_repo_search_error">Could not find any matching profiles.</string>
+    <!-- End of Profile Repository -->
+
+    <!-- Todoo Repository -->
+    <string name="todo_repo_create_error">Could not create todo.</string>
+    <string name="todo_repo_read_error">Could not get todos.</string>
+    <string name="todo_repo_update_error">Could not update todo.</string>
+    <string name="todo_repo_delete_error">Could not delete todo.</string>
+    <string name="todo_repo_find_error">Could not find todo.</string>
+    <string name="todo_repo_search_error">Could not find any matching todos.</string>
+    <!-- End of Todoo Repository -->
+
+    <!-- Todoo Notification Receiver -->
+    <string name="todo_notification_receiver_message_placeholder">Remember, you have a things todo</string>
+    <!-- End of Todoo Notification Receiver -->
 
 </resources>
