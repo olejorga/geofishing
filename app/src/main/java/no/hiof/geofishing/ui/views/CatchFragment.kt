@@ -1,13 +1,11 @@
 package no.hiof.geofishing.ui.views
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +16,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -27,7 +23,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
-import com.vmadalin.easypermissions.EasyPermissions
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
 import no.hiof.geofishing.MainActivity
@@ -130,14 +125,10 @@ class CatchFragment : Fragment() {
         viewModel.picture.observe(viewLifecycleOwner) { uri ->
             Picasso.get().load(uri).into(binding.imagePreview)
         }
-        return binding.root
-    }
 
-    // TODO kamera test
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // TODO kamera testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+        // TODO kamera test
+        // First checks if user has granted permissions, if not query. then try to create a unique
+        // file, then launch camera
         binding.buttonTakePicture.setOnClickListener {
             if (checkCameraStoragePermissions()) {
                 if (createUniqueFileName())
@@ -146,45 +137,49 @@ class CatchFragment : Fragment() {
                 requestCameraAndStoragePermissions()
             }
         }
+        return binding.root
     }
+
+    // TODO kamera test
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//    }
 
     private fun requestCameraAndStoragePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             cameraPermission.launch(Manifest.permission.CAMERA)
         } else {
             imageRequest.launch(cameraAndStoragePermissionsArray)
-//            cameraPermission.launch(Manifest.permission.CAMERA)
         }
     }
 
+    // Permission for camera SDK <=30
     private val cameraPermission: ActivityResultLauncher<String> = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
             Toast.makeText(context, "Camera Granted", Toast.LENGTH_LONG).show()
-//            createUniqueFileName()
+            Log.i("Camera Granted", "$it")
         } else {
-            Toast.makeText(context, "Camera NOT Granted", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Camera not Granted", Toast.LENGTH_LONG).show()
+            Log.i("Camera Granted", "$it")
         }
     }
 
-
+    // Depending on SDK version camera permissions do not require a query
     private fun checkCameraStoragePermissions(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return createUniqueFileName()
-//            val writeCheck = ContextCompat.checkSelfPermission(
-//                requireContext(),
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE
-//            )
-//            return writeCheck == PackageManager.PERMISSION_GRANTED
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            createUniqueFileName()
         } else {
             val cameraCheck =
                 ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            return cameraCheck == PackageManager.PERMISSION_GRANTED
+            cameraCheck == PackageManager.PERMISSION_GRANTED
         }
     }
 
-
+    // Tries to create a file at ../Pictures
     private fun createUniqueFileName(): Boolean {
         try {
             imageUri = FileProvider.getUriForFile(
@@ -192,22 +187,21 @@ class CatchFragment : Fragment() {
                 "no.hiof.geofishing.fileprovider",
                 createImageFile()
             )
-            Log.e("imguri", imageUri.toString())
+            Log.i("imageUri", imageUri.toString())
             return true
         } catch (ex: IOException) {
-            Log.e("IOExeption", ex.message.toString())
+            Log.e("IOException", ex.message.toString())
             Toast.makeText(context, "Could not create image file", Toast.LENGTH_LONG).show()
             return false
         } catch (ex: SecurityException) {
-            Log.e("SecurityExeption", ex.message.toString())
+            Log.e("SecurityException", ex.message.toString())
             Toast.makeText(context, "Could not create image file", Toast.LENGTH_LONG).show()
             return false
         }
     }
 
     // TODO kamera test
-    // Creates a unique file using currenttimemillis appended to filename..
-    // TODO bedre unikt filename?
+    // Creates a unique file using currenttimemillis appended to filename
     @Throws(IOException::class, SecurityException::class)
     private fun createImageFile(): File {
         val timeStamp: String = System.currentTimeMillis().toString()
@@ -221,45 +215,32 @@ class CatchFragment : Fragment() {
         }
     }
 
+    // Permission request SDK >30
     private val imageRequest =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions())
         { permissions ->
             permissions.entries.forEach { permissionReq ->
                 val isGranted = permissionReq.value
                 val permissionString = permissionReq.key
-                Log.e("isGranted", permissionString)
                 when {
                     isGranted -> {
-                        Log.e("isGranted", permissionString)
+                        Log.i("isGranted", permissionString)
                         if (permissionString == cameraAndStoragePermissionsArray[1])
                             createUniqueFileName()
-                        return@registerForActivityResult
-                    }
-                    ActivityCompat.shouldShowRequestPermissionRationale(
-                        requireActivity(), permissionString
-                    ) -> {
-                        Log.e("isNOTGranted", permissionString)
-                        AlertDialog.Builder(requireContext())
-                            .setTitle("BILDE")
-                            .setMessage("PLS TA BILDE")
-                            .setPositiveButton("JAVISST") { _, _ ->
-                                checkCameraStoragePermissions()
-                            }.setNegativeButton("NEIFAAN", null)
-                            .create()
-                            .show()
                         return@registerForActivityResult
                     }
                 }
             }
         }
 
+    // Takes a picture and saves it as a content URI
     private val imageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
                 viewModel.setPicture(imageUri)
                 Log.e("IMGURI", imageUri.toString())
             }
-            Toast.makeText(requireContext(), "Result: $success", Toast.LENGTH_SHORT).show()
+            Log.i("Picture URI", "Result: $success")
         }
 
     override fun onDestroyView() {
