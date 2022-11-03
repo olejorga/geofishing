@@ -1,6 +1,8 @@
 package no.hiof.geofishing.data.contracts
 
+import android.content.Context
 import kotlinx.coroutines.flow.Flow
+import no.hiof.geofishing.data.entities.Profile
 
 /**
  * Represents a repository (uses the "C-R-U-D" pattern).
@@ -9,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
  * - All read methods return a flow (realtime data stream), within the standardized response.
  */
 interface Repository<T> {
-
     /**
      * Asynchronously save an entity in the database.
      *
