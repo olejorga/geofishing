@@ -5,15 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Profile
 
-class FeedViewModel(
-    catchRepository: Repository<Catch>,
-    private val profileRepository: Repository<Profile>
-    ) : ViewModel() {
+class FeedViewModel(catchRepository: Repository<Catch>, profileRepository: Repository<Profile>, authService: AuthService) : ViewModel() {
+    private var auth: AuthService
+    val currentProfileId get() = auth.id
+
     lateinit var catchList: LiveData<Response<List<Catch>>>
     lateinit var profileList: LiveData<Response<List<Profile>>>
 
@@ -32,6 +33,7 @@ class FeedViewModel(
     }
 
     init {
+        auth = authService
         viewModelScope.launch {
             catchList = catchRepository.read().asLiveData()
             profileList = profileRepository.read().asLiveData()
