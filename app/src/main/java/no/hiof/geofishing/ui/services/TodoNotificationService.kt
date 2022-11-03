@@ -1,48 +1,55 @@
 package no.hiof.geofishing.ui.services
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.Context
-import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
+import android.os.IBinder
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.navigation.NavDeepLinkBuilder
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.App
-import no.hiof.geofishing.MainActivity
-import no.hiof.geofishing.R
 import no.hiof.geofishing.ui.receivers.TodoNotificationReceiver
 import no.hiof.geofishing.ui.utils.NotificationChannelFactory
 
-class TodoNotificationService(private val context: Context) {
-
+/**
+ * Responsible for scheduling todos.
+ */
+class TodoNotificationService : LifecycleService() {
     companion object {
         const val CHANNEL_ID = "todo_channel"
         const val CHANNEL_NAME = "Todo"
         const val CHANNEL_DESCRIPTION = "Reminders to complete todos."
     }
 
-    fun scheduleNotifications(runOnce: Boolean = false) {
-        NotificationChannelFactory.create(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION, context)
+    /**
+     * When the service starts, a coroutine is created in which the todos a fetched from
+     * the globally injected todoRepository. The todos are iterated over and a alarm with a
+     * notification is scheduled for all todos.
+     *
+     * The coroutine remains open and listening for new data until the lifecycle is terminated.
+     * For instance on device startup, when the "BootReceiver" is done running, this service is
+     * terminated.
+     *
+     * If the todos are updated, all alarms are canceled and re-scheduled.
+     */
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        val context = this
+
+        NotificationChannelFactory.create(
+            CHANNEL_ID,
+            CHANNEL_NAME,
+            CHANNEL_DESCRIPTION, context
+        )
+
+        lifecycleScope.launch(Dispatchers.IO) {
             val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
             val intents = ArrayList<PendingIntent>()
-
-            NotificationChannelFactory.create(
-                "todo_channel",
-                "Todo",
-                "Reminders to complete todos.",
-                context
-            )
 
             val app = context.applicationContext as App
 
@@ -55,10 +62,8 @@ class TodoNotificationService(private val context: Context) {
                     .cancellable()
                     .collect { res ->
                         if (res.error == null && res.data != null) {
-                            Log.d("HERE", "CHANGED")
-
-                            for (intent in intents) {
-                                alarmManager.cancel(intent)
+                            for (alarm in intents) {
+                                alarmManager.cancel(alarm)
                             }
 
                             intents.clear()
@@ -67,7 +72,7 @@ class TodoNotificationService(private val context: Context) {
 
                             for (todo in res.data) {
                                 if (!todo.completed && todo.reminder != null) {
-                                    val intent = Intent(
+                                    val alarm = Intent(
                                         context,
                                         TodoNotificationReceiver::class.java
                                     ).apply {
@@ -84,43 +89,27 @@ class TodoNotificationService(private val context: Context) {
                                         )
                                     }
 
-                                    intents.add(intent)
+                                    intents.add(alarm)
 
                                     alarmManager.set(
                                         AlarmManager.RTC_WAKEUP,
                                         todo.reminder.time,
-                                        intent
+                                        alarm
                                     )
 
                                     id++
                                 }
                             }
                         }
-
-                        if (runOnce) cancel()
                     }
             }
         }
+
+        return START_NOT_STICKY
     }
 
-    @SuppressLint("MissingPermission")
-    fun showNotification(id: Int, message: String) {
-        val intent = NavDeepLinkBuilder(context)
-            .setComponentName(MainActivity::class.java)
-            .setGraph(R.navigation.nav_graph)
-            .setDestination(R.id.todoFragment)
-            .createPendingIntent()
-
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_baseline_done_24)
-            .setContentTitle(CHANNEL_NAME)
-            .setContentText(message)
-            .setContentIntent(intent)
-            .setAutoCancel(true)
-            .build()
-
-        with(NotificationManagerCompat.from(context)) {
-            notify(id, notification)
-        }
+    override fun onBind(intent: Intent): IBinder? {
+        super.onBind(intent)
+        return null
     }
 }

@@ -3,6 +3,9 @@ package no.hiof.geofishing.ui.utils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+/**
+ * A helper for instantiating view models.
+ */
 object ViewModelFactory {
     inline fun <VM : ViewModel> create(crossinline f: () -> VM) =
         object : ViewModelProvider.Factory {
