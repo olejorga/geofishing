@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Profile
+import no.hiof.geofishing.ui.viewmodels.RankViewModel
 
-class RankProfileAdapter(
-    private val profiles: List<Profile>,
-    private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<RankProfileAdapter.ViewHolder>() {
+class RankAdapter(
+    private val ranks: List<RankViewModel.Rank>
+) : RecyclerView.Adapter<RankAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textName: TextView = view.findViewById(R.id.rankNameTextView)
@@ -30,11 +30,10 @@ class RankProfileAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val rank = position + 1
 
-        viewHolder.textName.text = profiles[position].name
-        viewHolder.textPoints.text = profiles[position].points.toString()
+        viewHolder.textName.text = ranks[position].profile.name
+        viewHolder.textPoints.text = ranks[position].points.toString()
         viewHolder.textPositionNumber.text = rank.toString()
-        viewHolder.itemView.setOnClickListener(onClickListener)
     }
 
-    override fun getItemCount() = profiles.size
+    override fun getItemCount() = ranks.size
 }

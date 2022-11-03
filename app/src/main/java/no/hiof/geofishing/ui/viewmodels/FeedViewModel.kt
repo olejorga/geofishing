@@ -1,9 +1,13 @@
 package no.hiof.geofishing.ui.viewmodels
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
@@ -12,29 +16,29 @@ import no.hiof.geofishing.data.entities.Profile
 
 class FeedViewModel(
     catchRepository: Repository<Catch>,
-    private val profileRepository: Repository<Profile>
-    ) : ViewModel() {
-    lateinit var catchList: LiveData<Response<List<Catch>>>
-    lateinit var profileList: LiveData<Response<List<Profile>>>
+    profileRepository: Repository<Profile>,
+) : ViewModel() {
+    val posts = catchRepository.read()
+        .combine(profileRepository.read()) { resCatches, resProfiles ->
+            val posts = ArrayList<Post>()
 
-    fun setAllProfileNames(catches: List<Catch>, profiles: List<Profile>) {
-        catches.forEach { catch ->
-            catch.profileName = profiles.find { profile ->
-                profile.id == catch.profile
-            }?.name.toString()
-        }
-    }
+            if (
+                resCatches.error == null && resCatches.data != null &&
+                resProfiles.error == null && resProfiles.data != null
+            ) {
+                for (catch in resCatches.data) {
+                    for (profile in resProfiles.data) {
+                        if (profile.id == catch.profile)
+                            posts.add(Post(catch, profile))
+                    }
+                }
+            }
 
-    fun setSingleProfileName(catch: Catch, profiles: List<Profile>){
-        catch.profileName = profiles.find { profile ->
-            profile.id == catch.profile
-        }?.name.toString()
-    }
+            return@combine posts
+        }.asLiveData()
 
-    init {
-        viewModelScope.launch {
-            catchList = catchRepository.read().asLiveData()
-            profileList = profileRepository.read().asLiveData()
-        }
-    }
+    data class Post(
+        val catch: Catch,
+        val profile: Profile,
+    )
 }

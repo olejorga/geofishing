@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.coroutines.flow.collect
 import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedBinding
@@ -31,38 +32,22 @@ class FeedFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
 
-        lateinit var profiles: List<Profile>
-        viewModel.profileList.observe(viewLifecycleOwner) { res ->
-            if (res.error == null)
-                profiles = res.data!!
-        }
+        viewModel.posts.observe(viewLifecycleOwner) { posts ->
+            binding.feedRecyclerView.adapter = FeedAdapter(posts) {
+                val position = binding.feedRecyclerView.getChildAdapterPosition(it)
+                val post = posts[position]
+                val action = FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
 
+                action.uid = posts.indexOf(post)
 
-        val feedRecyclerView = binding.feedRecyclerView
-        viewModel.catchList.observe(viewLifecycleOwner) { res ->
-            if (res.error == null && res.data != null) {
-                val catches = res.data
+                findNavController().navigate(action)
+            }
 
-                viewModel.setAllProfileNames(catches, profiles)
-
-                feedRecyclerView.adapter = FeedAdapter(catches) {
-                    val position = feedRecyclerView.getChildAdapterPosition(it)
-                    val clickedPost = catches[position]
-                    val action =
-                        FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
-
-                    action.uid = catches.indexOf(clickedPost)
-                    findNavController().navigate(action)
-                }
-
-                feedRecyclerView.layoutManager = GridLayoutManager(context, 1)
-            } else
-                Toast.makeText(context, res.error, Toast.LENGTH_LONG).show()
+            binding.feedRecyclerView.layoutManager = GridLayoutManager(context, 1)
         }
 
         return binding.root

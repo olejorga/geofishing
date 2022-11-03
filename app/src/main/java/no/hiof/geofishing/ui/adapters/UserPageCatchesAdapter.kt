@@ -12,10 +12,10 @@ import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
-class FeedAdapter(
-    private val posts: List<FeedViewModel.Post>,
+class UserPageCatchesAdapter(
+    private val catch: List<Catch>,
     private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<UserPageCatchesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.image_catch)
@@ -34,16 +34,16 @@ class FeedAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         Picasso.get()
-            .load(posts[position].catch.picture)
+            .load(catch[position].picture)
             .resize(viewHolder.imageView.maxWidth, viewHolder.imageView.maxHeight)
             .into(viewHolder.imageView)
 
-        viewHolder.textTitle.text = posts[position].catch.title
-        viewHolder.textProfile.text = posts[position].profile.name
-        viewHolder.textDesc.text = posts[position].catch.description
+        viewHolder.textTitle.text = catch[position].title
+        viewHolder.textProfile.text = catch[position].profileName
+        viewHolder.textDesc.text = catch[position].description
         viewHolder.itemView.setOnClickListener(onClickListener)
     }
 
-    override fun getItemCount() = posts.size
+    override fun getItemCount() = catch.size
 }
 

@@ -10,23 +10,35 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import no.hiof.geofishing.data.contracts.Response
 
-class RankViewModel(profileRepository: Repository<Profile>, catchRepository: Repository<Catch>) : ViewModel() {
-    lateinit var profileList : LiveData<Response<List<Profile>>>
-    lateinit var catchList : LiveData<Response<List<Catch>>>
+class RankViewModel(
+    catchRepository: Repository<Catch>,
+    profileRepository: Repository<Profile>,
+) : ViewModel() {
+    val ranks = catchRepository.read()
+        .combine(profileRepository.read()) { resCatches, resProfiles ->
+            val ranks = ArrayList<Rank>()
 
-    fun setPoints(profiles : MutableList<Profile>, catches : List<Catch>) {
-        profiles.forEach { p ->
-            p.points = catches.count {
-                it.profile == p.id
+            if (
+                resCatches.error == null && resCatches.data != null &&
+                resProfiles.error == null && resProfiles.data != null
+            ) {
+                for (profile in resProfiles.data) {
+                    var count = 0
+
+                    for (catch in resCatches.data) {
+                        if (profile.id == catch.profile)
+                            count++
+                    }
+
+                    ranks.add(Rank(profile, count))
+                }
             }
-        }
 
-    }
+            return@combine ranks
+        }.asLiveData()
 
-    init {
-        viewModelScope.launch {
-            profileList = profileRepository.read().asLiveData()
-            catchList = catchRepository.read().asLiveData()
-        }
-    }
+    data class Rank(
+        val profile: Profile,
+        val points: Int,
+    )
 }
