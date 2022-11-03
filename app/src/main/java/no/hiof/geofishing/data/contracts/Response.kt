@@ -10,3 +10,8 @@ data class Response<T>(
     val data: T? = null,
     var error: String? = null
 )
+
+// sealed class Response<T> {
+//     data class Success<T>(val data: T): Result<T>()
+//     data class Error<T>(val message: String): Result<T>()
+// }

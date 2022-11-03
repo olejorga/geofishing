@@ -1,5 +1,6 @@
 package no.hiof.geofishing.data.repositories
 
+import android.content.Context
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.snapshots
@@ -8,6 +9,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.tasks.await
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Todo
@@ -16,7 +18,8 @@ import no.hiof.geofishing.data.entities.Todo
  * A firebase implementation of a the repository.
  */
 class TodoRepository(
-    private val collection: CollectionReference
+    private val collection: CollectionReference,
+    private val context: Context,
 ) : Repository<Todo> {
 
     companion object {
@@ -32,7 +35,7 @@ class TodoRepository(
                 Response(collection.add(entity).await().id)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not create todo.")
+            Response(error = context.getString(R.string.todo_repo_create_error))
         }
     }
 
@@ -41,7 +44,7 @@ class TodoRepository(
         .mapNotNull { Response(it.toObjects<Todo>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not get todos."))
+            emit(Response(error = context.getString(R.string.todo_repo_read_error)))
         }
 
     override suspend fun update(id: String, data: Map<String, Any>): Response<Unit> {
@@ -50,7 +53,7 @@ class TodoRepository(
             Response(Unit)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not update todos.")
+            Response(error = context.getString(R.string.todo_repo_update_error))
         }
     }
 
@@ -60,7 +63,7 @@ class TodoRepository(
             Response(Unit)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not delete todo.")
+            Response(error = context.getString(R.string.todo_repo_delete_error))
         }
     }
 
@@ -70,7 +73,7 @@ class TodoRepository(
         .mapNotNull { Response(it.toObject<Todo>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not find todo with id=$id."))
+            emit(Response(error = context.getString(R.string.todo_repo_find_error)))
         }
 
     override fun search(property: String, value: Any) = collection
@@ -79,6 +82,6 @@ class TodoRepository(
         .mapNotNull { Response(it.toObjects<Todo>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not find any matching todo."))
+            emit(Response(error = context.getString(R.string.todo_repo_search_error)))
         }
 }

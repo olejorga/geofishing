@@ -1,8 +1,10 @@
 package no.hiof.geofishing.data.services
 
+import android.content.Context
 import android.util.Log
 import com.google.firebase.auth.*
 import kotlinx.coroutines.tasks.await
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
@@ -13,7 +15,8 @@ import no.hiof.geofishing.data.entities.Profile
  */
 class FirebaseAuthService(
     private val auth: FirebaseAuth,
-    private val profileRepository: Repository<Profile>
+    private val profileRepository: Repository<Profile>,
+    private val context: Context,
 ) : AuthService {
     private val user get() = auth.currentUser
     override val authenticated get() = user != null
@@ -30,10 +33,10 @@ class FirebaseAuthService(
             Response()
         } catch (e: FirebaseAuthInvalidCredentialsException) {
             Log.d(TAG, e.toString())
-            Response(error = "Wrong username or password.")
+            Response(error = context.getString(R.string.auth_service_wrong_credentials_error))
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not sign in user.")
+            Response(error = context.getString(R.string.auth_service_login_error))
         }
     }
 
@@ -43,7 +46,7 @@ class FirebaseAuthService(
             Response()
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not sign out user.")
+            Response(error = context.getString(R.string.auth_service_logout_error))
         }
     }
 
@@ -54,13 +57,13 @@ class FirebaseAuthService(
             Response()
         } catch (e: FirebaseAuthWeakPasswordException) {
             Log.d(TAG, e.toString())
-            Response(error = "Password is not strong enough.")
+            Response(error = context.getString(R.string.auth_service_password_strength_error))
         } catch (e: FirebaseAuthUserCollisionException) {
             Log.d(TAG, e.toString())
-            Response(error = "Email already in use.")
+            Response(error = context.getString(R.string.auth_service_user_exists_error))
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not sign up user.")
+            Response(error = context.getString(R.string.auth_service_signup_error))
         }
     }
 
@@ -71,7 +74,7 @@ class FirebaseAuthService(
             Response()
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not change password.")
+            Response(error = context.getString(R.string.auth_service_change_password_error))
         }
     }
 
@@ -82,7 +85,7 @@ class FirebaseAuthService(
             Response()
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not change email.")
+            Response(error = context.getString(R.string.auth_service_change_email_error))
         }
     }
 

@@ -1,5 +1,6 @@
 package no.hiof.geofishing.data.repositories
 
+import android.content.Context
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.snapshots
@@ -8,6 +9,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.tasks.await
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Catch
@@ -16,7 +18,8 @@ import no.hiof.geofishing.data.entities.Catch
  * A firebase implementation of a catch repository.
  */
 class CatchRepository(
-    private val collection: CollectionReference
+    private val collection: CollectionReference,
+    private val context: Context,
 ): Repository<Catch> {
 
     companion object {
@@ -32,7 +35,7 @@ class CatchRepository(
                 Response(this.collection.add(entity).await().id)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not create catch.")
+            Response(error = context.getString(R.string.catch_repo_create_error))
         }
     }
 
@@ -41,7 +44,7 @@ class CatchRepository(
         .mapNotNull { Response(it.toObjects<Catch>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not get catches."))
+            emit(Response(error = context.getString(R.string.catch_repo_read_error)))
         }
 
     override suspend fun update(id: String, data: Map<String, Any>): Response<Unit> {
@@ -50,7 +53,7 @@ class CatchRepository(
             Response(Unit)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not update catch.")
+            Response(error = context.getString(R.string.catch_repo_update_error))
         }
     }
 
@@ -60,7 +63,7 @@ class CatchRepository(
             Response(Unit)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            Response(error = "Could not delete catch.")
+            Response(error = context.getString(R.string.catch_repo_delete_error))
         }
     }
 
@@ -70,7 +73,7 @@ class CatchRepository(
         .mapNotNull { Response(it.toObject<Catch>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not find catch with id=$id."))
+            emit(Response(error = context.getString(R.string.catch_repo_find_error)))
         }
 
     override fun search(property: String, value: Any) = this.collection
@@ -79,6 +82,6 @@ class CatchRepository(
         .mapNotNull { Response(it.toObjects<Catch>()) }
         .catch { e ->
             Log.d(TAG, e.toString())
-            emit(Response(error = "Could not find any matching catch."))
+            emit(Response(error = context.getString(R.string.catch_repo_search_error)))
         }
 }

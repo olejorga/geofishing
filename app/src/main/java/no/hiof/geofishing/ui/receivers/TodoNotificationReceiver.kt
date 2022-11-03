@@ -29,7 +29,7 @@ class TodoNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val id = intent.getIntExtra("id", 0)
         val message = intent.getStringExtra("message")
-            ?: context.getString(R.string.todo_notification_service_message_placeholder)
+            ?: context.getString(R.string.todo_notification_receiver_message_placeholder)
 
         val action = NavDeepLinkBuilder(context)
             .setComponentName(MainActivity::class.java)

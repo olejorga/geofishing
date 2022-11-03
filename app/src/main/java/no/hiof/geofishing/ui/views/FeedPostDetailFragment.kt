@@ -12,8 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.GeofishingApplication
-import no.hiof.geofishing.R
-import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
@@ -21,7 +19,8 @@ import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
 class FeedPostDetailFragment : Fragment() {
     private val args: FeedPostDetailFragmentArgs by navArgs()
-    private var fragmentBinding: FragmentFeedPostDetailBinding? = null
+    private var _binding: FragmentFeedPostDetailBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: FeedViewModel by viewModels {
         ViewModelFactory.create {
@@ -36,64 +35,49 @@ class FeedPostDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_feed_post_detail, container, false)
-    }
+    ): View {
+        _binding = FragmentFeedPostDetailBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentFeedPostDetailBinding.bind(view)
-        fragmentBinding = binding
+        viewModel.posts.observe(viewLifecycleOwner) { posts ->
+            val post = posts[args.uid]
+            val img = binding.imageCatch
 
-        lateinit var profiles: List<Profile>
-        viewModel.profileList.observe(viewLifecycleOwner) { res ->
-            if (res.error == null)
-                profiles = res.data!!
-        }
+            Picasso.get()
+                .load(post.catch.picture)
+                .resize(img.maxWidth, img.maxHeight)
+                .into(img)
 
-        viewModel.catchList.observe(viewLifecycleOwner) { res ->
-            if (res.error == null && res.data != null) {
-                val catch = res.data[args.uid]
-                val img = binding.imageCatch
+            val weight = post.catch.weight.toString() + "g"
+            val length = post.catch.length.toString() + "cm"
 
-                Picasso.get()
-                    .load(catch.picture)
-                    .resize(img.maxWidth, img.maxHeight)
-                    .into(img)
+            binding.textTitle.text = post.catch.title
+            binding.textDescription.text = post.catch.description
+            binding.textSpecies.text = post.catch.species
+            binding.textWeight.text = weight
+            binding.textLength.text = length
+            binding.textRod.text = post.catch.rod
+            binding.textLure.text = post.catch.lure
 
-                val weight = catch.weight.toString() + "g"
-                val length = catch.length.toString() + "cm"
-
-                binding.textTitle.text = catch.title
-                binding.textDescription.text = catch.description
-                binding.textSpecies.text = catch.species
-                binding.textWeight.text = weight
-                binding.textLength.text = length
-                binding.textRod.text = catch.rod
-                binding.textLure.text = catch.lure
-
-                viewModel.setSingleProfileName(catch, profiles)
-                binding.textProfile.text = catch.profileName
-
-                if (viewModel.currentProfileId == catch.profile) {
-                    binding.buttonEditCatch.isEnabled = true
-                    binding.buttonEditCatch.setOnClickListener {
+            binding.textProfile.text = post.profile.name
+            
+            if (viewModel.currentProfileId == post.catch.profile) {
+                binding.buttonEditCatch.isEnabled = true
+                binding.buttonEditCatch.setOnClickListener {
 //                        UpdateCatchFragment().show(childFragmentManager, "UpdateCatch")
 //                        UpdateCatchFragment().show(childFragmentManager, "UpdateCatch")
-                        Log.i("CurrentProfile", "${viewModel.currentProfileId}")
-                        Log.i("CatchProf", "${catch.profile}")
-                    }
-                } else {
-                    binding.buttonEditCatch.isVisible = false
+                    Log.i("CurrentProfile", "${viewModel.currentProfileId}")
+                    Log.i("CatchProf", "${post.catch.profile}")
                 }
+            } else {
+                binding.buttonEditCatch.isVisible = false
             }
         }
 
-
-
-
-
+        return binding.root
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
