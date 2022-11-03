@@ -38,9 +38,8 @@ class CatchFragment : Fragment() {
     private var _binding: FragmentCatchBinding? = null
     private val binding get() = _binding!!
 
-    // TODO kamera test
-    lateinit var imageUri: Uri
-    lateinit var currentPhotoPath: String
+    private lateinit var imageUri: Uri
+    private lateinit var currentPhotoPath: String
 
     private val cameraAndStoragePermissionsArray = arrayOf(
         Manifest.permission.CAMERA,
@@ -126,7 +125,6 @@ class CatchFragment : Fragment() {
             Picasso.get().load(uri).into(binding.imagePreview)
         }
 
-        // TODO kamera test
         // First checks if user has granted permissions, if not query. then try to create a unique
         // file, then launch camera
         binding.buttonTakePicture.setOnClickListener {
@@ -139,13 +137,6 @@ class CatchFragment : Fragment() {
         }
         return binding.root
     }
-
-    // TODO kamera test
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//
-//    }
 
     private fun requestCameraAndStoragePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -200,7 +191,6 @@ class CatchFragment : Fragment() {
         }
     }
 
-    // TODO kamera test
     // Creates a unique file using currenttimemillis appended to filename
     @Throws(IOException::class, SecurityException::class)
     private fun createImageFile(): File {
@@ -247,20 +237,3 @@ class CatchFragment : Fragment() {
         super.onDestroyView()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
