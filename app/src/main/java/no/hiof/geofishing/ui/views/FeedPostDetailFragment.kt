@@ -39,13 +39,12 @@ class FeedPostDetailFragment : Fragment() {
         _binding = FragmentFeedPostDetailBinding.inflate(inflater, container, false)
 
         viewModel.posts.observe(viewLifecycleOwner) { posts ->
-            val post = posts[args.uid]
-            val img = binding.imageCatch
+            val post = posts.filter { it.catch.id == args.catchId }[0]
 
             Picasso.get()
                 .load(post.catch.picture)
-                .resize(img.maxWidth, img.maxHeight)
-                .into(img)
+                .resize(binding.imageCatch.maxWidth, binding.imageCatch.maxHeight)
+                .into(binding.imageCatch)
 
             val weight = post.catch.weight.toString() + "g"
             val length = post.catch.length.toString() + "cm"

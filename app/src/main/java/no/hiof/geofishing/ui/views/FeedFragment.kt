@@ -36,12 +36,14 @@ class FeedFragment : Fragment() {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
 
         viewModel.posts.observe(viewLifecycleOwner) { posts ->
-            binding.feedRecyclerView.adapter = FeedAdapter(posts) {
+            val sortedPosts = posts.sortedByDescending { it.catch.created }
+
+            binding.feedRecyclerView.adapter = FeedAdapter(sortedPosts) {
                 val position = binding.feedRecyclerView.getChildAdapterPosition(it)
-                val post = posts[position]
+                val post = sortedPosts[position]
                 val action = FeedFragmentDirections.actionFeedFragmentToFeedPostDetailFragment()
 
-                action.uid = posts.indexOf(post)
+                action.catchId = post.catch.id.toString()
 
                 findNavController().navigate(action)
             }

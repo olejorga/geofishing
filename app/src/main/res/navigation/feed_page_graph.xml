@@ -27,9 +27,9 @@
             app:uri="myapp://Geofishing.com/{uid}" />
 
         <argument
-            android:name="uid"
-            android:defaultValue="1"
-            app:argType="integer" />
+            android:name="catch_id"
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
 
 </navigation>
