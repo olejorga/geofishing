@@ -82,13 +82,13 @@
     <!-- End of Update User, Email & Password -->
 
     <!-- Auth -->
-    <string name="auth_password_hint">Passord</string>
-    <string name="auth_email_hint">E-post</string>
-    <string name="auth_login_button_text">Logg inn</string>
-    <string name="auth_signup_button_text">Registrer deg</string>
-    <string name="auth_name_hint">Navn</string>
-    <string name="auth_confirm_password_hint">Bekreft passord</string>
-    <string name="auth_signup_title_text">Opprett bruker</string>
+    <string name="auth_password_hint">Password</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_login_button_text">Log in</string>
+    <string name="auth_signup_button_text">Sign up</string>
+    <string name="auth_name_hint">Name</string>
+    <string name="auth_confirm_password_hint">Confirm passord</string>
+    <string name="auth_signup_title_text">Create account</string>
     <string name="auth_log_out_button_text">Log out</string>
     <!-- End of Auth -->
 
@@ -146,7 +146,16 @@
     <!-- End of Todoo Repository -->
 
     <!-- Todoo Notification Receiver -->
-    <string name="todo_notification_receiver_message_placeholder">Remember, you have a things todo</string>
+    <string name="todo_notification_receiver_message_placeholder">Remember, you have a things todo.</string>
     <!-- End of Todoo Notification Receiver -->
+
+    <!-- New Todoo -->
+    <string name="new_todo_choose_day">Choose day for reminder</string>
+    <string name="new_todo_choose_time">Choose time for reminder</string>
+    <string name="new_todo_created">Todo added.</string>
+    <string name="new_todo_field_description_hint">Description</string>
+    <string name="new_todo_switch_text">Reminder</string>
+    <string name="new_todo_button_text">Create todo</string>
+    <!-- End of New Todoo -->
 
 </resources>

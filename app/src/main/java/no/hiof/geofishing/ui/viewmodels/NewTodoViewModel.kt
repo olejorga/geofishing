@@ -8,7 +8,7 @@ import no.hiof.geofishing.data.entities.Todo
 import java.util.*
 
 class NewTodoViewModel(
-    private val authService: AuthService,
+    authService: AuthService,
     private val todoRepository: Repository<Todo>,
 ) : ViewModel() {
     var description: String? = null

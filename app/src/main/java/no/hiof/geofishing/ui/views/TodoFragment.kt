@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
+import no.hiof.geofishing.data.repositories.CatchRepository
 import no.hiof.geofishing.databinding.FragmentTodoBinding
 import no.hiof.geofishing.ui.adapters.TodoAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -32,10 +33,14 @@ class TodoFragment : Fragment() {
         }
     }
 
+    companion object {
+        private val TAG = TodoFragment::class.java.simpleName
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
 
         viewModel.todos.observe(viewLifecycleOwner) { res ->
@@ -46,14 +51,12 @@ class TodoFragment : Fragment() {
                         val todo = res.data[position]
                         val (_, error) = viewModel.completeTodo(todo.id!!, todo.completed)
 
-                        if (error != null) Log.d(Tags.REPOSITORY.toString(), error)
+                        if (error != null) Log.d(TAG, error)
                     }
                 }
                 binding.recyclerViewTodos.layoutManager = GridLayoutManager(context, 1)
             } else if (res.error != null) {
-                Log.d(Tags.REPOSITORY.toString(), res.error!!)
-            } else {
-                Log.d(Tags.REPOSITORY.toString(), "Could not find any data")
+                Log.d(TAG, res.error!!)
             }
         }
 

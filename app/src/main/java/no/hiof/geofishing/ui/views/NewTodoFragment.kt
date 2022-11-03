@@ -15,6 +15,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentNewTodoBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.NewTodoViewModel
@@ -40,7 +41,6 @@ class NewTodoFragment : Fragment() {
         _binding = FragmentNewTodoBinding.inflate(inflater, container, false)
 
         viewModel.reminder.observe(viewLifecycleOwner) {
-            Log.d("RAN", "HELLO")
             binding.switchReminder.isChecked = it != null
         }
 
@@ -48,13 +48,13 @@ class NewTodoFragment : Fragment() {
             if (binding.switchReminder.isChecked) {
                 val datePicker =
                     MaterialDatePicker.Builder.datePicker()
-                        .setTitleText("Velg dag for påminnelse")
+                        .setTitleText(getString(R.string.new_todo_choose_day))
                         .build()
 
                 val timePicker =
                     MaterialTimePicker.Builder()
                         .setTimeFormat(CLOCK_24H)
-                        .setTitleText("Velg tid for påminnelse")
+                        .setTitleText(getString(R.string.new_todo_choose_time))
                         .build()
 
                 datePicker.addOnPositiveButtonClickListener {
@@ -89,7 +89,8 @@ class NewTodoFragment : Fragment() {
                 val (_, error) = viewModel.createTodo()
                 if (error != null) Toast.makeText(context, error, Toast.LENGTH_LONG).show()
                 else {
-                    Toast.makeText(context, "Todo added.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.new_todo_created), Toast.LENGTH_LONG)
+                        .show()
                     findNavController().navigateUp()
                 }
             }
