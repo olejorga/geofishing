@@ -1,14 +1,11 @@
 package no.hiof.geofishing.ui.viewmodels
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.flow.toList
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.combine
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Profile
-import java.util.Dictionary
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import no.hiof.geofishing.data.contracts.Response
 
 class RankViewModel(
     catchRepository: Repository<Catch>,

@@ -2,10 +2,10 @@ package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
-import no.hiof.geofishing.data.constants.Tags
-import no.hiof.geofishing.data.repositories.CatchRepository
 import no.hiof.geofishing.databinding.FragmentTodoBinding
 import no.hiof.geofishing.ui.adapters.TodoAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory

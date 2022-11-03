@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.R
-import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
 class FeedAdapter(

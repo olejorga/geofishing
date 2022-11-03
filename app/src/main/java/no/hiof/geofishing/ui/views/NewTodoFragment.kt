@@ -1,11 +1,15 @@
 package no.hiof.geofishing.ui.views
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -34,11 +38,24 @@ class NewTodoFragment : Fragment() {
         }
     }
 
+    private var hasNotificationPermission: Boolean? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentNewTodoBinding.inflate(inflater, container, false)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            hasNotificationPermission = ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+
+        val notificationPremissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted -> hasNotificationPermission = isGranted }
 
         viewModel.reminder.observe(viewLifecycleOwner) {
             binding.switchReminder.isChecked = it != null
@@ -46,37 +63,43 @@ class NewTodoFragment : Fragment() {
 
         binding.switchReminder.setOnClickListener {
             if (binding.switchReminder.isChecked) {
-                val datePicker =
-                    MaterialDatePicker.Builder.datePicker()
-                        .setTitleText(getString(R.string.new_todo_choose_day))
-                        .build()
+                if (hasNotificationPermission == false) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        notificationPremissionRequest.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                } else {
+                    val datePicker =
+                        MaterialDatePicker.Builder.datePicker()
+                            .setTitleText(getString(R.string.new_todo_choose_day))
+                            .build()
 
-                val timePicker =
-                    MaterialTimePicker.Builder()
-                        .setTimeFormat(CLOCK_24H)
-                        .setTitleText(getString(R.string.new_todo_choose_time))
-                        .build()
+                    val timePicker =
+                        MaterialTimePicker.Builder()
+                            .setTimeFormat(CLOCK_24H)
+                            .setTitleText(getString(R.string.new_todo_choose_time))
+                            .build()
 
-                datePicker.addOnPositiveButtonClickListener {
-                    viewModel.calendar.timeInMillis = datePicker.selection!!
+                    datePicker.addOnPositiveButtonClickListener {
+                        viewModel.calendar.timeInMillis = datePicker.selection!!
+                    }
+
+                    timePicker.addOnPositiveButtonClickListener {
+                        viewModel.calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                        viewModel.calendar.set(Calendar.MINUTE, timePicker.minute)
+                        viewModel.reminder.value = viewModel.calendar.time
+                    }
+
+                    datePicker.addOnDismissListener {
+                        viewModel.reminder.value = viewModel.reminder.value
+                    }
+
+                    timePicker.addOnDismissListener {
+                        viewModel.reminder.value = viewModel.reminder.value
+                    }
+
+                    timePicker.show(childFragmentManager, "")
+                    datePicker.show(childFragmentManager, "")
                 }
-
-                timePicker.addOnPositiveButtonClickListener {
-                    viewModel.calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
-                    viewModel.calendar.set(Calendar.MINUTE, timePicker.minute)
-                    viewModel.reminder.value = viewModel.calendar.time
-                }
-
-                datePicker.addOnDismissListener {
-                    viewModel.reminder.value = viewModel.reminder.value
-                }
-
-                timePicker.addOnDismissListener {
-                    viewModel.reminder.value = viewModel.reminder.value
-                }
-
-                timePicker.show(childFragmentManager, "")
-                datePicker.show(childFragmentManager, "")
             } else {
                 viewModel.reminder.value = null
             }

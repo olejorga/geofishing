@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.GeofishingApplication
-import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
