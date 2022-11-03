@@ -1,9 +1,12 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -23,7 +26,8 @@ class FeedPostDetailFragment : Fragment() {
         ViewModelFactory.create {
             FeedViewModel(
                 (activity?.application as GeofishingApplication).catchRepository,
-                (activity?.application as GeofishingApplication).profileRepository
+                (activity?.application as GeofishingApplication).profileRepository,
+                (activity?.application as GeofishingApplication).authService
             )
         }
     }
@@ -55,6 +59,18 @@ class FeedPostDetailFragment : Fragment() {
             binding.textLure.text = post.catch.lure
 
             binding.textProfile.text = post.profile.name
+            
+            if (viewModel.currentProfileId == post.catch.profile) {
+                binding.buttonEditCatch.isEnabled = true
+                binding.buttonEditCatch.setOnClickListener {
+//                        UpdateCatchFragment().show(childFragmentManager, "UpdateCatch")
+//                        UpdateCatchFragment().show(childFragmentManager, "UpdateCatch")
+                    Log.i("CurrentProfile", "${viewModel.currentProfileId}")
+                    Log.i("CatchProf", "${post.catch.profile}")
+                }
+            } else {
+                binding.buttonEditCatch.isVisible = false
+            }
         }
 
         return binding.root

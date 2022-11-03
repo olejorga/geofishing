@@ -1,6 +1,7 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,8 @@ class FeedFragment : Fragment() {
         ViewModelFactory.create {
             FeedViewModel(
                 (activity?.application as GeofishingApplication).catchRepository,
-                (activity?.application as GeofishingApplication).profileRepository
+                (activity?.application as GeofishingApplication).profileRepository,
+                (activity?.application as GeofishingApplication).authService
             )
         }
     }

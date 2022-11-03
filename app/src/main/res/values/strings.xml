@@ -99,7 +99,6 @@
     <string name="permission_request_rationale">This app needs access to your precise location for some functionality to work as intended</string>
     <string name="request_permission_again">Back</string>
     <string name="deny_permission_dialog">No thanks</string>
-    <string name="log_out">Log Out</string>
     <!-- End of Map Fragment -->
 
     <!-- Auth Service -->
@@ -157,5 +156,11 @@
     <string name="new_todo_switch_text">Reminder</string>
     <string name="new_todo_button_text">Create todo</string>
     <!-- End of New Todoo -->
+    
+    <!-- Other -->
+    <string name="edit_catch">Edit catch button</string>
+    <string name="updatecatch">Update catch</string>
+    <string name="log_out">Log Out</string>
+    <!-- End of Other -->
 
 </resources>
