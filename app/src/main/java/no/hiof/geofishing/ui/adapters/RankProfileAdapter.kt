@@ -10,39 +10,31 @@ import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Profile
 
 class RankProfileAdapter(
-    private val rankList: List<Profile>,
-    private val clickListener: OnClickListener
-) : RecyclerView.Adapter<RankProfileAdapter.RankViewHolder>() {
+    private val profiles: List<Profile>,
+    private val onClickListener: OnClickListener
+) : RecyclerView.Adapter<RankProfileAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RankViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.rank_item, parent, false)
-        return RankViewHolder(itemView)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textName: TextView = view.findViewById(R.id.rankNameTextView)
+        val textPoints: TextView = view.findViewById(R.id.rankPointsTextView)
+        val textPositionNumber: TextView = view.findViewById(R.id.rankNumberTextView)
     }
 
-    override fun onBindViewHolder(holder: RankViewHolder, position: Int) {
-        val currentPost = rankList[position]
-        holder.bind(currentPost, clickListener)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.rank_item, viewGroup, false)
+
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return rankList.size
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val rank = position + 1
+
+        viewHolder.textName.text = profiles[position].name
+        viewHolder.textPoints.text = profiles[position].points.toString()
+        viewHolder.textPositionNumber.text = rank.toString()
+        viewHolder.itemView.setOnClickListener(onClickListener)
     }
 
-    class RankViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val textName: TextView = view.findViewById(R.id.rankNameTextView)
-        private val textPoints: TextView = view.findViewById(R.id.rankPointsTextView)
-        private val textPositionNumber: TextView = view.findViewById(R.id.rankNumberTextView)
-
-        fun bind(profile: Profile, clickListener: OnClickListener) {
-            textName.text = profile.name
-            textPoints.text = profile.points.toString()
-            textPositionNumber.text = position().toString()
-            itemView.setOnClickListener(clickListener)
-        }
-
-        private fun position(): Int {
-            return adapterPosition + 1
-        }
-    }
+    override fun getItemCount() = profiles.size
 }

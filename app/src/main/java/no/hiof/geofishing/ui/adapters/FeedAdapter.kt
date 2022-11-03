@@ -12,44 +12,37 @@ import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Catch
 
 class FeedAdapter(
-    private val feedList: List<Catch>,
-    private val clickListener: View.OnClickListener
-) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+    private val catches: List<Catch>,
+    private val onClickListener: OnClickListener
+) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.feed_post_item, parent, false)
-
-        return FeedViewHolder(itemView)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = view.findViewById(R.id.image_catch)
+        val textTitle: TextView = view.findViewById(R.id.text_title)
+        val textProfile: TextView = view.findViewById(R.id.text_profile)
+        val textDesc: TextView = view.findViewById(R.id.text_description)
+        val textLocation: TextView = view.findViewById(R.id.text_location_date_feed)
     }
 
-    override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        val currentPost = feedList[position]
-        holder.bind(currentPost, clickListener)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.feed_post_item, viewGroup, false)
+
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return feedList.size
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        Picasso.get()
+            .load(catches[position].picture)
+            .resize(viewHolder.imageView.maxWidth, viewHolder.imageView.maxHeight)
+            .into(viewHolder.imageView)
+
+        viewHolder.textTitle.text = catches[position].title
+        viewHolder.textProfile.text = catches[position].profileName
+        viewHolder.textDesc.text = catches[position].description
+        viewHolder.itemView.setOnClickListener(onClickListener)
     }
 
-    class FeedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val imageView: ImageView = view.findViewById(R.id.image_catch)
-        private val textTitle: TextView = view.findViewById(R.id.text_title)
-        private val textProfile: TextView = view.findViewById(R.id.text_profile)
-        private val textDesc: TextView = view.findViewById(R.id.text_description)
-
-        // LatLng test
-        private val textLocation: TextView = view.findViewById(R.id.text_location_date_feed)
-
-        fun bind(post: Catch, clickListener: OnClickListener) {
-            Picasso.get().load(post.picture).resize(imageView.maxWidth, imageView.maxHeight)
-                .into(imageView)
-            textTitle.text = post.title
-            textProfile.text = post.profileName
-            textDesc.text = post.description
-
-            itemView.setOnClickListener(clickListener)
-        }
-    }
+    override fun getItemCount() = catches.size
 }
 
