@@ -76,11 +76,6 @@ class UpdateUserFragment : DialogFragment() {
             Log.d("BUTTON", "Cancel changes button pressed")
             dismiss()
         }
-
-
-
         return binding.root
     }
-
-
 }
