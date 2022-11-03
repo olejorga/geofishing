@@ -103,6 +103,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo_notification_service_message_placeholder">Remember, you have a things todo</string>
+    <string name="edit_catch">Edit catch button</string>
+    <string name="updatecatch">Update catch</string>
     <!-- End of Map Fragment -->
 
 </resources>
