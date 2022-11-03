@@ -1,6 +1,5 @@
 package no.hiof.geofishing.ui.views
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
@@ -28,7 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.databinding.FragmentMapsBinding
@@ -54,7 +53,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
     private val viewModel: MapViewModel by viewModels {
         ViewModelFactory.create {
             MapViewModel(
-                (activity?.application as App).catchRepository
+                (activity?.application as GeofishingApplication).catchRepository
             )
         }
     }

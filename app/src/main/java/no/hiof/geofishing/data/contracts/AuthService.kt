@@ -1,17 +1,14 @@
 package no.hiof.geofishing.data.contracts
 
-import no.hiof.geofishing.data.entities.Profile
-
 /**
  * Represents an auth-service with email & password authentication.
  *
- * @property profileRepository What implementation of a "profile repository" to use (singleton).
  * @property authenticated A boolean that indicates whether a user is logged in or not.
  * @property email The email of the user, null if not authenticated.
+ * @property id The id of the authenticated account.
  */
 interface AuthService {
-    var profileRepository: Repository<Profile>?
-    val authenticated: Boolean?
+    val authenticated: Boolean
     val email: String?
     val id: String?
 

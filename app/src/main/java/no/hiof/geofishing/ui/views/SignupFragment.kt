@@ -11,7 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentSignupBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -22,7 +22,7 @@ class SignupFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SignupViewModel by viewModels {
-        ViewModelFactory.create { SignupViewModel((activity?.application as App).authService) }
+        ViewModelFactory.create { SignupViewModel((activity?.application as GeofishingApplication).authService) }
     }
 
     override fun onCreateView(

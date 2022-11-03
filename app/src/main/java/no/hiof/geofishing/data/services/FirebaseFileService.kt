@@ -2,16 +2,21 @@ package no.hiof.geofishing.data.services
 
 import android.net.Uri
 import android.util.Log
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
-import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Response
 
-object FirebaseFileService : FileService {
-    // Creating a getter for retrieving the firebase instance (singleton).
-    private val storage get() = Firebase.storage
+/**
+ * A firebase implementation of a file service.
+ */
+class FirebaseFileService(
+    private val storage: FirebaseStorage
+) : FileService {
+
+    companion object {
+        private val TAG = FirebaseFileService::class.java.simpleName
+    }
 
     override suspend fun upload(filename: String, uri: Uri): Response<String> {
         return try {
@@ -20,7 +25,7 @@ object FirebaseFileService : FileService {
 
             Response(ref.downloadUrl.await().toString())
         } catch (e: Exception) {
-            Log.d(Tags.FILE_SERVICE.toString(), e.toString())
+            Log.d(TAG, e.toString())
             Response(error = "Could not upload file.")
         }
     }
@@ -32,7 +37,7 @@ object FirebaseFileService : FileService {
 
             Response()
         } catch (e: Exception) {
-            Log.d(Tags.FILE_SERVICE.toString(), e.toString())
+            Log.d(TAG, e.toString())
             Response(error = "Could not delete file.")
         }
     }

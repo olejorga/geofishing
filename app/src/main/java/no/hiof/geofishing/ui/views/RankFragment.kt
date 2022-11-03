@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Profile
@@ -27,8 +26,8 @@ class RankFragment : Fragment() {
     private val viewModel: RankViewModel by viewModels {
         ViewModelFactory.create {
             RankViewModel(
-                (activity?.application as App).profileRepository,
-                (activity?.application as App).catchRepository
+                (activity?.application as GeofishingApplication).profileRepository,
+                (activity?.application as GeofishingApplication).catchRepository
             )
         }
     }

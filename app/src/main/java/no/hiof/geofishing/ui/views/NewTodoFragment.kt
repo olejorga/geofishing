@@ -14,8 +14,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
-import no.hiof.geofishing.R
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.databinding.FragmentNewTodoBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.NewTodoViewModel
@@ -28,8 +27,8 @@ class NewTodoFragment : Fragment() {
     private val viewModel: NewTodoViewModel by viewModels {
         ViewModelFactory.create {
             NewTodoViewModel(
-                (activity?.application as App).authService,
-                (activity?.application as App).todoRepository
+                (activity?.application as GeofishingApplication).authService,
+                (activity?.application as GeofishingApplication).todoRepository
             )
         }
     }

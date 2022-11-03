@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUpdateUserBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -26,9 +26,9 @@ class UpdateUserFragment : DialogFragment() {
     private val viewModel: UpdateUserViewModel by viewModels {
         ViewModelFactory.create {
             UpdateUserViewModel(
-                (activity?.application as App).authService,
-                (activity?.application as App).fileService,
-                (activity?.application as App).profileRepository
+                (activity?.application as GeofishingApplication).authService,
+                (activity?.application as GeofishingApplication).fileService,
+                (activity?.application as GeofishingApplication).profileRepository
             )
         }
     }

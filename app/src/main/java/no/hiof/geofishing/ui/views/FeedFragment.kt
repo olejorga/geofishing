@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedBinding
 import no.hiof.geofishing.ui.adapters.FeedAdapter
@@ -23,8 +23,8 @@ class FeedFragment : Fragment() {
     private val viewModel: FeedViewModel by viewModels {
         ViewModelFactory.create {
             FeedViewModel(
-                (activity?.application as App).catchRepository,
-                (activity?.application as App).profileRepository
+                (activity?.application as GeofishingApplication).catchRepository,
+                (activity?.application as GeofishingApplication).profileRepository
             )
         }
     }

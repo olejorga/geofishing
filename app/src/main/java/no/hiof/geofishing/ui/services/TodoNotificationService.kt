@@ -5,13 +5,12 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.ui.receivers.TodoNotificationReceiver
 import no.hiof.geofishing.ui.utils.NotificationChannelFactory
 
@@ -51,7 +50,7 @@ class TodoNotificationService : LifecycleService() {
             val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
             val intents = ArrayList<PendingIntent>()
 
-            val app = context.applicationContext as App
+            val app = context.applicationContext as GeofishingApplication
 
             app.authService.id?.let {
                 app.todoRepository

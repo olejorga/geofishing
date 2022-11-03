@@ -1,15 +1,13 @@
 package no.hiof.geofishing.data.repositories
 
 import android.util.Log
-import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.snapshots
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.tasks.await
-import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.contracts.Response
 import no.hiof.geofishing.data.entities.Todo
@@ -17,66 +15,70 @@ import no.hiof.geofishing.data.entities.Todo
 /**
  * A firebase implementation of a the repository.
  */
-object TodoRepository : Repository<Todo> {
-    // Creating a getter for retrieving the firebase instance (singleton).
-    private val database get() = Firebase.firestore.collection("todos")
+class TodoRepository(
+    private val collection: CollectionReference
+) : Repository<Todo> {
+
+    companion object {
+        private val TAG = TodoRepository::class.java.simpleName
+    }
 
     override suspend fun create(entity: Todo, id: String?): Response<String> {
         return try {
             if (id != null) {
-                database.document(id).set(entity).await()
+                collection.document(id).set(entity).await()
                 Response(id)
             } else
-                Response(database.add(entity).await().id)
+                Response(collection.add(entity).await().id)
         } catch (e: Exception) {
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             Response(error = "Could not create todo.")
         }
     }
 
-    override fun read() = database
+    override fun read() = collection
         .snapshots()
         .mapNotNull { Response(it.toObjects<Todo>()) }
         .catch { e ->
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             emit(Response(error = "Could not get todos."))
         }
 
     override suspend fun update(id: String, data: Map<String, Any>): Response<Unit> {
         return try {
-            database.document(id).update(data).await()
+            collection.document(id).update(data).await()
             Response(Unit)
         } catch (e: Exception) {
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             Response(error = "Could not update todos.")
         }
     }
 
     override suspend fun delete(id: String): Response<Unit> {
         return try {
-            database.document(id).delete().await()
+            collection.document(id).delete().await()
             Response(Unit)
         } catch (e: Exception) {
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             Response(error = "Could not delete todo.")
         }
     }
 
-    override fun find(id: String) = database
+    override fun find(id: String) = collection
         .document(id)
         .snapshots()
         .mapNotNull { Response(it.toObject<Todo>()) }
         .catch { e ->
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             emit(Response(error = "Could not find todo with id=$id."))
         }
 
-    override fun search(property: String, value: Any) = database
+    override fun search(property: String, value: Any) = collection
         .whereEqualTo(property, value)
         .snapshots()
         .mapNotNull { Response(it.toObjects<Todo>()) }
         .catch { e ->
-            Log.d(Tags.REPOSITORY.toString(), e.toString())
+            Log.d(TAG, e.toString())
             emit(Response(error = "Could not find any matching todo."))
         }
 }

@@ -24,7 +24,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentCatchBinding
@@ -50,9 +50,9 @@ class CatchFragment : Fragment() {
     private val viewModel: CatchViewModel by viewModels {
         ViewModelFactory.create {
             CatchViewModel(
-                (activity?.application as App).authService,
-                (activity?.application as App).catchRepository,
-                (activity?.application as App).fileService
+                (activity?.application as GeofishingApplication).authService,
+                (activity?.application as GeofishingApplication).catchRepository,
+                (activity?.application as GeofishingApplication).fileService
             )
         }
     }

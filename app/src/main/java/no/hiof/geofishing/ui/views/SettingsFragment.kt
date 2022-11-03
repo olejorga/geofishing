@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentSettingsBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -20,7 +20,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SettingsViewModel by viewModels {
-        ViewModelFactory.create { SettingsViewModel((activity?.application as App).authService) }
+        ViewModelFactory.create { SettingsViewModel((activity?.application as GeofishingApplication).authService) }
     }
 
     override fun onCreateView(

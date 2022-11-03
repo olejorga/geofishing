@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
@@ -23,8 +23,8 @@ class FeedPostDetailFragment : Fragment() {
     private val viewModel: FeedViewModel by viewModels {
         ViewModelFactory.create {
             FeedViewModel(
-                (activity?.application as App).catchRepository,
-                (activity?.application as App).profileRepository
+                (activity?.application as GeofishingApplication).catchRepository,
+                (activity?.application as GeofishingApplication).profileRepository
             )
         }
     }

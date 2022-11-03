@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.squareup.picasso.Picasso
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
@@ -27,9 +27,9 @@ class UserPageFragment : Fragment() {
     private val viewModel: UserPageViewModel by viewModels {
         ViewModelFactory.create {
             UserPageViewModel(
-                (activity?.application as App).authService,
-                (activity?.application as App).profileRepository,
-                (activity?.application as App).catchRepository
+                (activity?.application as GeofishingApplication).authService,
+                (activity?.application as GeofishingApplication).profileRepository,
+                (activity?.application as GeofishingApplication).catchRepository
             )
         }
     }

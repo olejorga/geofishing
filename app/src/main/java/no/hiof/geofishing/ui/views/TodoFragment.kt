@@ -11,7 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.databinding.FragmentTodoBinding
@@ -26,8 +26,8 @@ class TodoFragment : Fragment() {
     private val viewModel: TodoViewModel by viewModels {
         ViewModelFactory.create {
             TodoViewModel(
-                (activity?.application as App).authService,
-                (activity?.application as App).todoRepository
+                (activity?.application as GeofishingApplication).authService,
+                (activity?.application as GeofishingApplication).todoRepository
             )
         }
     }

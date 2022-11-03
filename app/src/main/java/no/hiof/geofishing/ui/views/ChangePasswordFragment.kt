@@ -1,7 +1,6 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import no.hiof.geofishing.App
-import no.hiof.geofishing.R
+import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.databinding.FragmentChangePasswordBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.ChangePasswordViewModel
@@ -23,7 +21,7 @@ class ChangePasswordFragment : DialogFragment() {
     private val viewModel: ChangePasswordViewModel by viewModels {
         ViewModelFactory.create {
             ChangePasswordViewModel(
-                (activity?.application as App).authService
+                (activity?.application as GeofishingApplication).authService
             )
         }
     }
