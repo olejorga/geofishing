@@ -46,12 +46,12 @@ class UserPageFragment : Fragment() {
 
         viewModel.catches.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
+                val sortedPosts = response.data.sortedByDescending { it.created }
                 val recyclerView = binding.userPageRecyclerView
                 Log.d("UserPageF", response.data.firstOrNull().toString())
-                // TODO: Lag en egen adapter, som passer litt bedre.
-                // TODO: Lag et eget detailview som passer litt bedre.
-                recyclerView.adapter = UserPageCatchesAdapter(response.data) {
+                recyclerView.adapter = UserPageCatchesAdapter(sortedPosts) {
                     val position = recyclerView.getChildAdapterPosition(it)
+                    // TODO: Navigering til catchDeatail?
                 }
                 recyclerView.layoutManager = GridLayoutManager(context, 1)
             } else if (response.error != null) {

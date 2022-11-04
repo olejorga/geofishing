@@ -54,6 +54,7 @@
     <string name="New_Catch_Lure">Fishing lure (optional)</string>
     <string name="New_Catch_Add_New_Catch">Add new Catch</string>
     <string name="New_Catch_Species_Choose">Choose species</string>
+    <string name="New_Catch_image">Add new image</string>
     <string-array name="fish_array">
         <item>Cod</item>
         <item>Salmon</item>
