@@ -162,6 +162,7 @@
     <string name="edit_catch">Edit catch button</string>
     <string name="updatecatch">Update catch</string>
     <string name="log_out">Log Out</string>
+    <string name="hello_blank_fragment">asdasd</string>
     <!-- End of Other -->
 
 </resources>
