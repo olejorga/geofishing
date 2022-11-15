@@ -2,8 +2,6 @@ package no.hiof.geofishing
 
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -62,12 +60,10 @@ class MainActivity : AppCompatActivity() {
             if (view.id == R.id.loginFragment || view.id == R.id.signupFragment) {
                 binding.bottomNavigation.visibility = View.GONE
                 binding.toolbar.visibility = View.GONE
-            } else {
+            }  else {
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
-
-
     }
 }
