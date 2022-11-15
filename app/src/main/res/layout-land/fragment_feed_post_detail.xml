@@ -122,21 +122,22 @@
             android:id="@+id/buttonEditCatch"
             android:layout_width="49dp"
             android:layout_height="49dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:contentDescription="@string/edit_catch"
             app:layout_constraintBottom_toBottomOf="@+id/buttonDeleteCatch"
-            app:layout_constraintEnd_toStartOf="@+id/buttonDeleteCatch"
-            app:layout_constraintTop_toTopOf="@+id/buttonDeleteCatch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_lure"
             app:srcCompat="@drawable/ic_baseline_mode_edit_24" />
 
         <ImageButton
             android:id="@+id/buttonDeleteCatch"
             android:layout_width="49dp"
             android:layout_height="49dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toEndOf="@+id/buttonEditCatch"
+            app:layout_constraintTop_toBottomOf="@+id/text_lure"
             app:srcCompat="@drawable/ic_baseline_delete_24" />
 
 

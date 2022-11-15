@@ -59,12 +59,10 @@ class MainActivity : AppCompatActivity() {
             if (view.id == R.id.loginFragment || view.id == R.id.signupFragment) {
                 binding.bottomNavigation.visibility = View.GONE
                 binding.toolbar.visibility = View.GONE
-            } else {
+            }  else {
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
-
-
     }
 }
