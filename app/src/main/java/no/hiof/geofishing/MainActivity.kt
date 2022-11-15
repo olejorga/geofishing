@@ -2,6 +2,8 @@ package no.hiof.geofishing
 
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -18,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController
-
     // TODO LatLng test
     companion object {
         var latitude: Double = 0.0
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-
         // Using the Navigation component(nav_graph, NavHostFragment, NavController)
         // Set the navHostFragment to the id of FragmentContainer(navHost) from activity_main.xml
         val navHostFragment =
@@ -67,5 +67,7 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
+
+
     }
 }

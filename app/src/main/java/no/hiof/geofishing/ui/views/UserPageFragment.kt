@@ -1,16 +1,27 @@
 package no.hiof.geofishing.ui.views
 
+import android.app.Activity
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.GeofishingApplication
+import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
@@ -24,8 +35,10 @@ import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
  * TODO: TEMP ADAPTER WHILE REFACTORING...
  */
 class UserPageFragment : Fragment() {
+    private val lastPosition = "lastPosition"
     private var _binding: FragmentUserPageBinding? = null
     private val binding get() = _binding!!
+    private var position: Int = 0
 
     private val viewModel: UserPageViewModel by viewModels {
         ViewModelFactory.create {
@@ -44,22 +57,39 @@ class UserPageFragment : Fragment() {
     ): View {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
+        activity?.actionBar?.title = "hei"
+
         viewModel.catches.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 val sortedPosts = response.data.sortedByDescending { it.created }
                 val recyclerView = binding.userPageRecyclerView
-                Log.d("UserPageF", response.data.firstOrNull().toString())
+
                 recyclerView.adapter = UserPageCatchesAdapter(sortedPosts) {
-                    val position = recyclerView.getChildAdapterPosition(it)
-                    // TODO: Navigering til catchDeatail?
+                    position = recyclerView.getChildAdapterPosition(it)
+                    val postId = sortedPosts[position].id
+                    val uri = Uri.parse("myapp://Geofishing.com/${postId}")
+                    if (findNavController().graph.hasDeepLink(uri)) {
+                        findNavController().navigate(uri)
+                    }
                 }
-                recyclerView.layoutManager = GridLayoutManager(context, 1)
+
+                recyclerView.layoutManager = LinearLayoutManager(context)
+
+                recyclerView.addOnScrollListener(object: OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                        val xPos = recyclerView.computeVerticalScrollOffset()
+                        position = xPos / (recyclerView.height / response.data.size)
+                    }
+                })
+
             } else if (response.error != null) {
                 Log.d(Tags.REPOSITORY.toString(), response.error.toString())
             } else {
                 Log.d(Tags.REPOSITORY.toString(), "Could not find any data")
             }
         }
+
 
         viewModel.profile.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
@@ -94,8 +124,19 @@ class UserPageFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(lastPosition, position)
     }
-}
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        var savedPosition = 0
+        if (savedInstanceState != null) {
+            savedPosition = savedInstanceState.getInt(lastPosition)
+        }
+        val recyclerView = binding.userPageRecyclerView
+        recyclerView.postDelayed({
+            recyclerView.smoothScrollToPosition(savedPosition)
+        }, 500)
+    }
+ }

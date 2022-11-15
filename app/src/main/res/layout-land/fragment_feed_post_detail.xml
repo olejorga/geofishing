@@ -32,8 +32,7 @@
             android:id="@+id/image_catch"
             android:layout_width="309dp"
             android:layout_height="301dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="24dp"
             android:contentDescription="@string/post_image"
             android:maxWidth="500dp"
             android:maxHeight="500dp"
@@ -41,8 +40,6 @@
             android:minHeight="0dp"
             android:src="@drawable/fish_9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
         <TextView
@@ -53,7 +50,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/feedProfile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_catch" />
+            app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
         <TextView
             android:id="@+id/text_description"
@@ -61,7 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/description"
+            app:layout_constraintEnd_toStartOf="@+id/image_catch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile" />
 
@@ -115,9 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:text="Møresild 15g"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_rod" />
 
@@ -136,7 +133,7 @@
             android:id="@+id/buttonDeleteCatch"
             android:layout_width="49dp"
             android:layout_height="49dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

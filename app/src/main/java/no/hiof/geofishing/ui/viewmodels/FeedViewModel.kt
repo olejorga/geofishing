@@ -11,7 +11,7 @@ import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.data.entities.Profile
 
 class FeedViewModel(
-    catchRepository: Repository<Catch>,
+    private val catchRepository: Repository<Catch>,
     profileRepository: Repository<Profile>,
     authService: AuthService
 ) : ViewModel() {
@@ -39,4 +39,9 @@ class FeedViewModel(
         val catch: Catch,
         val profile: Profile,
     )
+
+    suspend fun deleteCatch(id: String) {
+        catchRepository.delete(id)
+    }
+
 }

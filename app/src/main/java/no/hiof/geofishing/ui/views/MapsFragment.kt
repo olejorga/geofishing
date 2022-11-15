@@ -47,7 +47,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
 
     // Constant determining offset on duplicate marker LatLngs
     companion object {
-        private const val POSITION_OFFSET = 0.000085f
+        private const val POSITION_OFFSET = 0.00003f
     }
 
     private val viewModel: MapViewModel by viewModels {
@@ -149,7 +149,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                     viewModel.catchListCache = response.data as MutableList<Catch>
                     var catchLatLng: LatLng
 
-                    viewModel.catchListCache.forEachIndexed { index, catch ->
+                    viewModel.catchListCache.forEachIndexed { _, catch ->
+
                         catchLatLng =
                             // Set default coordinates if catch cords are null
                             if (catch.latitude == null || catch.longitude == null)
@@ -166,7 +167,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                             bitmapDescriptorFromVector(requireContext(), markerImgId)
                         // Checks marker coords are unique and creates a new marker.
                         val marker = createMapMarker(catchLatLng, markerIcon)
-                        // Set marker tag to it's index to use in deeplink to view catch details.
+                        // Set marker tag to id to use in deeplink to view catch details.
                         marker?.tag = catch.id.toString()
                     }
                 }

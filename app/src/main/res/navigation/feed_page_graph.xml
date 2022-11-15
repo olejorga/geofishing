@@ -31,6 +31,24 @@
             android:name="catch_id"
             android:defaultValue="null"
             app:argType="string" />
+        <action
+            android:id="@+id/action_feedPostDetailFragment_to_updateCatchFragment"
+            app:destination="@id/updateCatchFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/updateCatchFragment"
+        android:name="no.hiof.geofishing.ui.views.UpdateCatchFragment"
+        android:label="Update catch"
+        tools:layout="@layout/fragment_update_catch" >
+
+        <argument
+            android:name="catch_id"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_feedPostDetailFragment"
+        app:destination="@id/feedPostDetailFragment"
+        app:launchSingleTop="false" />
 
 </navigation>
