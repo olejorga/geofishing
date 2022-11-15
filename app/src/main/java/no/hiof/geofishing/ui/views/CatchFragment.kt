@@ -76,7 +76,6 @@ class CatchFragment : Fragment() {
 
         binding.buttonCreateCatch.setOnClickListener {
             try {
-                // TODO: Required fields
                 viewModel.viewModelScope.launch {
                     viewModel.title = binding.fieldTitle.text.toString()
                     viewModel.description = binding.fieldDescription.text.toString()

@@ -2,8 +2,6 @@ package no.hiof.geofishing.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import kotlinx.coroutines.flow.cancellable
-import kotlinx.coroutines.flow.collect
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Todo

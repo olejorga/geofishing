@@ -181,8 +181,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         val uri = Uri.parse("myapp://Geofishing.com/${marker.tag}")
         if (findNavController().graph.hasDeepLink(uri)) {
             findNavController().navigate(uri)
-        } else {
-            // TODO toast?
         }
         return true
     }
@@ -278,6 +276,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                 }
             }
         }
+
+    override fun onResume() {
+        super.onResume()
+        super.onDestroyView()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -42,6 +41,7 @@ class FeedPostDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFeedPostDetailBinding.inflate(inflater, container, false)
+
 
         viewModel.posts.observe(viewLifecycleOwner) { posts ->
             if (posts != null) {
