@@ -1,0 +1,168 @@
+<resources>
+    <string name="app_name">Geofishing</string>
+
+    <!-- Navigation bar -->
+    <string name="Catch">Fangst</string>
+    <string name="map">Kart</string>
+    <string name="new_catch">Registrer fangst</string>
+    <string name="feed">Ferske fangster</string>
+    <string name="my_page">Min side</string>
+    <!-- End of Navigation bar -->
+
+    <!-- User page -->
+    <string name="UserPage_Title">Profil</string>
+    <string name="UserPage_Name">Navn</string>
+    <string name="UserPage_About_Title">Om</string>
+    <string name="UserPage_About_Text">Bio</string>
+    <string name="UserPage_RecyclerView_Title">Mine fangster</string>
+    <string name="UserPage_ImageView_Alternative_Text">Profilbilde</string>
+    <!-- End of User page -->
+
+    <!-- Settings -->
+    <string name="settings_text_title">Innstillinger</string>
+    <string name="settings_button_log_out">Logg ut</string>
+    <string name="settings_button_change_email">Endre e-post</string>
+    <string name="settings_button_change_password">Endre passord</string>
+    <!-- End of Settings -->
+
+    <!-- Rank-->
+    <string name="Rank_Title">Rang</string>
+    <string name="Rank_Number">1</string>
+    <string name="Rank_Name">Name</string>
+    <string name="Rank_Dots"> </string>
+    <string name="Rank_Points">0</string>
+    <!-- End of Rank-->
+
+    <!-- Feed -->
+    <string name="feedposterimageview">Bilde</string>
+    <string name="post_image">Bilde</string>
+    <string name="feedTitle">Tittel</string>
+    <string name="feedProfile">Profil</string>
+    <string name="description">Beskrivelse</string>
+    <string name="feedLocation">Lokasjon</string>
+    <!-- End of Feed -->
+
+    <!-- New Catch -->
+    <string name="New_Catch">Registrer fangst</string>
+    <string name="New_Catch_Title">Tittel</string>
+    <string name="New_Catch_Description">Beskrivelse</string>
+    <string name="New_Catch_Weight">Vekt (g)</string>
+    <string name="New_Catch_Length">Lengde (cm)</string>
+    <string name="New_Catch_Take_Picture">Ta bilde</string>
+    <string name="New_Catch_Add_Picture">Velg bilde</string>
+    <string name="New_Catch__Rod">Fiskestang (valgfri)</string>
+    <string name="New_Catch_Lure">Angn (valgfri)</string>
+    <string name="New_Catch_Add_New_Catch">Registrer fangst</string>
+    <string name="New_Catch_Species_Choose">Velg art</string>
+    <string name="New_Catch_image">Last opp bilde</string>
+    <string-array name="fish_array">
+        <item>Cod</item>
+        <item>Salmon</item>
+        <item>Blobfish</item>
+        <item>Blowfish</item>
+        <item>Brill</item>
+        <item>Jewfish</item>
+        <item>Dogfish</item>
+        <item>Pirate perch</item>
+    </string-array>
+    <!-- End of New Catch-->
+
+    <!-- Update User, Email & Password -->
+    <string name="update_profile_text_title">Endre profil</string>
+    <string name="update_password_text_title">Endre passord</string>
+    <string name="update_email_text_title">Endre e-post</string>
+    <string name="update_profile_field_name">Endre navn</string>
+    <string name="update_profile_field_bio">Endre bio</string>
+    <string name="update_profile_button_picture">Picture</string>
+    <string name="update_profile_button_save_changes">Lagre</string>
+    <string name="update_profile_button_cancel_changes">Avbryt</string>
+    <string name="update_profile_field_password">Nytt passord</string>
+    <string name="update_profile_field_confirm_password">Bekreft passord</string>
+    <string name="update_profile_field_email">Endre e-post</string>
+    <string name="update_profile_field_old_password">Gammelt passord</string>
+    <!-- End of Update User, Email & Password -->
+
+    <!-- Auth -->
+    <string name="auth_password_hint">Passord</string>
+    <string name="auth_email_hint">E-post</string>
+    <string name="auth_login_button_text">Logg inn</string>
+    <string name="auth_signup_button_text">Registrer deg</string>
+    <string name="auth_name_hint">Navn</string>
+    <string name="auth_confirm_password_hint">Bekreft passord</string>
+    <string name="auth_signup_title_text">Opprett konto</string>
+    <string name="auth_log_out_button_text">Logg ut</string>
+    <!-- End of Auth -->
+
+    <!-- Map Fragment -->
+    <string name="fab_label">Ny fangst</string>
+    <string name="extended_fab_content_desc">Ny fangst</string>
+    <string name="permission_request_title">Lokasjon</string>
+    <string name="permission_request_rationale">Denne appen trenger din lokasjon for å fungerer slik den er ment til.</string>
+    <string name="request_permission_again">Tilbake</string>
+    <string name="deny_permission_dialog">Nei takk</string>
+    <!-- End of Map Fragment -->
+
+    <!-- Auth Service -->
+    <string name="auth_service_wrong_credentials_error">Feil brukernavn eller passord.</string>
+    <string name="auth_service_login_error">Kunne ikke logge på.</string>
+    <string name="auth_service_logout_error">Kunne ikke logge ut.</string>
+    <string name="auth_service_password_strength_error">Passordet er for svakt.</string>
+    <string name="auth_service_user_exists_error">E-posten er allerede i bruk.</string>
+    <string name="auth_service_signup_error">Kunne ikke opprette brukerkonto.</string>
+    <string name="auth_service_change_password_error">Kunne ikke endre passord.</string>
+    <string name="auth_service_change_email_error">Kunne ikke endre e-post.</string>
+    <!-- End of Auth Service -->
+
+    <!-- File Service -->
+    <string name="file_service_upload_error">Kunne ikke laste opp fil.</string>
+    <string name="file_service_delete_error">Kunne ikke slette fil.</string>
+    <!-- End of File Service -->
+
+    <!-- Catch Repository -->
+    <string name="catch_repo_create_error">Kunne ikke registrere fangst.</string>
+    <string name="catch_repo_read_error">Kunne ikke laste inn fangster.</string>
+    <string name="catch_repo_update_error">Kunne ikke oppdatere fangst.</string>
+    <string name="catch_repo_delete_error">Kunne ikke slette fangst.</string>
+    <string name="catch_repo_find_error">Fant ikke fangsten.</string>
+    <string name="catch_repo_search_error">Fant ingen matchene fangster.</string>
+    <!-- End of Catch Repository -->
+
+    <!-- Profile Repository -->
+    <string name="profile_repo_create_error">Kunne ikke opprette profil.</string>
+    <string name="profile_repo_read_error">Kunne ikke laste inn profiler.</string>
+    <string name="profile_repo_update_error">Kunne ikke oppdatere profil.</string>
+    <string name="profile_repo_delete_error">Kunne ikke slette profil.</string>
+    <string name="profile_repo_find_error">Fant ikke profilen.</string>
+    <!-- End of Profile Repository -->
+
+    <!-- Todoo Repository -->
+    <string name="todo_repo_create_error">Kunne ikke opprette todo.</string>
+    <string name="todo_repo_read_error">Kunne ikke laste inn todos.</string>
+    <string name="todo_repo_update_error">Kunne ikke oppdatere todo.</string>
+    <string name="todo_repo_delete_error">Kunne ikke slette todo.</string>
+    <string name="todo_repo_find_error">Fant ikke todo.</string>
+    <string name="todo_repo_search_error">Fant ingen matchene todos.</string>
+    <!-- End of Todoo Repository -->
+
+    <!-- Todoo Notification Receiver -->
+    <string name="todo_notification_receiver_message_placeholder">Husk, du har ting å gjøre.</string>
+    <!-- End of Todoo Notification Receiver -->
+
+    <!-- New Todoo -->
+    <string name="new_todo_choose_day">Velg dag for påminnelse</string>
+    <string name="new_todo_choose_time">Velg tid for påminnelse.</string>
+    <string name="new_todo_created">Todo lagt til.</string>
+    <string name="new_todo_field_description_hint">Beskrivelse</string>
+    <string name="new_todo_switch_text">Påminnelse</string>
+    <string name="new_todo_button_text">Legg til todo</string>
+    <!-- End of New Todoo -->
+
+    <!-- Other -->
+    <string name="edit_catch">Endre fangst</string>
+    <string name="updatecatch">Endre fangst</string>
+    <string name="log_out">Logg ut</string>
+    <string name="hello_blank_fragment">Oppdater profil</string>
+    <string name="profile_repo_search_error">Fant ingen matchene profiler.</string>
+    <!-- End of Other -->
+
+</resources>

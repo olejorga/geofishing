@@ -11,10 +11,10 @@
 
     <!-- User page -->
     <string name="UserPage_Title">Profile</string>
-    <string name="UserPage_Name">Ole-Jørgen Andersen</string>
+    <string name="UserPage_Name">Name</string>
     <string name="UserPage_About_Title">About</string>
-    <string name="UserPage_About_Text">I really love tuna fish</string>
-    <string name="UserPage_RecyclerView_Title">Last catches</string>
+    <string name="UserPage_About_Text">Bio</string>
+    <string name="UserPage_RecyclerView_Title">My catches</string>
     <string name="UserPage_ImageView_Alternative_Text">Profile Image</string>
     <!-- End of User page -->
 
@@ -30,12 +30,12 @@
     <string name="Rank_Number">1</string>
     <string name="Rank_Name">Name</string>
     <string name="Rank_Dots"> </string>
-    <string name="Rank_Points">69</string>
+    <string name="Rank_Points">0</string>
     <!-- End of Rank-->
 
     <!-- Feed -->
-    <string name="feedposterimageview">feedPosterImageView</string>
-    <string name="post_image">post_image</string>
+    <string name="feedposterimageview">Picture</string>
+    <string name="post_image">Picture</string>
     <string name="feedTitle">Title</string>
     <string name="feedProfile">Profile</string>
     <string name="description">description</string>
@@ -88,7 +88,7 @@
     <string name="auth_login_button_text">Log in</string>
     <string name="auth_signup_button_text">Sign up</string>
     <string name="auth_name_hint">Name</string>
-    <string name="auth_confirm_password_hint">Confirm passord</string>
+    <string name="auth_confirm_password_hint">Confirm password</string>
     <string name="auth_signup_title_text">Create account</string>
     <string name="auth_log_out_button_text">Log out</string>
     <!-- End of Auth -->
@@ -97,7 +97,7 @@
     <string name="fab_label">Add catch</string>
     <string name="extended_fab_content_desc">Add Catch</string>
     <string name="permission_request_title">Location</string>
-    <string name="permission_request_rationale">This app needs access to your precise location for some functionality to work as intended</string>
+    <string name="permission_request_rationale">This app needs access to your precise location for some functionality to work as intended.</string>
     <string name="request_permission_again">Back</string>
     <string name="deny_permission_dialog">No thanks</string>
     <!-- End of Map Fragment -->
