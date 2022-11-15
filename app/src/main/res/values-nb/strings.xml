@@ -73,7 +73,7 @@
     <string name="update_email_text_title">Endre e-post</string>
     <string name="update_profile_field_name">Endre navn</string>
     <string name="update_profile_field_bio">Endre bio</string>
-    <string name="update_profile_button_picture">Picture</string>
+    <string name="update_profile_button_picture">Bilde</string>
     <string name="update_profile_button_save_changes">Lagre</string>
     <string name="update_profile_button_cancel_changes">Avbryt</string>
     <string name="update_profile_field_password">Nytt passord</string>
