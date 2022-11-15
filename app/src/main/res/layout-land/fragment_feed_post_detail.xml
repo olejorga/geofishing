@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.views.FeedPostDetailFragment">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/feedTitle"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_catch"
+            android:layout_width="309dp"
+            android:layout_height="301dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/post_image"
+            android:maxWidth="500dp"
+            android:maxHeight="500dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:src="@drawable/fish_9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+        <TextView
+            android:id="@+id/text_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/feedProfile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/description"
+            app:layout_constraintEnd_toStartOf="@+id/image_catch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile" />
+
+        <TextView
+            android:id="@+id/text_species"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Torsk"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+        <TextView
+            android:id="@+id/text_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="500g"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/text_species"
+            app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+        <TextView
+            android:id="@+id/text_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="30cm"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/text_weight"
+            app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+        <TextView
+            android:id="@+id/text_rod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Superstang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_species" />
+
+        <TextView
+            android:id="@+id/text_lure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Møresild 15g"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_rod" />
+
+        <ImageButton
+            android:id="@+id/buttonEditCatch"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/edit_catch"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonDeleteCatch"
+            app:layout_constraintEnd_toStartOf="@+id/buttonDeleteCatch"
+            app:layout_constraintTop_toTopOf="@+id/buttonDeleteCatch"
+            app:srcCompat="@drawable/ic_baseline_mode_edit_24" />
+
+        <ImageButton
+            android:id="@+id/buttonDeleteCatch"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
