@@ -19,7 +19,13 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintUpdateCatch"
@@ -31,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint='@{TextUtils.isEmpty(catchBinding.lure) ? "Fishing lure (optional)" : catchBinding.lure}'
@@ -41,7 +47,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/field_fishing_rod_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/field_fishing_rod_update"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/field_fishing_rod_update"
@@ -58,13 +65,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_preview_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_preview_update"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/field_description_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint='@{TextUtils.isEmpty(catchBinding.description) ? "Description" : catchBinding.description}'
@@ -73,13 +82,15 @@
                     android:text=""
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/field_title_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/field_title_update"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/field_title_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint='@{TextUtils.isEmpty(catchBinding.title) ? "Title" : catchBinding.title}'
@@ -89,14 +100,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <Spinner
                     android:id="@+id/spinner_species_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:minHeight="48dp"
                     android:value="@{}"
@@ -122,7 +134,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/field_length_update"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_species_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_species_update"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/field_length_update"
@@ -140,18 +153,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/field_weight_update"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_species_update" />
-
-                <Button
-                    android:id="@+id/button_take_picture_update"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Take new picture"
-                    app:layout_constraintEnd_toStartOf="@+id/button_update_picture"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/field_weight_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_species_update"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <Button
                     android:id="@+id/button_update_picture"
@@ -160,8 +163,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Add new picture"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/button_take_picture_update"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/field_length_update" />
 
                 <Button
@@ -169,9 +171,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
                     android:text="Update catch"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/field_fishing_lure_update" />
 
                 <ImageView
@@ -181,10 +184,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:src='@{catchBinding.picture}'
+                    android:src="@drawable/fish_9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button_take_picture_update" />
+                    app:layout_constraintTop_toBottomOf="@+id/button_update_picture" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

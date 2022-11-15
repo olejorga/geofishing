@@ -71,13 +71,11 @@ class FeedPostDetailFragment : Fragment() {
 
                     binding.buttonEditCatch.setOnClickListener {
                         val action =
-                            FeedPostDetailFragmentDirections.actionFeedPostDetailFragmentToUpdateCatchFragment()
+                            FeedPostDetailFragmentDirections
+                                .actionFeedPostDetailFragmentToUpdateCatchFragment()
 
                         action.catchId = post.catch.id.toString()
                         findNavController().navigate(action)
-
-                        Log.i("CurrentProfile", "${viewModel.currentProfileId}")
-                        Log.i("CatchProf", "${post.catch.profile}")
                     }
 
                     binding.buttonDeleteCatch.setOnClickListener {

@@ -81,14 +81,10 @@ class UpdateCatchFragment : Fragment() {
                 val originalSpeciesSelected = fishSpeciesArray.indexOf(catch.species)
                 spinnerUpdateSpecies.setSelection(originalSpeciesSelected)
 
-                // Sets default image if picture returns null
-                if (catch.picture != null) {
-                    Picasso.get()
-                        .load(catch.picture)
-                        .into(binding.imagePreviewUpdate)
-                } else {
-                    binding.imagePreviewUpdate.setImageResource(R.drawable.fish_9)
-                }
+                // gets image
+                Picasso.get()
+                    .load(catch.picture)
+                    .into(binding.imagePreviewUpdate)
             }
         }
 
@@ -109,10 +105,6 @@ class UpdateCatchFragment : Fragment() {
         viewModel.picture.observe(viewLifecycleOwner) { uri ->
             Picasso.get().load(uri)
                 .into(binding.imagePreviewUpdate)
-        }
-
-        binding.buttonTakePictureUpdate.setOnClickListener {
-
         }
 
         binding.buttonUpdateCatch.setOnClickListener {
