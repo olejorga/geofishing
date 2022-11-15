@@ -45,8 +45,6 @@ class UserPageFragment : Fragment() {
     ): View {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
-        activity?.actionBar?.title = "hei"
-
         viewModel.catches.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 val sortedPosts = response.data.sortedByDescending { it.created }
