@@ -1,8 +1,11 @@
 package no.hiof.geofishing.ui.views
 
+import android.app.Activity
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.GeofishingApplication
+import no.hiof.geofishing.MainActivity
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.constants.Tags
 import no.hiof.geofishing.data.entities.Profile
@@ -51,9 +55,9 @@ class UserPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
+
+        activity?.actionBar?.title = "hei"
 
         viewModel.catches.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
@@ -62,7 +66,11 @@ class UserPageFragment : Fragment() {
 
                 recyclerView.adapter = UserPageCatchesAdapter(sortedPosts) {
                     position = recyclerView.getChildAdapterPosition(it)
-                    // TODO: Navigering til catchDeatail?
+                    val postId = sortedPosts[position].id
+                    val uri = Uri.parse("myapp://Geofishing.com/${postId}")
+                    if (findNavController().graph.hasDeepLink(uri)) {
+                        findNavController().navigate(uri)
+                    }
                 }
 
                 recyclerView.layoutManager = LinearLayoutManager(context)
@@ -72,7 +80,6 @@ class UserPageFragment : Fragment() {
                         super.onScrollStateChanged(recyclerView, newState)
                         val xPos = recyclerView.computeVerticalScrollOffset()
                         position = xPos / (recyclerView.height / response.data.size)
-                        Log.d("POSITION", position.toString())
                     }
                 })
 
@@ -130,6 +137,6 @@ class UserPageFragment : Fragment() {
         val recyclerView = binding.userPageRecyclerView
         recyclerView.postDelayed({
             recyclerView.smoothScrollToPosition(savedPosition)
-        }, 1000)
+        }, 500)
     }
  }
