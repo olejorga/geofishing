@@ -4,8 +4,8 @@
     <!-- Navigation bar -->
     <string name="Catch">Fangst</string>
     <string name="map">Kart</string>
-    <string name="new_catch">Registrer fangst</string>
-    <string name="feed">Ferske fangster</string>
+    <string name="new_catch">Ny fangst</string>
+    <string name="feed">Fangster</string>
     <string name="my_page">Min side</string>
     <!-- End of Navigation bar -->
 
@@ -51,7 +51,7 @@
     <string name="New_Catch_Take_Picture">Ta bilde</string>
     <string name="New_Catch_Add_Picture">Velg bilde</string>
     <string name="New_Catch__Rod">Fiskestang (valgfri)</string>
-    <string name="New_Catch_Lure">Angn (valgfri)</string>
+    <string name="New_Catch_Lure">Agn (valgfri)</string>
     <string name="New_Catch_Add_New_Catch">Registrer fangst</string>
     <string name="New_Catch_Species_Choose">Velg art</string>
     <string name="New_Catch_image">Last opp bilde</string>
@@ -159,10 +159,19 @@
 
     <!-- Other -->
     <string name="edit_catch">Endre fangst</string>
-    <string name="updatecatch">Endre fangst</string>
+    <string name="update_catch">Endre fangst</string>
     <string name="log_out">Logg ut</string>
     <string name="hello_blank_fragment">Oppdater profil</string>
     <string name="profile_repo_search_error">Fant ingen matchene profiler.</string>
+    <string name="label_catch_detail">Fangst informasjon</string>
+    <string name="alertDialog_delete_catch">Slett fangst</string>
+    <string name="alertDialog_confirm_delete">Er du sikker på at du vil slette denne fangsten?</string>
+    <string name="alertDialog_catch_deleted_toast">Fangst slettet</string>
+    <string name="alertDialog_cancel">Avbryt</string>
+    <string name="alertDialog_positive_button">Ja</string>
+    <string name="label_update_catch">Endre fangst</string>
+    <string name="label_todo">Todo</string>
+    <string name="label_new_todo">Ny todo</string>
     <!-- End of Other -->
 
 </resources>

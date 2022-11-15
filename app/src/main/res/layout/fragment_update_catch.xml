@@ -40,7 +40,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.lure) ? "Fishing lure (optional)" : catchBinding.lure}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.lure) ? @string/New_Catch_Lure : catchBinding.lure}'
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:text=""
@@ -58,7 +58,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.rod) ? "Fishing rod (optional)" : catchBinding.rod}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.rod) ? @string/New_Catch__Rod : catchBinding.rod}'
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:text=""
@@ -76,7 +76,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.description) ? "Description" : catchBinding.description}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.description) ? @string/New_Catch_Description : @string/New_Catch_Description + ": " + catchBinding.description}'
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:text=""
@@ -93,7 +93,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.title) ? "Title" : catchBinding.title}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.title) ? @string/New_Catch_Title : @string/New_Catch_Title + ": " + catchBinding.title}'
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:text=""
@@ -128,7 +128,7 @@
                     android:width="180dp"
                     android:autofillHints=""
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.weight.toString()) ? "Weight (g)" : "Weight: " + catchBinding.weight.toString() + " g"}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.weight.toString()) ? @string/New_Catch_Weight : @string/New_Catch_Weight + " " + catchBinding.weight.toString()}'
                     android:inputType="number"
                     android:minHeight="48dp"
                     app:layout_constraintEnd_toStartOf="@+id/field_length_update"
@@ -147,7 +147,7 @@
                     android:width="180dp"
                     android:autofillHints=""
                     android:ems="10"
-                    android:hint='@{TextUtils.isEmpty(catchBinding.length.toString()) ? "Length (g)" : "Length: " + catchBinding.length.toString() + " cm"}'
+                    android:hint='@{TextUtils.isEmpty(catchBinding.length.toString()) ? @string/New_Catch_Length : @string/New_Catch_Length + " " + catchBinding.length.toString()}'
                     android:inputType="number"
                     android:minHeight="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Add new picture"
+                    android:text="@string/New_Catch_Add_Picture"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/field_length_update" />
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Update catch"
+                    android:text="@string/update_catch"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

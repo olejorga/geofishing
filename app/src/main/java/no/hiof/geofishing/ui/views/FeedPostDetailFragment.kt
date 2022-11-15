@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
+import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
@@ -80,21 +81,21 @@ class FeedPostDetailFragment : Fragment() {
 
                     binding.buttonDeleteCatch.setOnClickListener {
                         AlertDialog.Builder(requireContext())
-                            .setTitle("Delete catch")
-                            .setMessage("Are you sure you want to delete this catch?")
-                            .setPositiveButton("Yes") { _, _ ->
+                            .setTitle(getString(R.string.alertDialog_delete_catch))
+                            .setMessage(getString(R.string.alertDialog_confirm_delete))
+                            .setPositiveButton(getString(R.string.alertDialog_positive_button)) { _, _ ->
                                 viewModel.viewModelScope.launch {
                                     if (viewModel.posts.hasActiveObservers()) {
                                         viewModel.posts.removeObservers(viewLifecycleOwner)
                                     }
 
                                     viewModel.deleteCatch(post.catch.id.toString())
-                                    Toast.makeText(context, "Catch deleted", Toast.LENGTH_LONG)
+                                    Toast.makeText(context, getString(R.string.alertDialog_catch_deleted_toast), Toast.LENGTH_LONG)
                                         .show()
                                     findNavController().navigateUp()
                                 }
                             }
-                            .setNegativeButton("Cancel", null)
+                            .setNegativeButton(getString(R.string.alertDialog_cancel), null)
                             .create()
                             .show()
                     }

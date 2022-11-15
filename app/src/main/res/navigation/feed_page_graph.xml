@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="no.hiof.geofishing.ui.views.FeedFragment"
-        android:label="Feed"
+        android:label="@string/feed"
         tools:layout="@layout/fragment_feed" >
         <action
             android:id="@+id/action_feedFragment_to_feedPostDetailFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/feedPostDetailFragment"
         android:name="no.hiof.geofishing.ui.views.FeedPostDetailFragment"
-        android:label="Catch detail"
+        android:label="@string/label_catch_detail"
         tools:layout="@layout/fragment_feed_post_detail">
 
         <deepLink
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/updateCatchFragment"
         android:name="no.hiof.geofishing.ui.views.UpdateCatchFragment"
-        android:label="Update catch"
+        android:label="@string/label_update_catch"
         tools:layout="@layout/fragment_update_catch" >
 
         <argument
