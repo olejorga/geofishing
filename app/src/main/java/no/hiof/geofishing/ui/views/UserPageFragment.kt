@@ -22,8 +22,9 @@ import no.hiof.geofishing.ui.adapters.UserPageCatchesAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 
+private const val LAST_POSITION = "lastPosition"
+
 class UserPageFragment : Fragment() {
-    private val lastPosition = "lastPosition"
     private var _binding: FragmentUserPageBinding? = null
     private val binding get() = _binding!!
     private var position: Int = 0
@@ -111,18 +112,18 @@ class UserPageFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(lastPosition, position)
+        outState.putInt(LAST_POSITION, position)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         var savedPosition = 0
         if (savedInstanceState != null) {
-            savedPosition = savedInstanceState.getInt(lastPosition)
+            savedPosition = savedInstanceState.getInt(LAST_POSITION)
         }
         val recyclerView = binding.userPageRecyclerView
         recyclerView.postDelayed({
             recyclerView.smoothScrollToPosition(savedPosition)
         }, 500)
     }
- }
+}
