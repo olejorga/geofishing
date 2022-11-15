@@ -22,12 +22,15 @@ import no.hiof.geofishing.ui.adapters.UserPageCatchesAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 
-private const val LAST_POSITION = "lastPosition"
 
 class UserPageFragment : Fragment() {
     private var _binding: FragmentUserPageBinding? = null
     private val binding get() = _binding!!
     private var position: Int = 0
+
+    companion object {
+        private const val LAST_POSITION = "lastPosition"
+    }
 
     private val viewModel: UserPageViewModel by viewModels {
         ViewModelFactory.create {

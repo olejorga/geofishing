@@ -10,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import no.hiof.geofishing.databinding.ActivityMainBinding
 
-private const val TITLE = "title"
 
 /**
  * The main activity - all fragments stem from this activity.
@@ -23,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var latitude: Double = 0.0
         var longitude: Double = 0.0
+        private const val TITLE = "title"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
