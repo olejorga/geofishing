@@ -2,8 +2,6 @@ package no.hiof.geofishing
 
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -20,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     // Setup of navController since this is the navHost class
     private lateinit var navController: NavController
-    // TODO LatLng test
     companion object {
         var latitude: Double = 0.0
         var longitude: Double = 0.0

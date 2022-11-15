@@ -3,8 +3,6 @@ package no.hiof.geofishing.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.combine
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.Repository
 import no.hiof.geofishing.data.entities.Catch

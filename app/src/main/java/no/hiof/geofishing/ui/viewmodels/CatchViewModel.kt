@@ -1,13 +1,9 @@
 package no.hiof.geofishing.ui.viewmodels
 
-import android.Manifest
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.DocumentId
-import com.google.firebase.firestore.Exclude
-import com.google.firebase.firestore.ServerTimestamp
 import no.hiof.geofishing.data.contracts.AuthService
 import no.hiof.geofishing.data.contracts.FileService
 import no.hiof.geofishing.data.contracts.Repository
