@@ -22,9 +22,6 @@ import no.hiof.geofishing.ui.adapters.UserPageCatchesAdapter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 
-/**
- * TODO: TEMP ADAPTER WHILE REFACTORING...
- */
 class UserPageFragment : Fragment() {
     private val lastPosition = "lastPosition"
     private var _binding: FragmentUserPageBinding? = null
