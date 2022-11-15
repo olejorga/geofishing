@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import no.hiof.geofishing.databinding.ActivityMainBinding
 
+
 /**
  * The main activity - all fragments stem from this activity.
  */
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var latitude: Double = 0.0
         var longitude: Double = 0.0
+        private const val TITLE = "title"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,5 +66,15 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        supportActionBar?.title = savedInstanceState.getCharSequence(TITLE)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putCharSequence(TITLE, supportActionBar?.title)
     }
 }
