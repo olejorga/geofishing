@@ -148,7 +148,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                     // Changing to MutableList so forEachIndexed can be used
                     viewModel.catchListCache = response.data as MutableList<Catch>
                     var catchLatLng: LatLng
-
+                    mGoogleMap!!.clear()
                     viewModel.catchListCache.forEachIndexed { _, catch ->
 
                         catchLatLng =
