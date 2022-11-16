@@ -26,7 +26,7 @@ import no.hiof.geofishing.ui.viewmodels.UserPageViewModel
 class UserPageFragment : Fragment() {
     private var _binding: FragmentUserPageBinding? = null
     private val binding get() = _binding!!
-    private var position: Int = 0
+    private var lastPosition: Int = 0
 
     companion object {
         private const val LAST_POSITION = "lastPosition"
@@ -55,7 +55,7 @@ class UserPageFragment : Fragment() {
                 val recyclerView = binding.userPageRecyclerView
 
                 recyclerView.adapter = UserPageCatchesAdapter(sortedPosts) {
-                    position = recyclerView.getChildAdapterPosition(it)
+                    val position = recyclerView.getChildAdapterPosition(it)
                     val postId = sortedPosts[position].id
                     val uri = Uri.parse("myapp://Geofishing.com/${postId}")
                     if (findNavController().graph.hasDeepLink(uri)) {
@@ -69,7 +69,7 @@ class UserPageFragment : Fragment() {
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                         super.onScrollStateChanged(recyclerView, newState)
                         val xPos = recyclerView.computeVerticalScrollOffset()
-                        position = xPos / (recyclerView.height / response.data.size)
+                        lastPosition = xPos / (recyclerView.height / response.data.size)
                     }
                 })
 
@@ -115,7 +115,7 @@ class UserPageFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(LAST_POSITION, position)
+        outState.putInt(LAST_POSITION, lastPosition)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {

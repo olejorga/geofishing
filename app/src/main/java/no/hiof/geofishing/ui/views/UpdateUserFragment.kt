@@ -32,7 +32,6 @@ class UpdateUserFragment : DialogFragment() {
             )
         }
     }
-//    private lateinit var user: Profile
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
