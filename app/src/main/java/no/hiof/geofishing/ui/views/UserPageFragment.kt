@@ -129,4 +129,9 @@ class UserPageFragment : Fragment() {
             recyclerView.smoothScrollToPosition(savedPosition)
         }, 500)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

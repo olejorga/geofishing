@@ -63,4 +63,9 @@ class SignupFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
