@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
 import no.hiof.geofishing.R
 import no.hiof.geofishing.databinding.FragmentFeedPostDetailBinding
+import no.hiof.geofishing.ui.utils.CoordinateFormatter
 import no.hiof.geofishing.ui.utils.ViewModelFactory
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
@@ -60,6 +61,7 @@ class FeedPostDetailFragment : Fragment() {
                 binding.textSpecies.text = post.catch.species
                 binding.textWeight.text = weight
                 binding.textLength.text = length
+                binding.textLocation.text = CoordinateFormatter.prettyLocation(post.catch.latitude, post.catch.longitude)
                 binding.textRod.text = post.catch.rod
                 binding.textLure.text = post.catch.lure
 

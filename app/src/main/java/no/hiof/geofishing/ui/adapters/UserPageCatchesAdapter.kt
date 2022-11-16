@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso
 import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Catch
 import no.hiof.geofishing.ui.utils.CoordinateFormatter
-import java.text.DecimalFormat
 
 class UserPageCatchesAdapter(
     private val catch: List<Catch>,
