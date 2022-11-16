@@ -1,7 +1,6 @@
 package no.hiof.geofishing.ui.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,7 +89,11 @@ class FeedPostDetailFragment : Fragment() {
                                     }
 
                                     viewModel.deleteCatch(post.catch.id.toString())
-                                    Toast.makeText(context, getString(R.string.alertDialog_catch_deleted_toast), Toast.LENGTH_LONG)
+                                    Toast.makeText(
+                                        context,
+                                        getString(R.string.alertDialog_catch_deleted_toast),
+                                        Toast.LENGTH_LONG
+                                    )
                                         .show()
                                     findNavController().navigateUp()
                                 }

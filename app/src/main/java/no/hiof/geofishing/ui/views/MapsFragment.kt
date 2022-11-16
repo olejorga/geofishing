@@ -85,7 +85,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.floatingActionButton.setOnClickListener{
+        binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_menu_maps_fragment_to_menu_catch_fragment)
         }
     }
@@ -152,7 +152,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, OnMarkerClickListener {
                     viewModel.catchListCache.forEachIndexed { _, catch ->
 
                         catchLatLng =
-                            // Set default coordinates if catch cords are null
+                                // Set default coordinates if catch cords are null
                             if (catch.latitude == null || catch.longitude == null)
                                 LatLng(viewModel.defLatitude, viewModel.defLongitude)
                             else

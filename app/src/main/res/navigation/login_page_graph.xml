@@ -18,7 +18,7 @@
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popExitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_left"/>
+            app:popEnterAnim="@anim/from_left" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment"

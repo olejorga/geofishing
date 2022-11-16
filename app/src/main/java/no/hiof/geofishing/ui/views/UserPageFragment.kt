@@ -65,7 +65,7 @@ class UserPageFragment : Fragment() {
 
                 recyclerView.layoutManager = LinearLayoutManager(context)
 
-                recyclerView.addOnScrollListener(object: OnScrollListener() {
+                recyclerView.addOnScrollListener(object : OnScrollListener() {
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                         super.onScrollStateChanged(recyclerView, newState)
                         val xPos = recyclerView.computeVerticalScrollOffset()
