@@ -29,7 +29,7 @@ class ChangePasswordFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
 
@@ -44,14 +44,13 @@ class ChangePasswordFragment : DialogFragment() {
                     confirmPasswordField.text.toString(),
                     oldPasswordField.text.toString()
                 )
-                if(response.error == null){
-                    Toast.makeText(context, "Password successfully changed!", Toast.LENGTH_LONG).show()
+                if (response.error == null) {
+                    Toast.makeText(context, "Password successfully changed!", Toast.LENGTH_LONG)
+                        .show()
                     dismiss()
-                }
-                else if (passwordField.text.toString() != confirmPasswordField.text.toString()) {
+                } else if (passwordField.text.toString() != confirmPasswordField.text.toString()) {
                     confirmPasswordField.error = response.error.toString()
-                }
-                else {
+                } else {
                     oldPasswordField.error = response.error.toString()
                 }
             }

@@ -32,12 +32,12 @@ class UpdateUserFragment : DialogFragment() {
             )
         }
     }
-    private lateinit var user: Profile
+//    private lateinit var user: Profile
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUpdateUserBinding.inflate(inflater, container, false)
 
         val photoPicker =
@@ -58,7 +58,8 @@ class UpdateUserFragment : DialogFragment() {
             Picasso.get().load(uri)
                 .resize(
                     binding.imageUpdateProfilePreview.maxWidth,
-                    binding.imageUpdateProfilePreview.maxHeight)
+                    binding.imageUpdateProfilePreview.maxHeight
+                )
                 .into(binding.imageUpdateProfilePreview)
         }
 

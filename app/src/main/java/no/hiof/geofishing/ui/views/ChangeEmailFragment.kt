@@ -29,11 +29,11 @@ class ChangeEmailFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentChangeEmailBinding.inflate(inflater, container, false)
 
-       val emailField = binding.fieldNewEmail
-       val passwordField = binding.fieldChangeEmailPassword
+        val emailField = binding.fieldNewEmail
+        val passwordField = binding.fieldChangeEmailPassword
 
         binding.buttonChangeEmailSave.setOnClickListener {
             viewModel.viewModelScope.launch {
@@ -41,11 +41,10 @@ class ChangeEmailFragment : DialogFragment() {
                     emailField.text.toString(),
                     passwordField.text.toString()
                 )
-                if(response.error == null){
+                if (response.error == null) {
                     Toast.makeText(context, "Email successfully updated", Toast.LENGTH_LONG).show()
                     dismiss()
-                }
-                else{
+                } else {
                     passwordField.error = response.error.toString()
                 }
             }

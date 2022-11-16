@@ -35,7 +35,7 @@
         android:id="@+id/menu_rank_fragment"
         android:name="no.hiof.geofishing.ui.views.RankFragment"
         android:label="@string/Rank_Title"
-        tools:layout="@layout/fragment_rank"/>
+        tools:layout="@layout/fragment_rank" />
 
-    <include app:graph="@navigation/user_page_graph"/>
+    <include app:graph="@navigation/user_page_graph" />
 </navigation>

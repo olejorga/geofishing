@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import no.hiof.geofishing.R
+import no.hiof.geofishing.ui.utils.CoordinateFormatter
 import no.hiof.geofishing.ui.viewmodels.FeedViewModel
 
 class FeedAdapter(
@@ -40,6 +41,9 @@ class FeedAdapter(
         viewHolder.textTitle.text = posts[position].catch.title
         viewHolder.textProfile.text = posts[position].profile.name
         viewHolder.textDesc.text = posts[position].catch.description
+        val location = CoordinateFormatter.prettyLocation(posts[position].catch.latitude, posts[position].catch.longitude)
+        viewHolder.textLocation.text = location
+
         viewHolder.itemView.setOnClickListener(onClickListener)
     }
 
