@@ -109,7 +109,6 @@ class CatchFragment : Fragment() {
         val photoPicker =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri != null) {
-                    Log.d("URI", uri.toString())
                     viewModel.setPicture(uri)
                 }
             }
@@ -151,10 +150,8 @@ class CatchFragment : Fragment() {
     ) {
         if (it) {
             Toast.makeText(context, "Camera Granted", Toast.LENGTH_LONG).show()
-            Log.i("Camera Granted", "$it")
         } else {
             Toast.makeText(context, "Camera not Granted", Toast.LENGTH_LONG).show()
-            Log.i("Camera Granted", "$it")
         }
     }
 
@@ -177,7 +174,6 @@ class CatchFragment : Fragment() {
                 "no.hiof.geofishing.fileprovider",
                 createImageFile()
             )
-            Log.i("imageUri", imageUri.toString())
             return true
         } catch (ex: IOException) {
             Log.e("IOException", ex.message.toString())
@@ -213,7 +209,6 @@ class CatchFragment : Fragment() {
                 val permissionString = permissionReq.key
                 when {
                     isGranted -> {
-                        Log.i("isGranted", permissionString)
                         if (permissionString == cameraAndStoragePermissionsArray[1])
                             createUniqueFileName()
                         return@registerForActivityResult
@@ -227,9 +222,7 @@ class CatchFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
                 viewModel.setPicture(imageUri)
-                Log.e("IMGURI", imageUri.toString())
             }
-            Log.i("Picture URI", "Result: $success")
         }
 
     override fun onDestroyView() {
