@@ -70,23 +70,4 @@ class CatchViewModel(
 
         return catchRepository.create(catch)
     }
-
-
-    //    private fun clear() {
-    //        id = null
-    //        date = null
-    //        description = null
-    //        latitude = null
-    //        length = null
-    //        longitude = null
-    //        lure = null
-    //        picture = null
-    //        place = null
-    //        rod = null
-    //        species = null
-    //        title = null
-    //        profile = null
-    //        weight = null
-    //
-    //    }
 }
