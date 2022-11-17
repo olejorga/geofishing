@@ -63,17 +63,28 @@ class UpdateUserFragment : DialogFragment() {
         }
 
         binding.buttonSaveChanges.setOnClickListener {
-            viewModel.viewModelScope.launch {
-                viewModel.name = binding.fieldUpdateName.text.toString()
-                viewModel.bio = binding.fieldUpdateBio.text.toString()
-                viewModel.updateUser()
-                Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
-                dismiss()
+            val bio = binding.fieldUpdateBio
+            val name =  binding.fieldUpdateName
+            if(name.text.length > 50 || bio.text.length > 200){
+                if(name.text.length > 50){
+                    name.error = "Name must be shorter than 51 characters."
+                }
+                if(bio.text.length > 200){
+                    bio.error = "Bio must be shorter than 201 characters."
+                }
+            }
+            else {
+                viewModel.viewModelScope.launch {
+                    viewModel.name = name.text.toString()
+                    viewModel.bio = bio.text.toString()
+                    viewModel.updateUser()
+                    Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
             }
         }
 
         binding.buttonCancelChanges.setOnClickListener {
-            Log.d("BUTTON", "Cancel changes button pressed")
             dismiss()
         }
         return binding.root
