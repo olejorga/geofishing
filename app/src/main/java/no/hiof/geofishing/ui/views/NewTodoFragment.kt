@@ -55,7 +55,10 @@ class NewTodoFragment : Fragment() {
 
         val notificationPremissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
-        ) { isGranted -> hasNotificationPermission = isGranted }
+        ) { isGranted ->
+            hasNotificationPermission = isGranted
+            showDialog()
+        }
 
         viewModel.reminder.observe(viewLifecycleOwner) {
             binding.switchReminder.isChecked = it != null
@@ -68,37 +71,7 @@ class NewTodoFragment : Fragment() {
                         notificationPremissionRequest.launch(Manifest.permission.POST_NOTIFICATIONS)
                     }
                 } else {
-                    val datePicker =
-                        MaterialDatePicker.Builder.datePicker()
-                            .setTitleText(getString(R.string.new_todo_choose_day))
-                            .build()
-
-                    val timePicker =
-                        MaterialTimePicker.Builder()
-                            .setTimeFormat(CLOCK_24H)
-                            .setTitleText(getString(R.string.new_todo_choose_time))
-                            .build()
-
-                    datePicker.addOnPositiveButtonClickListener {
-                        viewModel.calendar.timeInMillis = datePicker.selection!!
-                    }
-
-                    timePicker.addOnPositiveButtonClickListener {
-                        viewModel.calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
-                        viewModel.calendar.set(Calendar.MINUTE, timePicker.minute)
-                        viewModel.reminder.value = viewModel.calendar.time
-                    }
-
-                    datePicker.addOnDismissListener {
-                        viewModel.reminder.value = viewModel.reminder.value
-                    }
-
-                    timePicker.addOnDismissListener {
-                        viewModel.reminder.value = viewModel.reminder.value
-                    }
-
-                    timePicker.show(childFragmentManager, "")
-                    datePicker.show(childFragmentManager, "")
+                    showDialog()
                 }
             } else {
                 viewModel.reminder.value = null
@@ -120,6 +93,40 @@ class NewTodoFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun showDialog() {
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText(getString(R.string.new_todo_choose_day))
+                .build()
+
+        val timePicker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(CLOCK_24H)
+                .setTitleText(getString(R.string.new_todo_choose_time))
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            viewModel.calendar.timeInMillis = datePicker.selection!!
+        }
+
+        timePicker.addOnPositiveButtonClickListener {
+            viewModel.calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+            viewModel.calendar.set(Calendar.MINUTE, timePicker.minute)
+            viewModel.reminder.value = viewModel.calendar.time
+        }
+
+        datePicker.addOnDismissListener {
+            viewModel.reminder.value = viewModel.reminder.value
+        }
+
+        timePicker.addOnDismissListener {
+            viewModel.reminder.value = viewModel.reminder.value
+        }
+
+        timePicker.show(childFragmentManager, "")
+        datePicker.show(childFragmentManager, "")
     }
 
     override fun onDestroyView() {
