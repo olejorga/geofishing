@@ -80,28 +80,20 @@
             app:layout_constraintTop_toTopOf="@+id/image_profile" />
 
         <TextView
-            android:id="@+id/text_achievement"
+            android:id="@+id/text_bio_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="#3 in all of Norway"
-            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:text="@string/UserPage_About_Title"
             app:layout_constraintStart_toStartOf="@+id/text_name"
             app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
         <TextView
-            android:id="@+id/text_bio_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/UserPage_About_Title"
-            app:layout_constraintStart_toStartOf="@+id/text_achievement"
-            app:layout_constraintTop_toBottomOf="@+id/text_achievement" />
-
-        <TextView
             android:id="@+id/text_bio"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:ellipsize="none"
             android:text="@string/UserPage_About_Text"
             app:layout_constraintStart_toStartOf="@+id/text_bio_title"
             app:layout_constraintTop_toBottomOf="@+id/text_bio_title" />
