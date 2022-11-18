@@ -29,12 +29,14 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="@string/New_Catch_Lure"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_fishing_rod" />
+                app:layout_constraintTop_toBottomOf="@+id/field_fishing_rod"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/field_fishing_rod"
@@ -50,7 +52,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_preview" />
+                app:layout_constraintTop_toBottomOf="@+id/image_preview"
+                tools:ignore="TextContrastCheck"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/field_description"
@@ -92,7 +96,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                android:importantForAutofill="no" />
 
             <View
                 android:id="@+id/divider"
@@ -134,7 +139,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/field_length"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_species" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_species"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/field_length"
@@ -152,7 +158,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/field_weight"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_species" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_species"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/button_take_picture"
@@ -193,11 +200,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/New_Catch_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_take_picture"
-                app:srcCompat="@drawable/fish_9"
-                android:contentDescription="@string/New_Catch_image" />
+                app:srcCompat="@drawable/placeholder"
+                tools:ignore="ImageContrastCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
