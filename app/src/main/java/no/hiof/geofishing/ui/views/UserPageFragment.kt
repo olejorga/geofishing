@@ -41,6 +41,7 @@ class UserPageFragment : Fragment() {
             )
         }
     }
+
     private lateinit var user: Profile
 
     override fun onCreateView(
@@ -83,11 +84,15 @@ class UserPageFragment : Fragment() {
         viewModel.profile.observe(viewLifecycleOwner) { response ->
             if (response.error == null && response.data != null) {
                 user = response.data
+
                 binding.textName.text = user.name
                 binding.textBio.text = user.bio
-                Picasso.get().load(user.portrait)
-                    .resize(binding.imageProfile.maxWidth, binding.imageProfile.maxHeight)
-                    .into(binding.imageProfile)
+
+                if (user.portrait != null) {
+                    Picasso.get().load(user.portrait)
+                        .resize(binding.imageProfile.maxWidth, binding.imageProfile.maxHeight)
+                        .into(binding.imageProfile)
+                }
             } else if (response.error != null) {
                 Log.d(Tags.REPOSITORY.toString(), response.error.toString())
             } else {
