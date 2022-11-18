@@ -80,6 +80,10 @@
     <string name="update_profile_field_confirm_password">Confirm Password</string>
     <string name="update_profile_field_email">Update Email</string>
     <string name="update_profile_field_old_password">Old Password</string>
+    <string name="update_profile_name_error">Name must be shorter than 51 characters</string>
+    <string name="update_profile_bio_error">Bio must be shorter than 201 characters</string>
+    <string name="update_profile_picture_not_selected">Could not select image</string>
+    <string name="update_profile_success">Profile updated</string>
     <!-- End of Update User, Email & Password -->
 
     <!-- Auth -->

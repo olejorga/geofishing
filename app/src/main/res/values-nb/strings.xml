@@ -80,6 +80,10 @@
     <string name="update_profile_field_confirm_password">Bekreft passord</string>
     <string name="update_profile_field_email">Endre e-post</string>
     <string name="update_profile_field_old_password">Gammelt passord</string>
+    <string name="update_profile_name_error">Navn må være kortere enn 51 tegn</string>
+    <string name="update_profile_bio_error">Bio må være kortere enn 201 tegn</string>
+    <string name="update_profile_picture_not_selected">Kunne ikke velge bilde</string>
+    <string name="update_profile_success">Profil oppdatert</string>
     <!-- End of Update User, Email & Password -->
 
     <!-- Auth -->

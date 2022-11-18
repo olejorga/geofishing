@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import no.hiof.geofishing.GeofishingApplication
+import no.hiof.geofishing.R
 import no.hiof.geofishing.data.entities.Profile
 import no.hiof.geofishing.databinding.FragmentUpdateUserBinding
 import no.hiof.geofishing.ui.utils.ViewModelFactory
@@ -42,14 +43,12 @@ class UpdateUserFragment : DialogFragment() {
         val photoPicker =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri != null) {
-                    Log.d("URI", uri.toString())
                     viewModel.setPicture(uri)
                 } else {
-                    Toast.makeText(context, "Could not select image", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.update_profile_picture_not_selected, Toast.LENGTH_LONG).show()
                 }
             }
         binding.buttonUpdateProfilePicture.setOnClickListener {
-            Log.d("BUTTON", "Image button pressed")
             photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
@@ -67,10 +66,10 @@ class UpdateUserFragment : DialogFragment() {
             val name =  binding.fieldUpdateName
             if(name.text.length > 50 || bio.text.length > 200){
                 if(name.text.length > 50){
-                    name.error = "Name must be shorter than 51 characters."
+                    name.error = getString(R.string.update_profile_name_error)
                 }
                 if(bio.text.length > 200){
-                    bio.error = "Bio must be shorter than 201 characters."
+                    bio.error = getString(R.string.update_profile_bio_error)
                 }
             }
             else {
@@ -78,7 +77,7 @@ class UpdateUserFragment : DialogFragment() {
                     viewModel.name = name.text.toString()
                     viewModel.bio = bio.text.toString()
                     viewModel.updateUser()
-                    Toast.makeText(it.context, "Profile updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(it.context, R.string.update_profile_success, Toast.LENGTH_SHORT).show()
                     dismiss()
                 }
             }
